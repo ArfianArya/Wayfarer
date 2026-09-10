@@ -1,0 +1,22 @@
+:root{
+  /* glows — Arcanum has no drop shadows in the conventional sense;
+     elevation reads as candlelight bleeding off a gold edge. */
+  --glow-ring-gold:   0 0 0 4px var(--gold-a16);
+  --glow-ring-quiet:  0 0 0 4px var(--gold-a10);
+  --glow-soft:        0 0 24px 2px var(--gold-a40);
+  --shadow-card-hover: 0 18px 34px -18px rgba(192,152,97,.45);
+  --shadow-dot:       0 0 0 3px var(--gold-a16);
+
+  /* ambient grounds */
+  --wash-hero: radial-gradient(ellipse 900px 500px at 14% -8%, var(--gold-a14), transparent 60%),
+               radial-gradient(ellipse 700px 450px at 100% 8%, var(--gold-a07), transparent 55%); /* @kind other */
+  --wash-plate-art: radial-gradient(circle at 50% 38%, var(--gold-a22), transparent 60%);
+  --rule-fade: linear-gradient(90deg, transparent, var(--line-strong), transparent); /* @kind other */
+  --bar-gold: linear-gradient(90deg, var(--gold-dim), var(--gold)); /* @kind other */
+
+  --grain-url: url("../assets/grain.svg"); /* @kind other */
+  --grain-opacity: .05; /* @kind other */
+
+  --blur-nav: 10px; /* @kind other */
+  --scrim-nav: rgba(11,9,6,.86); /* @kind color */
+}

@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/colors.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/typography.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/motion.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/effects.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/base.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/styles.css">
+<script src="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/_ds_bundle.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; background: #0B0906; }
+  html { scroll-snap-type: y proximity; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-snap-type: none; scroll-behavior: auto } }
+  a { color: var(--ash); text-decoration: none; }
+  a:hover { color: var(--gold-bright); }
+  @keyframes twinkle { 0%, 100% { opacity: .28 } 50% { opacity: .62 } }
+  @keyframes firefly-glow { 0%, 100% { opacity: .06; transform: scale(.75) } 38% { opacity: 1; transform: scale(1.18) } 64% { opacity: .3; transform: scale(.92) } }
+  @keyframes firefly-path { 0% { transform: translate3d(0,0,0) } 30% { transform: translate3d(22px,-16px,0) } 60% { transform: translate3d(-14px,-30px,0) } 100% { transform: translate3d(9px,-46px,0) } }
+  @keyframes forest-breathe { 0%, 100% { transform: scale(1.02) translate3d(0,0,0) } 50% { transform: scale(1.06) translate3d(-14px,8px,0) } }
+  @keyframes hint-drop { 0%, 100% { transform: translateY(0); opacity: .5 } 50% { transform: translateY(6px); opacity: 1 } }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important } }
+</style>
+</helmet>
+
+<div style="position: relative; width: 100%; background: #0B0906; font-family: Geist, system-ui, sans-serif; overflow-x: hidden">
+
+  <div style="position: fixed; inset: 0; z-index: 0; pointer-events: none">
+    <div style="position: absolute; inset: -8%; background-image: url(assets/forest.jpg); background-size: cover; background-position: 50% 40%; filter: brightness(.58) contrast(1.06); animation: forest-breathe 46s ease-in-out infinite"></div>
+    <div style="position: absolute; inset: 0; background: radial-gradient(70% 54% at 50% 40%, rgba(11,9,6,.46), rgba(11,9,6,.9) 78%), linear-gradient(180deg, rgba(11,9,6,.76), rgba(11,9,6,.5) 30%, rgba(11,9,6,.94))"></div>
+    <div style="position: absolute; inset: -14%; background: radial-gradient(44% 32% at 42% 26%, rgba(214,178,120,.10), rgba(214,178,120,0) 70%)"></div>
+    <sc-for list="{{ fireflies }}" as="f" hint-placeholder-count="12">
+      <div style="position: absolute; left: {{ f.left }}; top: {{ f.top }}; animation: firefly-path {{ f.pathDur }} ease-in-out infinite alternate; animation-delay: {{ f.delay }}">
+        <div style="width: {{ f.size }}; height: {{ f.size }}; border-radius: 50%; background: #F2DCAF; filter: blur({{ f.blur }}); box-shadow: 0 0 {{ f.halo }} rgba(227,192,138,.8), 0 0 {{ f.haloWide }} rgba(192,152,97,.4); opacity: {{ f.peak }}; animation: firefly-glow {{ f.dur }} ease-in-out infinite; animation-delay: {{ f.delay }}"></div>
+      </div>
+    </sc-for>
+    <div style="position: absolute; top: 14%; left: 12%; width: 1px; height: 1px; border-radius: 50%; background: #FFF6D6; opacity: .5; animation: twinkle 6s ease-in-out infinite; box-shadow: 0 0 0 .5px rgba(255,246,214,.6), 24vw 5vh 0 0 #FFF6D6, 44vw -2vh 0 0 rgba(255,246,214,.7), 61vw 9vh 0 0 #FFF6D6, 72vw 3vh 0 0 rgba(255,246,214,.55), 14vw 28vh 0 0 rgba(255,246,214,.7), 36vw 40vh 0 0 #FFF6D6, 50vw 22vh 0 0 rgba(255,246,214,.5), 66vw 46vh 0 0 rgba(255,246,214,.8), 79vw 32vh 0 0 #FFF6D6, 6vw 54vh 0 0 rgba(255,246,214,.6), 30vw 65vh 0 0 rgba(255,246,214,.75), 55vw 60vh 0 0 #FFF6D6, 74vw 70vh 0 0 rgba(255,246,214,.5), 20vw 76vh 0 0 rgba(255,246,214,.65), 46vw 82vh 0 0 #FFF6D6"></div>
+  </div>
+
+  <div style="position: fixed; top: 0; left: 0; right: 0; z-index: 12; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px min(6vw, 92px); background: rgba(11,9,6,{{ navVeil }}); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(192,152,97,{{ navLine }}); transition: background 400ms ease, border-color 400ms ease">
+    <a href="index.html" style="display: flex; align-items: center; gap: 10px; color: var(--parchment)" style-hover="color: var(--gold-bright)">
+      <img src="assets/wordmark.png" alt="Wayfarer" decoding="async" style="display: block; height: clamp(22px, 6vw, 30px); width: auto">
+    </a>
+    <button type="button" onClick="{{ toggleMenu }}" aria-label="Menu" style="display: {{ burgerDisplay }}; flex-direction: column; align-items: center; justify-content: center; gap: 6px; width: 44px; height: 44px; margin-right: -10px; padding: 0; background: none; border: 0; cursor: pointer">
+      <span style="display: block; width: 22px; height: 1px; background: var(--gold); transform: {{ burgerTop }}; transition: transform 300ms cubic-bezier(.4,0,.2,1)"></span>
+      <span style="display: block; width: 22px; height: 1px; background: var(--gold); opacity: {{ burgerMidOp }}; transition: opacity 180ms ease"></span>
+      <span style="display: block; width: 22px; height: 1px; background: var(--gold); transform: {{ burgerBot }}; transition: transform 300ms cubic-bezier(.4,0,.2,1)"></span>
+    </button>
+    <div onClick="{{ closeMenu }}" style="display: {{ navLinksDisplay }}; flex-direction: {{ navDir }}; align-items: {{ navAlign }}; gap: {{ navGap }}; position: {{ navMenuPos }}; top: {{ navMenuTop }}; left: {{ navMenuSide }}; right: {{ navMenuSide }}; padding: {{ navMenuPad }}; background: {{ navMenuBg }}; border-bottom: {{ navMenuLine }}; backdrop-filter: {{ navMenuBlur }}">
+      <div data-nav-item="true" onClick="{{ goHome }}" style="display: flex; align-items: {{ navItemAlign }}; cursor: pointer; width: {{ navItemW }}; min-height: {{ navItemMinH }}">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.NavLink" href="index.html" hint-size="60px,18px">Home</x-import>
+      </div>
+      <div data-nav-item="true" onClick="{{ goProjects }}" style="display: flex; align-items: {{ navItemAlign }}; cursor: pointer; width: {{ navItemW }}; min-height: {{ navItemMinH }}">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.NavLink" href="projects.html" active="{{ trueVal }}" hint-size="70px,18px">Projects</x-import>
+      </div>
+      <div data-nav-item="true" onClick="{{ goAbout }}" style="display: flex; align-items: {{ navItemAlign }}; cursor: pointer; width: {{ navItemW }}; min-height: {{ navItemMinH }}">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.NavLink" href="about.html" hint-size="80px,18px">About Me</x-import>
+      </div>
+    </div>
+  </div>
+
+  <div style="position: fixed; top: 50%; right: {{ railRight }}; z-index: 11; transform: translateY(-50%); display: {{ railDisplay }}; flex-direction: column; align-items: flex-end; gap: 2px; pointer-events: none; opacity: {{ railOp }}; transition: opacity 600ms ease">
+    <sc-for list="{{ pageNav }}" as="p" hint-placeholder-count="12">
+      <div onClick="{{ p.go }}" title="{{ p.label }}" style="position: relative; display: flex; align-items: center; justify-content: flex-end; gap: 12px; height: 22px; padding-left: 14px; pointer-events: auto; cursor: pointer; color: {{ p.color }}; transition: color 300ms cubic-bezier(.4,0,.2,1)" style-hover="color: var(--gold-bright)">
+        <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; position: absolute; right: 46px; opacity: {{ p.labelOp }}; transform: translateX({{ p.labelX }}); pointer-events: none; transition: opacity 300ms cubic-bezier(.4,0,.2,1), transform 300ms cubic-bezier(.4,0,.2,1)">{{ p.label }}</span>
+        <span style="display: {{ p.numDisplay }}; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .1em; opacity: {{ p.numOp }}; transition: opacity 300ms cubic-bezier(.4,0,.2,1)">{{ p.num }}</span>
+        <span style="width: {{ p.tick }}; height: 1px; background: currentColor; transition: width 300ms cubic-bezier(.4,0,.2,1)"></span>
+      </div>
+    </sc-for>
+  </div>
+
+  <section data-screen-label="Case hero" style="position: relative; z-index: 2; scroll-snap-align: start; min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 min(6vw, 92px) 16vh; max-width: 1400px; margin: 0 auto">
+    <div data-reveal="true" style="display: flex; flex-direction: column; gap: 20px">
+      <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="320px,14px">UX Audit · SaaS Platform · 2026</x-import>
+      <h1 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(40px, 7.4vmin, 116px); line-height: 1.0; letter-spacing: -.015em; color: var(--parchment); text-wrap: balance">VetIT — <span style="color: var(--gold)">Uncovering a Better Experience</span></h1>
+      <p style="margin: 0; max-width: 58ch; font-size: clamp(15px, 1.2vw, 18px); line-height: 1.66; color: var(--ash); text-wrap: pretty">A focused UX audit uncovering usability and accessibility issues across the VetIT experience, with practical recommendations to create a clearer, more efficient, and user-friendly system.</p>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px; margin-top: 8vh">
+      <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ash-dim)">Read the case</span>
+      <span style="width: 1px; height: 18px; background: linear-gradient(180deg, var(--gold-dim), transparent); animation: hint-drop 2.6s ease-in-out infinite"></span>
+    </div>
+  </section>
+
+  <section id="overview" data-screen-label="Cover" style="position: relative; z-index: 2; scroll-snap-align: start; height: 100vh; box-sizing: border-box; display: flex; align-items: center">
+    <div data-reveal="true" style="display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 5vh; width: 100%; height: 100%; box-sizing: border-box; max-width: 1400px; margin: 0 auto; padding: 7vh min(6vw, 92px)">
+      <div style="position: relative; min-height: 0; height: 100%; max-width: 100%; aspect-ratio: 16 / 8.4; justify-self: center; border: 1px solid var(--line-strong); background: radial-gradient(70% 90% at 50% 30%, rgba(192,152,97,.09), rgba(11,9,6,0) 72%), linear-gradient(180deg, var(--ink-raised), var(--ink)); overflow: hidden">
+        <img src="assets/vetit/cover-wide.png" alt="VetIT platform screens" loading="lazy" decoding="async" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%">
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(8px, 2.6vw, 32px)">
+        <sc-for list="{{ meta }}" as="m" hint-placeholder-count="3">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center">
+            <span style="font-family: 'Libertinus Serif Display', serif; font-size: clamp(16px, 4.2vw, 25px); color: var(--gold)">{{ m.label }}</span>
+            <span style="font-size: clamp(11.5px, 3.1vw, 24px); font-weight: 600; white-space: nowrap; color: var(--parchment)">{{ m.value }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Disclaimer" style="position: relative; z-index: 2; scroll-snap-align: start; min-height: 100vh; box-sizing: border-box; display: flex; align-items: center">
+    <div data-reveal="true" style="display: flex; flex-wrap: wrap; align-items: center; gap: 34px 48px; width: 100%; max-width: 1400px; margin: 0 auto; padding: 10vh min(6vw, 92px)">
+      <div style="flex: none; display: flex; align-items: center; justify-content: center; width: 78px; height: 78px; border: 1px solid var(--gold-dim); border-radius: 50%; box-shadow: 0 0 40px rgba(192,152,97,.18) inset, 0 0 26px rgba(192,152,97,.12)">
+        <span style="font-family: 'Libertinus Serif Display', serif; font-size: 40px; line-height: 1; color: var(--gold)">!</span>
+      </div>
+      <div style="flex: 1 1 420px; display: flex; flex-direction: column; gap: 12px">
+        <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold)">Disclaimer</span>
+        <p style="margin: 0; max-width: 68ch; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">This is a conceptual project, not an official redesign of the VetIT website. The aim was to identify potential usability issues and propose simplified solutions. Undertaken by a team of six UI/UX designers, the initiative was carried out purely for learning and skill development.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="lenses" data-screen-label="The Audit" style="position: relative; z-index: 2; scroll-snap-align: start">
+    <div style="display: flex; flex-direction: column; gap: 7vh; max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div data-reveal="true" style="display: flex; flex-direction: column; gap: 18px; max-width: 62ch">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="300px,14px">How We Looked</x-import>
+        <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(32px, 3.6vw, 62px); line-height: 1.06; color: var(--gold)">Four lenses on one system.</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">VetIT is a veterinary practice management platform: appointments, clients, tasks, stock, and accounting in one workspace. Rather than reacting to what looked wrong, we audited it through four deliberate lenses, then synthesised the findings into recommendations and redesign concepts.</p>
+      </div>
+
+      <div data-reveal="true" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 1px">
+        <sc-for list="{{ lenses }}" as="l" hint-placeholder-count="4">
+          <div style="display: flex; flex-direction: column; gap: 14px; padding: 32px 28px; outline: 1px solid var(--line); transition: background 250ms cubic-bezier(.4,0,.2,1)" style-hover="background: rgba(192,152,97,.05)">
+            <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-dim)">{{ l.key }}</span>
+            <span style="font-family: 'Libertinus Serif Display', serif; font-size: clamp(21px, 1.8vw, 27px); line-height: 1.14; color: var(--parchment)">{{ l.title }}</span>
+            <p style="margin: 0; font-size: 14px; line-height: 1.66; color: var(--ash); text-wrap: pretty">{{ l.body }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="process" data-screen-label="The Process" style="position: relative; z-index: 2; scroll-snap-align: start">
+    <div style="display: flex; flex-direction: column; gap: 6vh; max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div data-reveal="true" style="display: flex; flex-direction: column; gap: 18px; max-width: 62ch">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="300px,14px">The Process</x-import>
+        <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(30px, 3.2vw, 54px); line-height: 1.06; color: var(--gold)">Eight passes over the same system.</h2>
+      </div>
+      <div data-reveal="true" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); grid-auto-flow: {{ procFlow }}; grid-template-rows: {{ procRows }}; gap: 0 64px">
+        <sc-for list="{{ process }}" as="p" hint-placeholder-count="8">
+          <div onMouseEnter="{{ p.enter }}" onMouseLeave="{{ p.leave }}" style="display: grid; grid-template-columns: 52px minmax(0, 1fr); align-items: baseline; gap: 0 18px; padding: 22px 0; border-bottom: {{ p.rule }}; cursor: default; transition: background 250ms cubic-bezier(.4,0,.2,1)" style-hover="background: rgba(192,152,97,.045)">
+            <span style="grid-row: span 2; font-family: 'Libertinus Serif Display', serif; font-size: 30px; line-height: 1; color: var(--gold-dim)">{{ p.num }}</span>
+            <span style="font-size: clamp(16px, 1.4vw, 20px); font-weight: 600; letter-spacing: .01em; color: var(--parchment)">{{ p.title }}</span>
+            <div style="overflow: hidden; max-height: {{ p.detailMax }}; opacity: {{ p.detailOp }}; transition: max-height 420ms cubic-bezier(.16,1,.3,1), opacity 300ms ease">
+              <p style="margin: 12px 0 4px; padding-right: 24px; max-width: 54ch; font-size: 14px; line-height: 1.68; color: var(--ash); text-wrap: pretty">{{ p.body }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="dashboard" data-screen-label="Dashboard" style="position: relative; z-index: 2; scroll-snap-align: start">
+    <div style="display: flex; flex-direction: column; gap: 5vh; max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div data-reveal="true" style="display: flex; flex-direction: column; gap: 16px">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="340px,14px">Screen by Screen</x-import>
+        <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px 40px">
+          <div style="display: flex; align-items: baseline; gap: 20px">
+            <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .18em; color: var(--gold-dim)">01</span>
+            <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(28px, 3vw, 50px); line-height: 1.06; color: var(--gold)">Dashboard</h2>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1px; background: var(--line)">
+            <span onClick="{{ dashSetAudit }}" style="padding: 11px 20px; background: {{ dashAuditBg }}; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: {{ dashAuditFg }}; cursor: pointer; transition: background 250ms cubic-bezier(.4,0,.2,1), color 250ms cubic-bezier(.4,0,.2,1)">Audit</span>
+            <span onClick="{{ dashSetProp }}" style="padding: 11px 20px; background: {{ dashPropBg }}; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: {{ dashPropFg }}; cursor: pointer; transition: background 250ms cubic-bezier(.4,0,.2,1), color 250ms cubic-bezier(.4,0,.2,1)">Proposal</span>
+          </div>
+        </div>
+        <p style="margin: 0; max-width: 74ch; font-size: 15px; line-height: 1.7; color: var(--ash); text-wrap: pretty">The daily overview: waiting times, practice notes, lab tests, tasks, and debt in one grid. Six panels competing for the same glance.</p>
+      </div>
+
+      <div data-reveal="true" style="width: 100%">
+        <img src="{{ dashSrc }}" alt="VetIT dashboard" loading="lazy" decoding="async" style="display: block; width: 100%; height: auto">
+      </div>
+
+      <div data-reveal="true" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 0 56px">
+        <sc-for list="{{ dashRows }}" as="r" hint-placeholder-count="4">
+          <div style="display: grid; grid-template-columns: 42px minmax(0, 1fr); gap: 6px 16px; padding: 22px 0; border-top: {{ r.rule }}">
+            <span style="grid-row: span 2; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .12em; line-height: 1.5; color: {{ r.tone }}">{{ r.num }}</span>
+            <span style="font-size: 15px; font-weight: 600; letter-spacing: .01em; color: var(--parchment)">{{ r.title }}</span>
+            <p style="margin: 0; max-width: 54ch; font-size: 14px; line-height: 1.66; color: var(--ash); text-wrap: pretty">{{ r.body }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="appointments" data-screen-label="Appointments" style="position: relative; z-index: 2; scroll-snap-align: start">
+    <div style="display: flex; flex-direction: column; gap: 5vh; max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div data-reveal="true" style="display: flex; flex-direction: column; gap: 16px">
+        <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px 40px">
+          <div style="display: flex; align-items: baseline; gap: 20px">
+            <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .18em; color: var(--gold-dim)">02</span>
+            <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(28px, 3vw, 50px); line-height: 1.06; color: var(--gold)">Appointments</h2>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1px; background: var(--line)">
+            <span onClick="{{ apptSetAudit }}" style="padding: 11px 20px; background: {{ apptAuditBg }}; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: {{ apptAuditFg }}; cursor: pointer; transition: background 250ms cubic-bezier(.4,0,.2,1), color 250ms cubic-bezier(.4,0,.2,1)">Audit</span>
+            <span onClick="{{ apptSetProp }}" style="padding: 11px 20px; background: {{ apptPropBg }}; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: {{ apptPropFg }}; cursor: pointer; transition: background 250ms cubic-bezier(.4,0,.2,1), color 250ms cubic-bezier(.4,0,.2,1)">Proposal</span>
+          </div>
+        </div>
+        <p style="margin: 0; max-width: 74ch; font-size: 15px; line-height: 1.7; color: var(--ash); text-wrap: pretty">Eleven pages of calendars, timelines, and a day book: the busiest surface in the product, and the one carrying the most duplicated function.</p>
+      </div>
+
+      <div data-reveal="true" style="width: 100%">
+        <img src="{{ apptSrc }}" alt="VetIT appointments calendar" loading="lazy" decoding="async" style="display: block; width: 100%; height: auto">
+      </div>
+
+      <div data-reveal="true" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 0 56px">
+        <sc-for list="{{ apptRows }}" as="r" hint-placeholder-count="5">
+          <div style="display: grid; grid-template-columns: 42px minmax(0, 1fr); gap: 6px 16px; padding: 22px 0; border-top: {{ r.rule }}">
+            <span style="grid-row: span 2; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .12em; line-height: 1.5; color: {{ r.tone }}">{{ r.num }}</span>
+            <span style="font-size: 15px; font-weight: 600; letter-spacing: .01em; color: var(--parchment)">{{ r.title }}</span>
+            <p style="margin: 0; max-width: 54ch; font-size: 14px; line-height: 1.66; color: var(--ash); text-wrap: pretty">{{ r.body }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="client" data-screen-label="Add New Client" style="position: relative; z-index: 2; scroll-snap-align: start">
+    <div style="display: flex; flex-direction: column; gap: 5vh; max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div data-reveal="true" style="display: flex; flex-direction: column; gap: 16px">
+        <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px 40px">
+          <div style="display: flex; align-items: baseline; gap: 20px">
+            <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .18em; color: var(--gold-dim)">03</span>
+            <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(28px, 3vw, 50px); line-height: 1.06; color: var(--gold)">Add New Client</h2>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1px; background: var(--line)">
+            <span onClick="{{ clientSetAudit }}" style="padding: 11px 20px; background: {{ clientAuditBg }}; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: {{ clientAuditFg }}; cursor: pointer; transition: background 250ms cubic-bezier(.4,0,.2,1), color 250ms cubic-bezier(.4,0,.2,1)">Audit</span>
+            <span onClick="{{ clientSetProp }}" style="padding: 11px 20px; background: {{ clientPropBg }}; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: {{ clientPropFg }}; cursor: pointer; transition: background 250ms cubic-bezier(.4,0,.2,1), color 250ms cubic-bezier(.4,0,.2,1)">Proposal</span>
+          </div>
+        </div>
+        <p style="margin: 0; max-width: 74ch; font-size: 15px; line-height: 1.7; color: var(--ash); text-wrap: pretty">Fourteen pages and six steps to register one client: the longest single flow in the audit, and the clearest candidate for compression.</p>
+      </div>
+
+      <div data-reveal="true" style="width: 100%">
+        <img src="{{ clientSrc }}" alt="VetIT add new client flow" loading="lazy" decoding="async" style="display: block; width: 100%; height: auto">
+      </div>
+
+      <div data-reveal="true" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 0 56px">
+        <sc-for list="{{ clientRows }}" as="r" hint-placeholder-count="4">
+          <div style="display: grid; grid-template-columns: 42px minmax(0, 1fr); gap: 6px 16px; padding: 22px 0; border-top: {{ r.rule }}">
+            <span style="grid-row: span 2; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .12em; line-height: 1.5; color: {{ r.tone }}">{{ r.num }}</span>
+            <span style="font-size: 15px; font-weight: 600; letter-spacing: .01em; color: var(--parchment)">{{ r.title }}</span>
+            <p style="margin: 0; max-width: 54ch; font-size: 14px; line-height: 1.66; color: var(--ash); text-wrap: pretty">{{ r.body }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="tasks" data-screen-label="Tasks" style="position: relative; z-index: 2; scroll-snap-align: start">
+    <div style="display: flex; flex-direction: column; gap: 5vh; max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div data-reveal="true" style="display: flex; flex-direction: column; gap: 16px">
+        <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px 40px">
+          <div style="display: flex; align-items: baseline; gap: 20px">
+            <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .18em; color: var(--gold-dim)">04</span>
+            <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(28px, 3vw, 50px); line-height: 1.06; color: var(--gold)">Tasks</h2>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1px; background: var(--line)">
+            <span onClick="{{ tasksSetAudit }}" style="padding: 11px 20px; background: {{ tasksAuditBg }}; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: {{ tasksAuditFg }}; cursor: pointer; transition: background 250ms cubic-bezier(.4,0,.2,1), color 250ms cubic-bezier(.4,0,.2,1)">Audit</span>
+            <span onClick="{{ tasksSetProp }}" style="padding: 11px 20px; background: {{ tasksPropBg }}; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: {{ tasksPropFg }}; cursor: pointer; transition: background 250ms cubic-bezier(.4,0,.2,1), color 250ms cubic-bezier(.4,0,.2,1)">Proposal</span>
+          </div>
+        </div>
+        <p style="margin: 0; max-width: 74ch; font-size: 15px; line-height: 1.7; color: var(--ash); text-wrap: pretty">A three-column board carrying the team's workload, where colour was doing all the work that hierarchy should have been doing.</p>
+      </div>
+
+      <div data-reveal="true" style="width: 100%">
+        <img src="{{ tasksSrc }}" alt="VetIT task board" loading="lazy" decoding="async" style="display: block; width: 100%; height: auto">
+      </div>
+
+      <div data-reveal="true" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 0 56px">
+        <sc-for list="{{ tasksRows }}" as="r" hint-placeholder-count="5">
+          <div style="display: grid; grid-template-columns: 42px minmax(0, 1fr); gap: 6px 16px; padding: 22px 0; border-top: {{ r.rule }}">
+            <span style="grid-row: span 2; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .12em; line-height: 1.5; color: {{ r.tone }}">{{ r.num }}</span>
+            <span style="font-size: 15px; font-weight: 600; letter-spacing: .01em; color: var(--parchment)">{{ r.title }}</span>
+            <p style="margin: 0; max-width: 54ch; font-size: 14px; line-height: 1.66; color: var(--ash); text-wrap: pretty">{{ r.body }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="verdict" data-screen-label="The Verdict" style="position: relative; z-index: 2; scroll-snap-align: start; min-height: 100vh; box-sizing: border-box; display: flex; align-items: center">
+    <div data-reveal="true" style="display: flex; flex-direction: column; gap: 40px; width: 100%; max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="220px,14px">The Verdict</x-import>
+        <span style="font-family: 'Libertinus Serif Display', serif; font-size: clamp(72px, 12vmin, 190px); line-height: .9; letter-spacing: -.02em; color: var(--gold)">30/30</span>
+        <span style="font-size: clamp(15px, 1.3vw, 19px); color: var(--parchment)">Existing VetIT users preferred the redesign</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 32px 56px; max-width: 1120px; margin: 0 auto">
+        <p style="margin: 0; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">Participants consistently described the redesign as easier to navigate, less cognitively demanding, and a better overall experience. These were reported impressions rather than directly measured outcomes, but the consistency of the feedback reinforced the direction.</p>
+        <p style="margin: 0; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">Participants who used the current system first were naturally slower when moving to the redesign. The preference held regardless of the order in which they used the two systems.</p>
+      </div>
+      <p style="margin: 0; max-width: 62ch; align-self: center; text-align: center; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--ash-dim)">Conceptual academic project · Not affiliated with or endorsed by VetIT</p>
+    </div>
+  </section>
+
+  <section data-screen-label="Case footer" style="position: relative; z-index: 2; border-top: 1px solid var(--line); scroll-snap-align: start; min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden">
+
+    <div style="position: absolute; inset: 0; background: radial-gradient(56% 44% at 50% 42%, rgba(192,152,97,.11), rgba(11,9,6,0) 74%), linear-gradient(180deg, rgba(11,9,6,0) 0%, rgba(11,9,6,.10) 34%, rgba(11,9,6,.46) 100%); pointer-events: none"></div>
+
+    <div style="position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px; padding: 22vh min(6vw, 92px) 12vh; max-width: 900px; margin: 0 auto">
+      <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="280px,14px">The Lovers · Open to the next chapter</x-import>
+      <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(24px, 3.1vw, 58px); line-height: 1.06; letter-spacing: -.01em; color: var(--parchment); white-space: {{ footWrap }}">Available for full-time <span style="font-style: italic; color: var(--gold)">Product Design</span> roles.</h2>
+      <p style="margin: 0; max-width: 58ch; font-size: 17px; line-height: 1.68; color: var(--ash); text-wrap: balance">Looking for a team building something that has to hold up, where research, systems and craft are treated as the same job.</p>
+
+      <div style="width: 280px; padding: 6px 0 2px">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Divider" ornament="full" hint-size="280px,16px"></x-import>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Button" href="mailto:arfianarya@gmail.com" hint-size="140px,42px">Email me</x-import>
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Button" variant="secondary" href="https://drive.google.com/drive/folders/1DG2bW8UIH0rnfBa0PBrw7l_vZZI6qqZW?usp=sharing" target="_blank" rel="noopener" hint-size="140px,42px">Download CV</x-import>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 28px; padding-top: 10px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase">
+        <a href="https://www.linkedin.com/in/arfianarya/" target="_blank" rel="noopener" style="color: var(--ash)" style-hover="color: var(--gold-bright)">LinkedIn</a>
+        <a href="https://www.behance.net/arfianarya8a40" target="_blank" rel="noopener" style="color: var(--ash)" style-hover="color: var(--gold-bright)">Behance</a>
+      </div>
+    </div>
+
+    <div style="position: relative; z-index: 1; display: grid; grid-template-columns: {{ footCols }}; justify-items: {{ footJustify }}; text-align: {{ footAlign }}; align-items: center; gap: {{ footGap }}; padding: 22px min(6vw, 92px) 28px">
+      <a href="index.html" style="display: flex; align-items: center; gap: 10px; color: var(--ash)" style-hover="color: var(--gold-bright)">
+        <img src="assets/wordmark.png" alt="Wayfarer" decoding="async" style="display: block; height: 24px; width: auto">
+      </a>
+      <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ash-dim); white-space: nowrap">Every step reveals something new</span>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: {{ footEnd }}; gap: 8px 20px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ash-dim)">
+        <span>© 2026 Arfian Arya</span>
+      </div>
+    </div>
+  </section>
+
+  <div style="position: fixed; inset: 0; background-image: url(assets/grain.svg); opacity: .05; mix-blend-mode: overlay; pointer-events: none; z-index: 20"></div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;wordmark&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;LOGO&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { menu: false, mobile: typeof window !== "undefined" && window.innerWidth < 760, scrolled: false, railFits: false, page: 0, gutter: 0, dash: 'a', appt: 'a', client: 'a', tasks: 'a', procHover: null };
+
+  fireflies = Array.from({ length: 18 }, (_, i) => {
+    const near = i % 3 === 0;
+    const s = near ? 3 + Math.random() * 2 : 1.2 + Math.random() * 1.5;
+    return {
+      left: (5 + Math.random() * 90).toFixed(1) + '%',
+      top: (12 + Math.random() * 76).toFixed(1) + '%',
+      size: s.toFixed(1) + 'px',
+      blur: (near ? 0.3 : 0.9 + Math.random()).toFixed(1) + 'px',
+      halo: (s * 2.6).toFixed(1) + 'px',
+      haloWide: (s * 6).toFixed(1) + 'px',
+      peak: near ? 1 : (0.4 + Math.random() * 0.35).toFixed(2),
+      dur: (2.8 + Math.random() * 4.5).toFixed(1) + 's',
+      pathDur: (14 + Math.random() * 16).toFixed(1) + 's',
+      delay: (-Math.random() * 9).toFixed(1) + 's',
+    };
+  });
+
+  pageNames = ['Opening', 'Cover', 'Disclaimer', 'The Audit', 'The Process', 'Dashboard', 'Appointments', 'Add New Client', 'Tasks', 'The Verdict', 'Contact'];
+
+  screens = {
+    dash: {
+      srcA: 'assets/vetit/dash-a.png', srcP: 'assets/vetit/dash-p.png',
+      audit: [
+        { num: 'I', title: 'Inconsistent use of colour', body: 'Panels use different colour treatments, creating visual noise and making it harder to identify priorities and status quickly.' },
+        { num: 'II', title: 'Inefficient space & scannability', body: 'Limited horizontal space and inconsistent tag placement make content harder to scan, especially when comparing multiple items or statuses.' },
+        { num: 'III', title: 'Weak error prevention', body: 'Small "X" buttons sit close to other interactive areas, increasing the risk of accidental widget removal without a confirmation step.' },
+        { num: 'IV', title: 'Unclear data context', body: '"Appointments Overview" uses progress bars without a total or scale, so it is hard to tell whether the displayed numbers are high or low.' },
+      ],
+      prop: [
+        { num: 'I', title: 'Standardise the colour system', body: 'Neutral colour for general information, specific colours reserved for important statuses, so meaning becomes consistent across panels.' },
+        { num: 'II', title: 'Refine spatial organisation', body: 'Reorganise the dashboard to use available space better and create a cleaner visual flow between cards and information.' },
+        { num: 'III', title: 'Improve error prevention', body: 'Make small interactive elements such as the "X" buttons easier to hit deliberately, while keeping the interface uncluttered.' },
+        { num: 'IV', title: 'Clarify appointment status', body: 'Present appointment volumes and statuses against a scale, so users can see what is happening and where attention is needed.' },
+      ],
+    },
+    appt: {
+      srcA: 'assets/vetit/appt-a.png', srcP: 'assets/vetit/appt-p.png',
+      audit: [
+        { num: 'I', title: 'Multiple views, overlapping functions', body: 'The experience spans eleven pages, including three calendars, three timelines, and a day book, with several views serving similar purposes.' },
+        { num: 'II', title: 'Information overload', body: 'Appointment cards carry too much information, making it difficult to identify the most important details at a glance.' },
+        { num: 'III', title: 'Hidden filters', body: 'Key filtering options are tucked inside a popup, making them less visible and harder to reach.' },
+        { num: 'IV', title: 'Unclear add action', body: 'Appointments can only be added by selecting a date, with no clearly visible "Add Appointment" action.' },
+        { num: 'V', title: 'Redundant navigation', body: 'Multiple calendar and timeline views create unnecessary complexity and make it harder to understand which view to use.' },
+      ],
+      prop: [
+        { num: 'I', title: 'Simplify view modes', body: 'Consolidate overlapping views into fewer, clearer modes.' },
+        { num: 'II', title: 'Reduce information density', body: 'Show only the most essential information on each appointment card.' },
+        { num: 'III', title: 'Improve filter accessibility', body: 'Keep filters visible and accessible directly on the page.' },
+        { num: 'IV', title: 'Make creation clearer', body: 'Add a dedicated "Add Appointment" button so the action is discoverable without guessing.' },
+        { num: 'V', title: 'Consolidate navigation', body: 'Remove duplicated calendar and timeline routes so each view has one obvious purpose.' },
+      ],
+    },
+    client: {
+      srcA: 'assets/vetit/client-a.png', srcP: 'assets/vetit/client-p.png',
+      audit: [
+        { num: 'I', title: 'Long & complex workflow', body: 'The longest section of the audit at fourteen pages, with multiple steps required to complete a single task.' },
+        { num: 'II', title: 'Too many steps', body: 'Adding a new client requires six separate steps, creating unnecessary effort for staff.' },
+        { num: 'III', title: 'Unclear consent status', body: 'Consent options do not clearly distinguish between "Declined" and "Not Yet Asked".' },
+        { num: 'IV', title: 'Redundant data entry', body: 'Staff must enter the client\u2019s age manually even though the date of birth is already provided.' },
+      ],
+      prop: [
+        { num: 'I', title: 'Simplify the flow', body: 'Merge related steps to reduce the process from six steps to four.' },
+        { num: 'II', title: 'Move duplicate checks earlier', body: 'Run the duplicate check at the end of the first step to prevent unnecessary data entry.' },
+        { num: 'III', title: 'Clarify consent states', body: 'Clearly distinguish between "Declined" and "Not Yet Asked".' },
+        { num: 'IV', title: 'Automate age calculation', body: 'Calculate the client\u2019s age automatically from their date of birth.' },
+      ],
+    },
+    tasks: {
+      srcA: 'assets/vetit/tasks-a.png', srcP: 'assets/vetit/tasks-p.png',
+      audit: [
+        { num: 'I', title: 'Difficult to scan', body: 'The task board uses heavy vertical stacking, making it hard to get a quick overview of the team\u2019s workload.' },
+        { num: 'II', title: 'Competing visual priorities', body: '"High Priority" and "Overdue" use similar red styling, making it harder to distinguish urgency from task status.' },
+        { num: 'III', title: 'Visual clutter', body: 'Repeated "No cards to display" messages add unnecessary noise to empty columns.' },
+        { num: 'IV', title: 'Limited filtering', body: 'Without global search or filters, users have to manually scan the board to find specific or high-priority tasks.' },
+        { num: 'V', title: 'High cognitive load', body: 'Each task contains multiple details and statuses, requiring users to process a lot of information at once.' },
+      ],
+      prop: [
+        { num: 'I', title: 'Improve structure & navigation', body: 'Improve the layout and allow tasks to be added directly from each column to make task management faster and easier.' },
+        { num: 'II', title: 'Simplify urgency & status', body: 'A clearer, more consistent colour system helps users distinguish between low, medium, high, and overdue tasks without relying on colour alone.' },
+        { num: 'III', title: 'Reduce visual noise', body: 'Replace repeated "No cards to display" messages with cleaner empty states to make the board easier to scan.' },
+        { num: 'IV', title: 'Strengthen visual hierarchy', body: 'Make task titles more prominent and simplify priority labels so important tasks read first.' },
+        { num: 'V', title: 'Add global filters', body: 'Filters for priority, assignee, status, and task type remove the need to scan the whole board.' },
+        { num: 'VI', title: 'Improve visual guidance', body: 'Subtle progress and status indicators give clearer cues when scanning through multiple tasks.' },
+      ],
+    },
+  };
+
+  componentDidMount() {
+    this.onMq = () => { const m = window.innerWidth < 760; if (m !== this.state.mobile) this.setState({ mobile: m }); };
+    window.addEventListener('resize', this.onMq);
+    this.onMq();
+    this.reveals = Array.from(document.querySelectorAll('[data-reveal]'));
+    const vh = window.innerHeight || 800;
+    this.reveals.forEach((el) => {
+      if (el.getBoundingClientRect().top > vh * 0.9) {
+        el.dataset.hidden = '1';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+      }
+      el.style.transition = 'opacity 700ms cubic-bezier(.16,1,.3,1), transform 700ms cubic-bezier(.16,1,.3,1)';
+    });
+    const show = (el) => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; };
+    this.io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.intersectionRatio > 0.06) { show(e.target); this.io.unobserve(e.target); }
+      });
+    }, { threshold: [0, 0.06, 0.2] });
+    this.reveals.forEach((el) => this.io.observe(el));
+    this.revealFallback = setInterval(() => {
+      const h = window.innerHeight || 800;
+      this.reveals.forEach((el) => {
+        if (el.dataset.hidden && el.getBoundingClientRect().top < h * 0.92) { delete el.dataset.hidden; show(el); }
+      });
+    }, 400);
+    this.pages = Array.from(document.querySelectorAll('section[data-screen-label]'));
+
+    this.onKey = (e) => {
+      const t = e.target;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+      if (e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); this.page(1); }
+      if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); this.page(-1); }
+    };
+    window.addEventListener('keydown', this.onKey);
+    this.onScroll = () => {
+      if (this.frame) return;
+      this.frame = requestAnimationFrame(() => { this.frame = null; this.tick(); });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onScroll);
+    this.tick();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onMq);
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onScroll);
+    window.removeEventListener('keydown', this.onKey);
+    if (this.io) this.io.disconnect();
+    clearInterval(this.revealFallback);
+    if (this.frame) cancelAnimationFrame(this.frame);
+  }
+
+  pageTo(i) {
+    const pages = this.pages || [];
+    if (!pages[i]) return;
+    const top = pages[i].getBoundingClientRect().top + (window.scrollY || 0);
+    window.scrollTo({ top: Math.max(0, Math.round(top)), behavior: 'smooth' });
+    this.setState({ page: i });
+  }
+
+  page(dir) {
+    const pages = this.pages || [];
+    if (!pages.length) return;
+    this.pageTo(Math.min(pages.length - 1, Math.max(0, (this.state.page || 0) + dir)));
+  }
+
+  tick() {
+    const scrolled = (window.scrollY || 0) > 60;
+    const vw = window.innerWidth;
+    const gutter = Math.max(0, (vw - 1400) / 2) + Math.min(vw * 0.06, 92);
+    const railFits = vw > 620;
+    if (railFits !== this.state.railFits || Math.abs((this.state.gutter || 0) - gutter) > 1) this.setState({ railFits, gutter });
+    let page = this.state.page || 0;
+    if (this.pages && this.pages.length) {
+      const mid = window.innerHeight * 0.42;
+      let found = 0;
+      this.pages.forEach((el, i) => { if (el.getBoundingClientRect().top <= mid) found = i; });
+      page = found;
+    }
+    if (scrolled !== this.state.scrolled || page !== this.state.page) this.setState({ scrolled, page });
+  }
+
+  screenVals(key, prefix) {
+    const s = this.screens[key];
+    const mode = this.state[key];
+    const isAudit = mode === 'a';
+    const rows = (isAudit ? s.audit : s.prop).map((r, i) => ({ ...r, tone: isAudit ? 'var(--ash-dim)' : 'var(--gold)', rule: i < 2 ? 'none' : '1px solid var(--line)' }));
+    const out = {};
+    out[prefix + 'Src'] = isAudit ? s.srcA : s.srcP;
+    out[prefix + 'Rows'] = rows;
+    out[prefix + 'SetAudit'] = () => this.setState({ [key]: 'a' });
+    out[prefix + 'SetProp'] = () => this.setState({ [key]: 'p' });
+    out[prefix + 'AuditBg'] = isAudit ? 'rgba(192,152,97,.14)' : 'var(--ink-raised)';
+    out[prefix + 'AuditFg'] = isAudit ? 'var(--gold-bright)' : 'var(--ash-dim)';
+    out[prefix + 'PropBg'] = isAudit ? 'var(--ink-raised)' : 'rgba(192,152,97,.14)';
+    out[prefix + 'PropFg'] = isAudit ? 'var(--ash-dim)' : 'var(--gold-bright)';
+    return out;
+  }
+
+  renderVals() {
+    const { scrolled } = this.state;
+    const compact = (this.state.gutter || 0) <= 62;
+    const roomForLabel = (this.state.gutter || 0) > 200;
+    return {
+      wordmark: this.props.wordmark ?? 'LOGO',
+      procFlow: this.state.mobile ? 'row' : 'column',
+      procRows: this.state.mobile ? 'auto' : 'repeat(4, auto)',
+      mob: !!this.state.mobile,
+      toggleMenu: () => this.setState({ menu: !this.state.menu }),
+      closeMenu: () => { if (this.state.menu) this.setState({ menu: false }); },
+      burgerDisplay: this.state.mobile ? 'flex' : 'none',
+      burgerTop: this.state.mobile ? (this.state.menu ? 'translateY(7px) rotate(45deg)' : 'none') : 'none',
+      burgerBot: this.state.mobile ? (this.state.menu ? 'translateY(-7px) rotate(-45deg)' : 'none') : 'none',
+      burgerMidOp: this.state.mobile ? (this.state.menu ? 0 : 1) : 1,
+      navLinksDisplay: this.state.mobile ? (this.state.menu ? 'flex' : 'none') : 'flex',
+      navDir: this.state.mobile ? 'column' : 'row',
+      navAlign: this.state.mobile ? 'flex-start' : 'center',
+      navGap: this.state.mobile ? '2px' : 'min(36px, 5.6vw)',
+      navItemW: this.state.mobile ? '100%' : 'auto',
+      navItemMinH: this.state.mobile ? '44px' : 'auto',
+      navItemAlign: this.state.mobile ? 'stretch' : 'center',
+      goHome: () => { window.location.href = 'index.html'; },
+      goProjects: () => { window.location.href = 'projects.html'; },
+      goAbout: () => { window.location.href = 'about.html'; },
+      navMenuPos: this.state.mobile ? 'absolute' : 'static',
+      navMenuTop: this.state.mobile ? '100%' : 'auto',
+      navMenuSide: this.state.mobile ? '0' : 'auto',
+      navMenuPad: this.state.mobile ? '22px min(6vw, 92px) 26px' : '0',
+      navMenuBg: this.state.mobile ? 'rgba(11,9,6,.96)' : 'transparent',
+      navMenuLine: this.state.mobile ? '1px solid var(--line)' : 'none',
+      navMenuBlur: this.state.mobile ? 'blur(12px)' : 'none',
+      footCols: this.state.mobile ? 'minmax(0, 1fr)' : '1fr auto 1fr',
+      footJustify: this.state.mobile ? 'center' : 'stretch',
+      footAlign: this.state.mobile ? 'center' : 'left',
+      footEnd: this.state.mobile ? 'center' : 'flex-end',
+      footStart: this.state.mobile ? 'center' : 'flex-start',
+      footGap: this.state.mobile ? '12px' : '14px 40px',
+      footWrap: this.state.mobile ? 'normal' : 'nowrap',
+      trueVal: true,
+      fireflies: this.fireflies,
+      navVeil: this.state.mobile ? '.9' : (scrolled ? '.86' : '0'),
+      navLine: this.state.mobile ? '.16' : (scrolled ? '.16' : '0'),
+      railOp: this.state.railFits ? 1 : 0,
+      railDisplay: this.state.railFits ? 'flex' : 'none',
+      railRight: (this.state.gutter || 0) > 62 ? 'min(3vw, 30px)' : '8px',
+      pageNav: this.pageNames.map((label, i) => {
+        const on = i === (this.state.page || 0);
+        return {
+          label,
+          num: String(i + 1).padStart(2, '0'),
+          color: on ? 'var(--gold)' : 'var(--ash-dim)',
+          tick: compact ? (on ? '20px' : '9px') : (on ? '30px' : '12px'),
+          numDisplay: compact ? 'none' : 'inline',
+          numOp: on ? 1 : 0.5,
+          labelOp: on && roomForLabel ? 1 : 0,
+          labelX: on ? '0px' : '8px',
+          go: () => this.pageTo(i),
+        };
+      }),
+      meta: [
+        { label: 'Client', value: 'VetIT' },
+        { label: 'Year', value: '2026' },
+        { label: 'Role', value: 'UI/UX Designer' },
+      ],
+      lenses: [
+        { key: 'Lens A', title: 'Layout Pattern Audit', body: 'Structural grids and responsiveness: how the interface holds together, and where the underlying grid stops holding.' },
+        { key: 'Lens B', title: 'Interaction & UI Quality', body: 'Visual hierarchy, system polish, and microcopy clarity: the details that decide whether an interface feels trustworthy.' },
+        { key: 'Lens C', title: 'Heuristics & Laws of UX', body: 'Nielsen\u2019s ten usability heuristics alongside Hick\u2019s Law and Fitts\u2019s Law, used to find cognitive friction and improve decision time and touch ergonomics.' },
+        { key: 'Lens D', title: 'Accessibility Benchmark', body: 'WCAG 2.1 Level AA compliance, resolving contrast and occlusion failures before synthesising everything into recommendations.' },
+      ],
+      process: [
+        { num: '1', title: 'Understanding the Existing Experience', body: 'We started by getting familiar with the VetIT system, reviewing the existing screens and workflows to understand how the product currently worked and what users were expected to do.' },
+        { num: '2', title: 'Mapping the User Experience', body: 'We mapped the key workflows and navigation paths to understand how different parts of the system connected, while identifying areas where users might experience unnecessary steps or confusion.' },
+        { num: '3', title: 'Extraction', body: 'With the structure in place, we examined how information was arranged on each screen. We identified the layout patterns being used and looked for areas where the structure could better support readability and usability.' },
+        { num: '4', title: 'Looking Beyond the Layout', body: 'We looked beyond the visual design to evaluate interaction patterns, branding, consistency, content hierarchy, and overall UI quality, considering how these elements affected usability.' },
+        { num: '5', title: 'Testing Against Usability Principles', body: 'We tested the experience against Nielsen\u2019s 10 Usability Heuristics, using each principle as a lens to identify usability issues and understand their potential impact.' },
+        { num: '6', title: 'Making the Experience More Accessible', body: 'We then evaluated the interface against WCAG 2.1 Level AA, looking at areas such as contrast, labels, touch targets, keyboard interaction, and information clarity.' },
+        { num: '7', title: 'Connecting Problems to UX Principles', body: 'We applied selected Laws of UX to understand why certain design decisions created friction, connecting the observed problems to principles such as Hick\u2019s Law, Fitts\u2019s Law, Jakob\u2019s Law, and Cognitive Load.' },
+        { num: '8', title: 'Turning Findings Into Improvements', body: 'Finally, we brought our findings together and turned them into actionable recommendations, balancing quick wins with longer-term improvements to make the VetIT experience clearer, more efficient, and easier to use.' },
+      ].map((p, i) => ({
+        ...p,
+        rule: (i === 3 || i === 7) ? 'none' : '1px solid var(--line)',
+        detailMax: this.state.procHover === i ? '200px' : '0px',
+        detailOp: this.state.procHover === i ? 1 : 0,
+        enter: () => this.setState({ procHover: i }),
+        leave: () => this.setState((st) => (st.procHover === i ? { procHover: null } : null)),
+      })),
+      ...this.screenVals('dash', 'dash'),
+      ...this.screenVals('appt', 'appt'),
+      ...this.screenVals('client', 'client'),
+      ...this.screenVals('tasks', 'tasks'),
+    };
+  }
+}
+
+</script>
+</body>
+</html>
