@@ -1,0 +1,25 @@
+:root{
+  /* 8px base, named for parts of a manuscript rather than numbered */
+  --space-hairline:    4px;   /* rules, borders */
+  --space-inline:      8px;   /* icon <-> label gaps */
+  --space-stack:      12px;   /* between related lines */
+  --space-base:       16px;   /* default component padding */
+  --space-comfortable: 24px;  /* card interiors */
+  --space-loose:      32px;   /* between components */
+  --space-section:    48px;   /* inside a plate */
+  --space-plate:      64px;   /* between minor plates */
+  --space-chapter:    96px;   /* between numbered sections */
+
+  /* layout */
+  --content-w: 1180px; /* @kind spacing */
+  --gutter: 32px; /* @kind spacing */
+  --bp-collapse: 880px; /* @kind other */
+
+  /* radii — corners stay sharp; ornament carries the softness */
+  --radius-none: 0px;
+  --radius-hair: 2px;
+  --radius-round: 50%;
+
+  /* hairline weight */
+  --border-w: 1px; /* @kind spacing */
+}

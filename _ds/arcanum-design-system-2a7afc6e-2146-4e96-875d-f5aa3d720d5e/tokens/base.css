@@ -1,0 +1,28 @@
+*,*::before,*::after{ box-sizing:border-box }
+html{ -webkit-text-size-adjust:100% }
+body{
+  margin:0;
+  background:var(--surface-ground);
+  color:var(--text-body);
+  font:var(--type-body);
+  position:relative;
+  overflow-x:hidden;
+}
+::selection{ background:var(--gold); color:var(--ink) }
+a{ color:var(--gold); text-decoration:none }
+a:hover{ color:var(--gold-bright) }
+img,svg{ display:block; max-width:100% }
+h1,h2,h3{ font-family:var(--font-display); font-weight:var(--fw-regular); color:var(--text-display); text-wrap:balance; margin:0 }
+p{ margin:0; text-wrap:pretty }
+
+/* ambient ground: fixed top glow + fine grain, both inert */
+.arc-ground::before{
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:var(--wash-hero);
+}
+.arc-ground::after{
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  opacity:var(--grain-opacity); mix-blend-mode:overlay;
+  background-image:var(--grain-url);
+}
+.arc-wrap{ max-width:var(--content-w); margin-inline:auto; padding-inline:var(--gutter); position:relative; z-index:1 }

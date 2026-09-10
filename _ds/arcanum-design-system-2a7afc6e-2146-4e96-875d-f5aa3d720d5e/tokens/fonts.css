@@ -1,0 +1,10 @@
+/* Arcanum webfonts — all three faces are served from Google Fonts.
+   No binaries ship with this system; the @font-face rules below are Google's,
+   restated locally so consumers get real @font-face declarations. */
+@import url("https://fonts.googleapis.com/css2?family=Libertinus+Serif+Display:ital@0;1&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap");
+
+:root{
+  --font-display: "Libertinus Serif Display", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-body: "Geist", "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Geist Mono", "SFMono-Regular", Consolas, monospace;
+}

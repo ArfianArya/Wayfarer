@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/colors.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/typography.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/motion.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/effects.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/base.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/styles.css">
+<script src="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/_ds_bundle.js"></script>
+<script src="image-slot.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; background: #0B0906; }
+  html { scroll-behavior: smooth; }
+  a { color: var(--ash); text-decoration: none; }
+  a:hover { color: var(--gold-bright); }
+  @keyframes twinkle { 0%, 100% { opacity: .28 } 50% { opacity: .62 } }
+  @keyframes firefly-glow { 0%, 100% { opacity: .06; transform: scale(.75) } 38% { opacity: 1; transform: scale(1.18) } 64% { opacity: .3; transform: scale(.92) } }
+  @keyframes firefly-path { 0% { transform: translate3d(0,0,0) } 30% { transform: translate3d(22px,-16px,0) } 60% { transform: translate3d(-14px,-30px,0) } 100% { transform: translate3d(9px,-46px,0) } }
+  @keyframes forest-breathe { 0%, 100% { transform: scale(1.02) translate3d(0,0,0) } 50% { transform: scale(1.06) translate3d(-14px,8px,0) } }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important } }
+</style>
+</helmet>
+
+<div style="position: relative; width: 100%; background: #0B0906; font-family: Geist, system-ui, sans-serif; overflow-x: hidden">
+
+  <div style="position: fixed; inset: 0; z-index: 0; pointer-events: none">
+    <div style="position: absolute; inset: -8%; background-image: url(assets/forest.jpg); background-size: cover; background-position: 50% 40%; filter: brightness(.58) contrast(1.06); animation: forest-breathe 46s ease-in-out infinite"></div>
+    <div style="position: absolute; inset: 0; background: radial-gradient(70% 54% at 50% 40%, rgba(11,9,6,.46), rgba(11,9,6,.9) 78%), linear-gradient(180deg, rgba(11,9,6,.76), rgba(11,9,6,.5) 30%, rgba(11,9,6,.94))"></div>
+    <div style="position: absolute; inset: -14%; background: radial-gradient(44% 32% at 42% 26%, rgba(214,178,120,.10), rgba(214,178,120,0) 70%)"></div>
+    <sc-for list="{{ fireflies }}" as="f" hint-placeholder-count="12">
+      <div style="position: absolute; left: {{ f.left }}; top: {{ f.top }}; animation: firefly-path {{ f.pathDur }} ease-in-out infinite alternate; animation-delay: {{ f.delay }}">
+        <div style="width: {{ f.size }}; height: {{ f.size }}; border-radius: 50%; background: #F2DCAF; filter: blur({{ f.blur }}); box-shadow: 0 0 {{ f.halo }} rgba(227,192,138,.8), 0 0 {{ f.haloWide }} rgba(192,152,97,.4); opacity: {{ f.peak }}; animation: firefly-glow {{ f.dur }} ease-in-out infinite; animation-delay: {{ f.delay }}"></div>
+      </div>
+    </sc-for>
+    <div style="position: absolute; top: 14%; left: 12%; width: 1px; height: 1px; border-radius: 50%; background: #FFF6D6; opacity: .5; animation: twinkle 6s ease-in-out infinite; box-shadow: 0 0 0 .5px rgba(255,246,214,.6), 24vw 5vh 0 0 #FFF6D6, 44vw -2vh 0 0 rgba(255,246,214,.7), 61vw 9vh 0 0 #FFF6D6, 72vw 3vh 0 0 rgba(255,246,214,.55), 14vw 28vh 0 0 rgba(255,246,214,.7), 36vw 40vh 0 0 #FFF6D6, 50vw 22vh 0 0 rgba(255,246,214,.5), 66vw 46vh 0 0 rgba(255,246,214,.8), 79vw 32vh 0 0 #FFF6D6, 6vw 54vh 0 0 rgba(255,246,214,.6), 30vw 65vh 0 0 rgba(255,246,214,.75), 55vw 60vh 0 0 #FFF6D6, 74vw 70vh 0 0 rgba(255,246,214,.5), 20vw 76vh 0 0 rgba(255,246,214,.65), 46vw 82vh 0 0 #FFF6D6"></div>
+  </div>
+
+  <div style="position: fixed; top: 0; left: 0; right: 0; z-index: 12; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px min(6vw, 92px); background: rgba(11,9,6,{{ navVeil }}); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(192,152,97,{{ navLine }}); transition: background 400ms ease, border-color 400ms ease">
+    <a href="index.html" style="display: flex; align-items: center; gap: 10px; color: var(--parchment)" style-hover="color: var(--gold-bright)">
+      <img src="assets/wordmark.png" alt="Wayfarer" decoding="async" style="display: block; height: clamp(22px, 6vw, 30px); width: auto">
+    </a>
+    <button type="button" onClick="{{ toggleMenu }}" aria-label="Menu" style="display: {{ burgerDisplay }}; flex-direction: column; align-items: center; justify-content: center; gap: 6px; width: 44px; height: 44px; margin-right: -10px; padding: 0; background: none; border: 0; cursor: pointer">
+      <span style="display: block; width: 22px; height: 1px; background: var(--gold); transform: {{ burgerTop }}; transition: transform 300ms cubic-bezier(.4,0,.2,1)"></span>
+      <span style="display: block; width: 22px; height: 1px; background: var(--gold); opacity: {{ burgerMidOp }}; transition: opacity 180ms ease"></span>
+      <span style="display: block; width: 22px; height: 1px; background: var(--gold); transform: {{ burgerBot }}; transition: transform 300ms cubic-bezier(.4,0,.2,1)"></span>
+    </button>
+    <div onClick="{{ closeMenu }}" style="display: {{ navLinksDisplay }}; flex-direction: {{ navDir }}; align-items: {{ navAlign }}; gap: {{ navGap }}; position: {{ navMenuPos }}; top: {{ navMenuTop }}; left: {{ navMenuSide }}; right: {{ navMenuSide }}; padding: {{ navMenuPad }}; background: {{ navMenuBg }}; border-bottom: {{ navMenuLine }}; backdrop-filter: {{ navMenuBlur }}">
+      <div data-nav-item="true" onClick="{{ goHome }}" style="display: flex; align-items: {{ navItemAlign }}; cursor: pointer; width: {{ navItemW }}; min-height: {{ navItemMinH }}">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.NavLink" href="index.html" hint-size="60px,18px">Home</x-import>
+      </div>
+      <div data-nav-item="true" onClick="{{ goProjects }}" style="display: flex; align-items: {{ navItemAlign }}; cursor: pointer; width: {{ navItemW }}; min-height: {{ navItemMinH }}">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.NavLink" href="projects.html" active="{{ trueVal }}" hint-size="70px,18px">Projects</x-import>
+      </div>
+      <div data-nav-item="true" onClick="{{ goAbout }}" style="display: flex; align-items: {{ navItemAlign }}; cursor: pointer; width: {{ navItemW }}; min-height: {{ navItemMinH }}">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.NavLink" href="about.html" hint-size="80px,18px">About Me</x-import>
+      </div>
+    </div>
+  </div>
+
+  <section data-screen-label="Projects header" style="position: relative; z-index: 2; display: flex; flex-direction: column; justify-content: flex-end; min-height: 62vh; box-sizing: border-box; max-width: 1400px; margin: 0 auto; padding: 26vh min(6vw, 92px) 8vh">
+    <div data-reveal="true" style="display: flex; flex-direction: column; gap: 20px">
+      <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="320px,14px">The Emperor · The full deck</x-import>
+      <h1 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(44px, 8vmin, 124px); line-height: 1.0; letter-spacing: -.015em; color: var(--parchment)">Selected <span style="font-style: italic; color: var(--gold)">work</span></h1>
+      <p style="margin: 0; max-width: 56ch; font-size: clamp(15px, 1.2vw, 18px); line-height: 1.66; color: var(--ash); text-wrap: pretty">Product design, UX audits, and editorial platforms. Four projects, each one a chapter with its own problem, its own constraints, and its own way of being read.</p>
+    </div>
+  </section>
+
+  <section data-screen-label="Projects index" style="position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; padding: 0 min(6vw, 92px) 14vh">
+    <sc-for list="{{ projects }}" as="p" hint-placeholder-count="4">
+      <a href="{{ p.href }}" data-reveal="true" style="display: grid; grid-template-columns: {{ rowCols }}; align-items: center; gap: {{ rowGap }}; padding: {{ rowPad }}; border-bottom: {{ p.rule }}; color: var(--ash); transition: background 300ms cubic-bezier(.4,0,.2,1)" style-hover="background: rgba(192,152,97,.045)">
+        <div style="display: flex; flex-direction: column; gap: 13px; min-width: 0">
+          <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ash-dim)">
+            <span>{{ p.kind }}</span>
+            <span>· {{ p.medium }}</span>
+            <span>· {{ p.year }}</span>
+          </div>
+          <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(26px, 3.4vmin, 46px); line-height: 1.06; color: var(--parchment)">{{ p.name }} — <span style="font-style: italic; color: var(--gold)">{{ p.tagline }}</span></h2>
+          <p style="margin: 0; max-width: 48ch; font-size: 15px; line-height: 1.66; color: var(--ash); text-wrap: pretty">{{ p.body }}</p>
+          <div style="display: flex; padding-top: 8px">
+            <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Button" variant="secondary" disabled="{{ p.ctaDisabled }}" hint-size="150px,42px">{{ p.cta }}</x-import>
+          </div>
+        </div>
+        <div style="position: relative; aspect-ratio: 16 / 11; min-width: 0; overflow: hidden; border: 1px solid var(--line-strong); background: linear-gradient(180deg, var(--ink-raised), var(--ink)); transition: border-color 300ms cubic-bezier(.4,0,.2,1), box-shadow 300ms cubic-bezier(.4,0,.2,1)" style-hover="border-color: var(--gold); box-shadow: 0 0 0 1px rgba(192,152,97,.22), 0 0 46px rgba(192,152,97,.14)">
+          <sc-if value="{{ p.hasCover }}" hint-placeholder-val="{{ true }}">
+            <img src="{{ p.cover }}" alt="{{ p.name }} cover" loading="lazy" decoding="async" style="display: {{ p.imgDisplay }}; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; opacity: .88; transition: opacity 400ms cubic-bezier(.4,0,.2,1), transform 600ms cubic-bezier(.16,1,.3,1)" style-hover="opacity: 1; transform: scale(1.03)">
+          </sc-if>
+          <span style="position: absolute; inset: 0; display: {{ p.placeholderDisplay }}; align-items: center; justify-content: center; gap: 10px; background: radial-gradient(70% 90% at 50% 30%, rgba(192,152,97,.09), rgba(11,9,6,0) 72%); font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ash-dim)">Not available</span>
+        </div>
+      </a>
+    </sc-for>
+  </section>
+
+  <section data-screen-label="Contact" style="position: relative; z-index: 2; min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; border-top: 1px solid var(--line)">
+
+    <div style="position: absolute; inset: 0; background: radial-gradient(56% 44% at 50% 42%, rgba(192,152,97,.11), rgba(11,9,6,0) 74%), linear-gradient(180deg, rgba(11,9,6,0) 0%, rgba(11,9,6,.10) 34%, rgba(11,9,6,.46) 100%); pointer-events: none"></div>
+
+    <div style="position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px; padding: 22vh min(6vw, 92px) 12vh; max-width: 900px; margin: 0 auto">
+      <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="280px,14px">The Lovers · Open to the next chapter</x-import>
+      <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(24px, 3.1vw, 58px); line-height: 1.06; letter-spacing: -.01em; color: var(--parchment); white-space: {{ footWrap }}">Available for full-time <span style="font-style: italic; color: var(--gold)">Product Design</span> roles.</h2>
+      <p style="margin: 0; max-width: 58ch; font-size: 17px; line-height: 1.68; color: var(--ash); text-wrap: balance">Looking for a team building something that has to hold up, where research, systems and craft are treated as the same job.</p>
+
+      <div style="width: 280px; padding: 6px 0 2px">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Divider" ornament="full" hint-size="280px,16px"></x-import>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Button" href="mailto:arfianarya@gmail.com" hint-size="140px,42px">Email me</x-import>
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Button" variant="secondary" href="https://drive.google.com/drive/folders/1DG2bW8UIH0rnfBa0PBrw7l_vZZI6qqZW?usp=sharing" target="_blank" rel="noopener" hint-size="140px,42px">Download CV</x-import>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 28px; padding-top: 10px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase">
+        <a href="https://www.linkedin.com/in/arfianarya/" target="_blank" rel="noopener" style="color: var(--ash)" style-hover="color: var(--gold-bright)">LinkedIn</a>
+        <a href="https://www.behance.net/arfianarya8a40" target="_blank" rel="noopener" style="color: var(--ash)" style-hover="color: var(--gold-bright)">Behance</a>
+      </div>
+    </div>
+
+    <div style="position: relative; z-index: 1; display: grid; grid-template-columns: {{ footCols }}; justify-items: {{ footJustify }}; text-align: {{ footAlign }}; align-items: center; gap: {{ footGap }}; padding: 22px min(6vw, 92px) 28px">
+      <a href="index.html" style="display: flex; align-items: center; gap: 10px; color: var(--ash)" style-hover="color: var(--gold-bright)">
+        <img src="assets/wordmark.png" alt="Wayfarer" decoding="async" style="display: block; height: 24px; width: auto">
+      </a>
+      <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ash-dim); white-space: nowrap">Every step reveals something new</span>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: {{ footEnd }}; gap: 8px 20px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ash-dim)">
+        <span>© 2026 Arfian Arya</span>
+      </div>
+    </div>
+  </section>
+
+  <div style="position: fixed; inset: 0; background-image: url(assets/grain.svg); opacity: .05; mix-blend-mode: overlay; pointer-events: none; z-index: 20"></div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;wordmark&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;LOGO&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { menu: false, mobile: typeof window !== "undefined" && window.innerWidth < 760, scrolled: false };
+
+  fireflies = Array.from({ length: 18 }, (_, i) => {
+    const near = i % 3 === 0;
+    const s = near ? 3 + Math.random() * 2 : 1.2 + Math.random() * 1.5;
+    return {
+      left: (5 + Math.random() * 90).toFixed(1) + '%',
+      top: (12 + Math.random() * 76).toFixed(1) + '%',
+      size: s.toFixed(1) + 'px',
+      blur: (near ? 0.3 : 0.9 + Math.random()).toFixed(1) + 'px',
+      halo: (s * 2.6).toFixed(1) + 'px',
+      haloWide: (s * 6).toFixed(1) + 'px',
+      peak: near ? 1 : (0.4 + Math.random() * 0.35).toFixed(2),
+      dur: (2.8 + Math.random() * 4.5).toFixed(1) + 's',
+      pathDur: (14 + Math.random() * 16).toFixed(1) + 's',
+      delay: (-Math.random() * 9).toFixed(1) + 's',
+    };
+  });
+
+  componentDidMount() {
+    this.onMq = () => { const m = window.innerWidth < 760; if (m !== this.state.mobile) this.setState({ mobile: m }); };
+    window.addEventListener('resize', this.onMq);
+    this.onMq();
+    this.reveals = Array.from(document.querySelectorAll('[data-reveal]'));
+    const vh = window.innerHeight || 800;
+    this.reveals.forEach((el) => {
+      if (el.getBoundingClientRect().top > vh * 0.9) {
+        el.dataset.hidden = '1';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+      }
+      el.style.transition = 'opacity 700ms cubic-bezier(.16,1,.3,1), transform 700ms cubic-bezier(.16,1,.3,1)';
+    });
+    const show = (el) => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; };
+    this.io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.intersectionRatio > 0.06) { show(e.target); this.io.unobserve(e.target); }
+      });
+    }, { threshold: [0, 0.06, 0.2] });
+    this.reveals.forEach((el) => this.io.observe(el));
+    this.revealFallback = setInterval(() => {
+      const h = window.innerHeight || 800;
+      this.reveals.forEach((el) => {
+        if (el.dataset.hidden && el.getBoundingClientRect().top < h * 0.92) { delete el.dataset.hidden; show(el); }
+      });
+    }, 400);
+
+    this.onScroll = () => {
+      const scrolled = (window.scrollY || 0) > 60;
+      if (scrolled !== this.state.scrolled) this.setState({ scrolled });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    this.onScroll();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onMq);
+    window.removeEventListener('scroll', this.onScroll);
+    if (this.io) this.io.disconnect();
+    clearInterval(this.revealFallback);
+  }
+
+  renderVals() {
+    const { scrolled } = this.state;
+    return {
+      wordmark: this.props.wordmark ?? 'LOGO',
+      rowCols: this.state.mobile ? 'minmax(0, 1fr)' : 'minmax(0, 0.82fr) minmax(0, 1.18fr)',
+      rowGap: this.state.mobile ? '22px' : '28px 44px',
+      rowPad: this.state.mobile ? '34px 0' : '44px min(3vw, 34px)',
+      mob: !!this.state.mobile,
+      toggleMenu: () => this.setState({ menu: !this.state.menu }),
+      closeMenu: () => { if (this.state.menu) this.setState({ menu: false }); },
+      burgerDisplay: this.state.mobile ? 'flex' : 'none',
+      burgerTop: this.state.mobile ? (this.state.menu ? 'translateY(7px) rotate(45deg)' : 'none') : 'none',
+      burgerBot: this.state.mobile ? (this.state.menu ? 'translateY(-7px) rotate(-45deg)' : 'none') : 'none',
+      burgerMidOp: this.state.mobile ? (this.state.menu ? 0 : 1) : 1,
+      navLinksDisplay: this.state.mobile ? (this.state.menu ? 'flex' : 'none') : 'flex',
+      navDir: this.state.mobile ? 'column' : 'row',
+      navAlign: this.state.mobile ? 'flex-start' : 'center',
+      navGap: this.state.mobile ? '2px' : 'min(36px, 5.6vw)',
+      navItemW: this.state.mobile ? '100%' : 'auto',
+      navItemMinH: this.state.mobile ? '44px' : 'auto',
+      navItemAlign: this.state.mobile ? 'stretch' : 'center',
+      goHome: () => { window.location.href = 'index.html'; },
+      goProjects: () => { window.location.href = 'projects.html'; },
+      goAbout: () => { window.location.href = 'about.html'; },
+      navMenuPos: this.state.mobile ? 'absolute' : 'static',
+      navMenuTop: this.state.mobile ? '100%' : 'auto',
+      navMenuSide: this.state.mobile ? '0' : 'auto',
+      navMenuPad: this.state.mobile ? '22px min(6vw, 92px) 26px' : '0',
+      navMenuBg: this.state.mobile ? 'rgba(11,9,6,.96)' : 'transparent',
+      navMenuLine: this.state.mobile ? '1px solid var(--line)' : 'none',
+      navMenuBlur: this.state.mobile ? 'blur(12px)' : 'none',
+      footCols: this.state.mobile ? 'minmax(0, 1fr)' : '1fr auto 1fr',
+      footJustify: this.state.mobile ? 'center' : 'stretch',
+      footAlign: this.state.mobile ? 'center' : 'left',
+      footEnd: this.state.mobile ? 'center' : 'flex-end',
+      footStart: this.state.mobile ? 'center' : 'flex-start',
+      footGap: this.state.mobile ? '12px' : '14px 40px',
+      footWrap: this.state.mobile ? 'normal' : 'nowrap',
+      trueVal: true,
+      fireflies: this.fireflies,
+      navVeil: this.state.mobile ? '.9' : (scrolled ? '.86' : '0'),
+      navLine: this.state.mobile ? '.16' : (scrolled ? '.16' : '0'),
+      projects: [
+        {
+          num: 'I', kind: 'Product', medium: 'Web & Mobile', year: '2026',
+          name: 'RSG', tagline: 'Simplifying the Insurance Journey',
+          body: 'Transforming a complex insurance journey into a clearer, more intuitive experience, from choosing a plan to managing protection.',
+          href: 'rsg.html', cta: 'Read the case', ctaColor: 'var(--gold)',
+          cover: 'assets/rsg/cover.png', rule: '1px solid var(--line)', hasCover: true, imgDisplay: 'block', placeholderDisplay: 'none',
+        },
+        {
+          num: 'II', kind: 'UX Audit', medium: 'SaaS Platform', year: '2026',
+          name: 'VetIT', tagline: 'Uncovering a Better Experience',
+          body: 'A focused UX audit uncovering usability and accessibility issues across the VetIT experience, with practical recommendations for a clearer, more efficient system.',
+          href: 'vetit.html', cta: 'Read the case', ctaColor: 'var(--gold)',
+          cover: 'assets/vetit/cover.png', rule: '1px solid var(--line)', hasCover: true, imgDisplay: 'block', placeholderDisplay: 'none',
+        },
+        {
+          num: 'III', kind: 'Product', medium: 'Website', year: '2025',
+          name: 'MediaMICE', tagline: 'Website Redesign',
+          body: 'Transforming MediaMICE into a cohesive digital magazine experience through thoughtful content structure, navigation, and visual storytelling.',
+          href: 'mediamice.html', cta: 'Read the case', ctaColor: 'var(--gold)',
+          cover: 'assets/mm/cover.png', rule: '1px solid var(--line)', hasCover: true, imgDisplay: 'block', placeholderDisplay: 'none',
+        },
+        {
+          num: 'IV', kind: 'Product', medium: 'App & Admin', year: '2025',
+          name: 'Gamuda Land', tagline: 'Designing a Connected Resident Experience',
+          body: 'A resident app and management console designed to keep a township, its services, and the people who run it in one connected experience.',
+          href: '#gamuda', cta: 'Coming soon', ctaColor: 'var(--ash-dim)', ctaDisabled: true,
+          cover: '', rule: 'none', hasCover: false, imgDisplay: 'none', placeholderDisplay: 'flex',
+        },
+      ],
+    };
+  }
+}
+
+</script>
+</body>
+</html>

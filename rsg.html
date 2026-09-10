@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/colors.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/typography.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/motion.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/effects.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/base.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/styles.css">
+<script src="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/_ds_bundle.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; background: #0B0906; }
+  html { scroll-snap-type: y proximity; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-snap-type: none; scroll-behavior: auto } }
+  a { color: var(--ash); text-decoration: none; }
+  a:hover { color: var(--gold-bright); }
+  @keyframes twinkle { 0%, 100% { opacity: .28 } 50% { opacity: .62 } }
+  @keyframes firefly-glow { 0%, 100% { opacity: .06; transform: scale(.75) } 38% { opacity: 1; transform: scale(1.18) } 64% { opacity: .3; transform: scale(.92) } }
+  @keyframes firefly-path { 0% { transform: translate3d(0,0,0) } 30% { transform: translate3d(22px,-16px,0) } 60% { transform: translate3d(-14px,-30px,0) } 100% { transform: translate3d(9px,-46px,0) } }
+  @keyframes forest-breathe { 0%, 100% { transform: scale(1.02) translate3d(0,0,0) } 50% { transform: scale(1.06) translate3d(-14px,8px,0) } }
+  @keyframes hint-drop { 0%, 100% { transform: translateY(0); opacity: .5 } 50% { transform: translateY(6px); opacity: 1 } }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important } }
+</style>
+</helmet>
+
+<div style="position: relative; width: 100%; background: #0B0906; font-family: Geist, system-ui, sans-serif; overflow-x: hidden">
+
+  <div style="position: fixed; inset: 0; z-index: 0; pointer-events: none">
+    <div style="position: absolute; inset: -8%; background-image: url(assets/forest.jpg); background-size: cover; background-position: 50% 40%; filter: brightness(.62) contrast(1.06); animation: forest-breathe 46s ease-in-out infinite"></div>
+    <div style="position: absolute; inset: 0; background: radial-gradient(70% 54% at 50% 40%, rgba(11,9,6,.42), rgba(11,9,6,.88) 78%), linear-gradient(180deg, rgba(11,9,6,.72), rgba(11,9,6,.46) 30%, rgba(11,9,6,.92))"></div>
+    <div style="position: absolute; inset: -14%; background: radial-gradient(44% 32% at 42% 26%, rgba(214,178,120,.10), rgba(214,178,120,0) 70%)"></div>
+    <sc-for list="{{ fireflies }}" as="f" hint-placeholder-count="12">
+      <div style="position: absolute; left: {{ f.left }}; top: {{ f.top }}; animation: firefly-path {{ f.pathDur }} ease-in-out infinite alternate; animation-delay: {{ f.delay }}">
+        <div style="width: {{ f.size }}; height: {{ f.size }}; border-radius: 50%; background: #F2DCAF; filter: blur({{ f.blur }}); box-shadow: 0 0 {{ f.halo }} rgba(227,192,138,.8), 0 0 {{ f.haloWide }} rgba(192,152,97,.4); opacity: {{ f.peak }}; animation: firefly-glow {{ f.dur }} ease-in-out infinite; animation-delay: {{ f.delay }}"></div>
+      </div>
+    </sc-for>
+    <div style="position: absolute; top: 14%; left: 12%; width: 1px; height: 1px; border-radius: 50%; background: #FFF6D6; opacity: .5; animation: twinkle 6s ease-in-out infinite; box-shadow: 0 0 0 .5px rgba(255,246,214,.6), 24vw 5vh 0 0 #FFF6D6, 44vw -2vh 0 0 rgba(255,246,214,.7), 61vw 9vh 0 0 #FFF6D6, 72vw 3vh 0 0 rgba(255,246,214,.55), 14vw 28vh 0 0 rgba(255,246,214,.7), 36vw 40vh 0 0 #FFF6D6, 50vw 22vh 0 0 rgba(255,246,214,.5), 66vw 46vh 0 0 rgba(255,246,214,.8), 79vw 32vh 0 0 #FFF6D6, 6vw 54vh 0 0 rgba(255,246,214,.6), 30vw 65vh 0 0 rgba(255,246,214,.75), 55vw 60vh 0 0 #FFF6D6, 74vw 70vh 0 0 rgba(255,246,214,.5), 20vw 76vh 0 0 rgba(255,246,214,.65), 46vw 82vh 0 0 #FFF6D6"></div>
+  </div>
+
+  <div style="position: fixed; top: 0; left: 0; right: 0; z-index: 12; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px min(6vw, 92px); background: rgba(11,9,6,{{ navVeil }}); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(192,152,97,{{ navLine }}); transition: background 400ms ease, border-color 400ms ease">
+    <a href="index.html" style="display: flex; align-items: center; gap: 10px; color: var(--parchment)" style-hover="color: var(--gold-bright)">
+      <img src="assets/wordmark.png" alt="Wayfarer" decoding="async" style="display: block; height: clamp(22px, 6vw, 30px); width: auto">
+    </a>
+    <button type="button" onClick="{{ toggleMenu }}" aria-label="Menu" style="display: {{ burgerDisplay }}; flex-direction: column; align-items: center; justify-content: center; gap: 6px; width: 44px; height: 44px; margin-right: -10px; padding: 0; background: none; border: 0; cursor: pointer">
+      <span style="display: block; width: 22px; height: 1px; background: var(--gold); transform: {{ burgerTop }}; transition: transform 300ms cubic-bezier(.4,0,.2,1)"></span>
+      <span style="display: block; width: 22px; height: 1px; background: var(--gold); opacity: {{ burgerMidOp }}; transition: opacity 180ms ease"></span>
+      <span style="display: block; width: 22px; height: 1px; background: var(--gold); transform: {{ burgerBot }}; transition: transform 300ms cubic-bezier(.4,0,.2,1)"></span>
+    </button>
+    <div onClick="{{ closeMenu }}" style="display: {{ navLinksDisplay }}; flex-direction: {{ navDir }}; align-items: {{ navAlign }}; gap: {{ navGap }}; position: {{ navMenuPos }}; top: {{ navMenuTop }}; left: {{ navMenuSide }}; right: {{ navMenuSide }}; padding: {{ navMenuPad }}; background: {{ navMenuBg }}; border-bottom: {{ navMenuLine }}; backdrop-filter: {{ navMenuBlur }}">
+      <div data-nav-item="true" onClick="{{ goHome }}" style="display: flex; align-items: {{ navItemAlign }}; cursor: pointer; width: {{ navItemW }}; min-height: {{ navItemMinH }}">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.NavLink" href="index.html" hint-size="60px,18px">Home</x-import>
+      </div>
+      <div data-nav-item="true" onClick="{{ goProjects }}" style="display: flex; align-items: {{ navItemAlign }}; cursor: pointer; width: {{ navItemW }}; min-height: {{ navItemMinH }}">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.NavLink" href="projects.html" active="{{ trueVal }}" hint-size="70px,18px">Projects</x-import>
+      </div>
+      <div data-nav-item="true" onClick="{{ goAbout }}" style="display: flex; align-items: {{ navItemAlign }}; cursor: pointer; width: {{ navItemW }}; min-height: {{ navItemMinH }}">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.NavLink" href="about.html" hint-size="80px,18px">About Me</x-import>
+      </div>
+    </div>
+  </div>
+
+  <div style="position: fixed; top: 50%; right: {{ railRight }}; z-index: 11; transform: translateY(-50%); display: {{ railDisplay }}; flex-direction: column; align-items: flex-end; gap: 2px; pointer-events: none; opacity: {{ railOp }}; transition: opacity 600ms ease">
+    <sc-for list="{{ pageNav }}" as="p" hint-placeholder-count="13">
+      <div onClick="{{ p.go }}" title="{{ p.label }}" style="position: relative; display: flex; align-items: center; justify-content: flex-end; gap: 12px; height: 22px; padding-left: 14px; pointer-events: auto; cursor: pointer; color: {{ p.color }}; transition: color 300ms cubic-bezier(.4,0,.2,1)" style-hover="color: var(--gold-bright)">
+        <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; position: absolute; right: 46px; opacity: {{ p.labelOp }}; transform: translateX({{ p.labelX }}); pointer-events: none; transition: opacity 300ms cubic-bezier(.4,0,.2,1), transform 300ms cubic-bezier(.4,0,.2,1)">{{ p.label }}</span>
+        <span style="display: {{ p.numDisplay }}; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .1em; opacity: {{ p.numOp }}; transition: opacity 300ms cubic-bezier(.4,0,.2,1)">{{ p.num }}</span>
+        <span style="width: {{ p.tick }}; height: 1px; background: currentColor; transition: width 300ms cubic-bezier(.4,0,.2,1)"></span>
+      </div>
+    </sc-for>
+  </div>
+
+  <section data-screen-label="Case hero" style="position: relative; z-index: 2; scroll-snap-align: start; min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 min(6vw, 92px) 16vh; max-width: 1400px; margin: 0 auto">
+    <div data-reveal="true" style="display: flex; flex-direction: column; gap: 20px">
+      <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="300px,14px">Product · Web &amp; Mobile · 2026</x-import>
+      <h1 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(40px, 7.4vmin, 116px); line-height: 1.0; letter-spacing: -.015em; color: var(--parchment); text-wrap: balance">RSG - <span style="color: var(--gold)">Simplifying the Insurance Journey</span></h1>
+      <p style="margin: 0; max-width: 56ch; font-size: clamp(15px, 1.2vw, 18px); line-height: 1.66; color: var(--ash); text-wrap: pretty">Transforming a complex insurance journey into a clearer, more intuitive experience, from choosing a plan to managing protection.</p>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px; margin-top: 8vh">
+      <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ash-dim)">Read the case</span>
+      <span style="width: 1px; height: 18px; background: linear-gradient(180deg, var(--gold-dim), transparent); animation: hint-drop 2.6s ease-in-out infinite"></span>
+    </div>
+  </section>
+
+  <section id="overview" data-chapter="0" data-screen-label="Meta" style="position: relative; z-index: 2; scroll-snap-align: start; height: 100vh; box-sizing: border-box; display: flex; align-items: center">
+    <div data-reveal="true" style="display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 5vh; width: 100%; height: 100%; box-sizing: border-box; max-width: 1400px; margin: 0 auto; padding: 7vh min(6vw, 92px)">
+      <div style="position: relative; min-height: 0; height: 100%; max-width: 100%; aspect-ratio: 16 / 8.4; justify-self: center; border: 1px solid var(--line-strong); background: radial-gradient(70% 90% at 50% 30%, rgba(192,152,97,.09), rgba(11,9,6,0) 72%), linear-gradient(180deg, var(--ink-raised), var(--ink)); overflow: hidden">
+        <img src="assets/rsg/cover-wide.png" alt="iuGO app screens" loading="lazy" decoding="async" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%">
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(8px, 2.6vw, 32px)">
+      <sc-for list="{{ meta }}" as="m" hint-placeholder-count="3">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center">
+          <span style="font-family: 'Libertinus Serif Display', serif; font-size: clamp(16px, 4.2vw, 25px); color: var(--gold)">{{ m.label }}</span>
+          <span style="font-size: clamp(11.5px, 3.1vw, 24px); font-weight: 600; white-space: nowrap; color: var(--parchment)">{{ m.value }}</span>
+        </div>
+      </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Background" style="position: relative; z-index: 2; scroll-snap-align: start">
+    <div style="display: flex; flex-direction: column; gap: 12vh; max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+
+      <div data-reveal="true" style="display: flex; flex-wrap: wrap; gap: 22px 44px">
+        <div style="flex: 1 1 180px; max-width: 220px; display: flex; flex-direction: column; gap: 8px">
+          <span style="font-family: 'Libertinus Serif Display', serif; font-style: italic; font-size: 21px; color: var(--ash-dim)">The Fool sets out</span>
+        </div>
+        <div style="flex: 3 1 340px; display: flex; flex-direction: column; gap: 18px; max-width: 62ch">
+          <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(32px, 3.6vw, 62px); line-height: 1.06; color: var(--gold)">Project Background</h2>
+          <p style="margin: 0; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">iuGO is a digital insurance platform designed to simplify how users explore, purchase, and manage insurance products online.</p>
+          <p style="margin: 0; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">The project focused on improving the end-to-end insurance experience, from login and personal information to product selection, quotation, purchase, and policy management. Because insurance involves complex information such as coverage, add-ons, beneficiaries, certificates, and payment plans, the challenge was to present these details in a way that feels simple and easy to understand.</p>
+          <p style="margin: 0; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">As part of the UI/UX team, I worked on designing and refining key customer journeys and high-fidelity interfaces, while collaborating with the team and stakeholders to translate business requirements into a clearer and more user-friendly experience.</p>
+        </div>
+      </div>
+
+      <div data-reveal="true" style="display: flex; flex-wrap: wrap; gap: 22px 44px">
+        <div style="flex: 1 1 180px; max-width: 220px; display: flex; flex-direction: column; gap: 8px">
+          <span style="font-family: 'Libertinus Serif Display', serif; font-style: italic; font-size: 21px; color: var(--ash-dim)">The hand that draws</span>
+        </div>
+        <div style="flex: 3 1 340px; display: flex; flex-direction: column; gap: 18px; max-width: 62ch">
+          <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(32px, 3.6vw, 62px); line-height: 1.06; color: var(--gold)">My Role</h2>
+          <p style="margin: 0; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">As a UI/UX Designer, I was responsible for designing and refining key user journeys within the iuGO platform. I worked closely with the BA, PM, and design team to understand requirements, explore solutions, and translate complex insurance processes into clear and intuitive interfaces.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="challenge" data-chapter="1" data-screen-label="Challenge" style="position: relative; z-index: 2; scroll-snap-align: start">
+    <div style="max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div data-reveal="true" style="display: flex; flex-direction: column; gap: 18px; max-width: 62ch">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="300px,14px">The Challenge · Five knots to untie</x-import>
+        <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(32px, 3.6vw, 62px); line-height: 1.06; color: var(--gold)">Insurance journeys become complex quickly.</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">Users need to understand different products, coverage options, add-ons, beneficiaries, payment plans, and policy information, while still being able to navigate the experience easily. During the project, I identified several key UX challenges.</p>
+      </div>
+
+      <div data-reveal="true" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 1px; margin-top: 7vh">
+        <sc-for list="{{ challenges }}" as="c" hint-placeholder-count="5">
+          <div style="display: flex; flex-direction: column; gap: 12px; padding: 30px 28px; outline: 1px solid var(--line); background: transparent; transition: background 250ms cubic-bezier(.4,0,.2,1)" style-hover="background: rgba(192,152,97,.05)">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 14px">
+              <span style="font-family: 'Libertinus Serif Display', serif; font-size: 25px; line-height: 1.15; color: var(--parchment)">{{ c.title }}</span>
+              <span style="flex: none; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .14em; color: var(--gold-dim)">{{ c.num }}</span>
+            </div>
+            <p style="margin: 0; font-size: 14px; line-height: 1.62; color: var(--ash); text-wrap: pretty">{{ c.body }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="requirements" data-chapter="2" data-screen-label="Requirements" style="position: relative; z-index: 2; scroll-snap-align: start">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 56px; max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div data-reveal="true" style="display: flex; flex-direction: column; gap: 18px">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="300px,14px">Understanding the Requirements</x-import>
+        <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(30px, 3.2vw, 54px); line-height: 1.06; color: var(--gold)">The logic comes before the layout.</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">The requirements provided the foundation for the user journeys, but some scenarios were more complex than they initially appeared. I worked through them with the BA, PM, developers, and design team to clarify the business logic and identify how different scenarios should behave.</p>
+        <p style="margin: 0; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">One key area was the difference between stacked and non-stacked policies, as this affected where Life Insured and Beneficiary information should be managed. I mapped the conditions within the purchase and policy journeys so the UI reflected real product logic rather than a standard layout.</p>
+      </div>
+
+      <div data-reveal="true" style="display: flex; flex-direction: column; gap: 18px; align-self: start">
+        <span style="font-family: 'Libertinus Serif Display', serif; font-style: italic; font-size: 27px; line-height: 1; color: var(--parchment)">What I focused on</span>
+        <div style="display: flex; flex-direction: column">
+          <sc-for list="{{ focus }}" as="f" hint-placeholder-count="4">
+            <div style="display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 6px 16px; padding: 18px 0; border-top: 1px solid var(--line)">
+              <span style="grid-row: span 2; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .14em; line-height: 1.5; color: var(--gold-dim)">{{ f.num }}</span>
+              <span style="font-size: 15px; font-weight: 600; letter-spacing: .01em; color: var(--gold)">{{ f.title }}</span>
+              <span style="font-size: 14px; line-height: 1.6; color: var(--ash); text-wrap: pretty">{{ f.body }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="flows" data-chapter="3" data-screen-label="Flows" style="position: relative; z-index: 2; scroll-snap-align: start">
+    <div style="display: flex; flex-direction: column; gap: 7vh; max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div data-reveal="true" style="display: flex; flex-direction: column; gap: 18px; max-width: 62ch">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="300px,14px">Mapping the Experience</x-import>
+        <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(30px, 3.2vw, 54px); line-height: 1.06; color: var(--gold)">The spread, laid out in order.</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">Once the requirements were clearer, I mapped the main purchase journey to understand how users move from selecting a product to managing their policy, and where the experience changes depending on account status and product type.</p>
+      </div>
+
+      <div data-reveal="true" style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+        <sc-for list="{{ flow }}" as="s" hint-placeholder-count="6">
+          <span style="display: flex; align-items: center; gap: 12px">
+            <span style="display: flex; align-items: center; gap: 12px; padding: 14px 20px; border: 1px solid var(--line-strong); background: linear-gradient(180deg, var(--ink-raised), var(--ink)); font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--parchment); transition: border-color 250ms cubic-bezier(.4,0,.2,1), color 250ms cubic-bezier(.4,0,.2,1)" style-hover="border-color: var(--gold); color: var(--gold-bright)">
+              <span style="color: var(--gold-dim)">{{ s.num }}</span>
+              <span>{{ s.label }}</span>
+            </span>
+            <span style="display: {{ s.arrow }}; align-items: center; gap: 4px; color: var(--gold-dim)">
+              <span style="width: 22px; height: 1px; background: currentColor"></span>
+              <span style="width: 5px; height: 5px; border: 1px solid currentColor; transform: rotate(45deg)"></span>
+            </span>
+          </span>
+        </sc-for>
+      </div>
+
+      <div data-reveal="true" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 32px; padding: 30px 0 0; border-top: 1px solid var(--line)">
+        <p style="margin: 0; padding-left: 20px; border-left: 1px solid var(--gold-dim); font-size: 15px; line-height: 1.68; color: var(--ash); text-wrap: pretty">The purchase journey stays the same, but the Personal Information step adapts to whether the user is logged in. Existing users reuse their account information; new users provide their details before continuing.</p>
+        <div style="display: flex; flex-direction: column; gap: 1px; background: var(--line)">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 16px 20px; background: var(--ink-raised)">
+            <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold)">Existing information</span>
+            <span style="font-size: 13px; color: var(--ash-dim)">Logged-in users</span>
+          </div>
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 16px 20px; background: var(--ink-raised)">
+            <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold)">New information</span>
+            <span style="font-size: 13px; color: var(--ash-dim)">Non-logged-in users</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="lofi" data-chapter="4" data-screen-label="Lo-Fi" style="position: relative; z-index: 2; scroll-snap-align: start">
+    <div style="display: flex; flex-direction: column; gap: 6vh; max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div data-reveal="true" style="display: flex; flex-direction: column; gap: 16px">
+        <div style="display: flex; flex-direction: column; gap: 16px">
+          <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="300px,14px">Design Exploration</x-import>
+          <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(30px, 3.2vw, 54px); line-height: 1.06; color: var(--gold)">Lo-Fi Design</h2>
+          <p style="margin: 0; max-width: 62ch; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">After mapping the key journeys, I started with low-fidelity wireframes to explore structure, content hierarchy, and user flow before moving into visual details.</p>
+        </div>
+      </div>
+
+      <div data-reveal="true" style="position: relative; padding: 26px; border: 1px solid var(--line-strong); background: linear-gradient(180deg, var(--ink-raised), var(--ink))">
+        <img src="assets/rsg/lofi.png" alt="Low-fidelity wireframes for the iuGO purchase and policy journeys" loading="lazy" decoding="async" style="display: block; width: 100%; height: auto; opacity: .88; transition: opacity 250ms cubic-bezier(.4,0,.2,1)" style-hover="opacity: 1">
+      </div>
+      <p data-reveal="true" style="margin: 0; max-width: 62ch; font-size: 15px; line-height: 1.68; color: var(--ash-dim); text-wrap: pretty">These Lo-Fi designs helped me validate the information hierarchy, navigation, and key interactions across the product, from purchasing a plan to managing policies and coverage.</p>
+    </div>
+  </section>
+
+
+  <section id="hifi" data-chapter="5" data-screen-label="Hi-Fi statement" style="position: relative; z-index: 2; scroll-snap-align: start; min-height: 100vh; display: flex; align-items: center; justify-content: center">
+    <div data-reveal="true" style="display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; padding: 12vh min(6vw, 92px)">
+      <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="200px,14px">Hi-Fi Design</x-import>
+      <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(38px, 7vmin, 112px); line-height: 1.02; letter-spacing: -.01em; color: var(--parchment); text-wrap: balance">Now We Make It Pretty</h2>
+      <p style="margin: 0; max-width: 58ch; font-size: 16px; line-height: 1.7; color: var(--ash); text-wrap: pretty">With the structure validated and the visual foundation established, I translated the wireframes into high-fidelity designs, clear, consistent, and accessible across every product scenario within iuGO.</p>
+    </div>
+  </section>
+
+  <section data-screen-label="Hi-Fi sections" style="position: relative; z-index: 2; scroll-snap-align: start">
+    <div style="display: flex; flex-direction: column; gap: 12vh; max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <sc-for list="{{ hifi }}" as="h" hint-placeholder-count="5">
+        <div data-reveal="true" style="display: flex; flex-direction: column; gap: 24px">
+          <div style="display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px 24px; align-items: baseline">
+            <span style="font-family: 'Libertinus Serif Display', serif; font-size: clamp(26px, 2.6vw, 42px); line-height: 1.08; color: var(--gold)">{{ h.title }}</span>
+            <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .16em; color: var(--gold-dim)">{{ h.num }}</span>
+            <p style="grid-column: 1 / -1; margin: 0; max-width: 74ch; font-size: 15px; line-height: 1.68; color: var(--ash); text-wrap: pretty">{{ h.body }}</p>
+          </div>
+          <div style="position: relative; padding: 22px; border: 1px solid var(--line-strong); background: linear-gradient(180deg, var(--ink-raised), var(--ink)); transition: border-color 250ms cubic-bezier(.4,0,.2,1)" style-hover="border-color: var(--gold)">
+            <img src="{{ h.src }}" alt="{{ h.alt }}" loading="lazy" decoding="async" style="display: block; width: 100%; height: auto; opacity: .9; transition: opacity 250ms cubic-bezier(.4,0,.2,1)" style-hover="opacity: 1">
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="result" data-chapter="6" data-screen-label="Result" style="position: relative; z-index: 2; scroll-snap-align: start">
+    <div style="max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div data-reveal="true" style="display: flex; flex-direction: column; gap: 18px; max-width: 62ch">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="300px,14px">The Result · What the deck settled into</x-import>
+        <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(32px, 3.6vw, 62px); line-height: 1.06; color: var(--gold)">The Result</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">Through user-centered design and close collaboration with the client, BA, PM, and development team, we translated complex insurance requirements into a clearer and more intuitive experience.</p>
+      </div>
+
+      <div data-reveal="true" style="display: flex; flex-direction: column; margin-top: 7vh">
+        <sc-for list="{{ results }}" as="r" hint-placeholder-count="6">
+          <div style="display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 24px; padding: 26px 0; border-top: 1px solid var(--line); transition: background 250ms cubic-bezier(.4,0,.2,1)" style-hover="background: rgba(192,152,97,.045)">
+            <span style="font-family: 'Libertinus Serif Display', serif; font-size: 30px; line-height: 1; color: var(--gold-dim)">{{ r.num }}</span>
+            <div style="display: flex; flex-direction: column; gap: 7px">
+              <span style="font-family: 'Libertinus Serif Display', serif; font-size: clamp(22px, 1.9vw, 30px); line-height: 1.12; color: var(--parchment)">{{ r.title }}</span>
+              <p style="margin: 0; max-width: 66ch; font-size: 15px; line-height: 1.66; color: var(--ash); text-wrap: pretty">{{ r.body }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Conclusion" style="position: relative; z-index: 2; scroll-snap-align: start; min-height: 100vh; box-sizing: border-box; display: flex; align-items: center; justify-content: center">
+    <div data-reveal="true" style="display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; max-width: 900px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="200px,14px">Conclusion</x-import>
+      <h2 style="margin: 0; max-width: 34ch; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(30px, 3.6vw, 58px); line-height: 1.06; color: var(--parchment); text-wrap: pretty">Designing for insurance is not making screens <span style="font-style: italic; color: var(--gold)">look</span> simpler.</h2>
+      <p style="margin: 0; max-width: 74ch; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">It is about making complex information and business logic understandable to users. By combining user-centered design, information architecture, iterative design, and cross-functional collaboration, I turned complex requirements into a more intuitive digital experience.</p>
+      <p style="margin: 0; max-width: 74ch; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">The result is an insurance experience that feels less complicated, more consistent, and easier for users to navigate.</p>
+    </div>
+  </section>
+
+  <section data-screen-label="Case footer" style="position: relative; z-index: 2; border-top: 1px solid var(--line); scroll-snap-align: start; min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden">
+
+    <div style="position: absolute; inset: 0; background: radial-gradient(56% 44% at 50% 42%, rgba(192,152,97,.11), rgba(11,9,6,0) 74%), linear-gradient(180deg, rgba(11,9,6,0) 0%, rgba(11,9,6,.10) 34%, rgba(11,9,6,.46) 100%); pointer-events: none"></div>
+
+    <div style="position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px; padding: 22vh min(6vw, 92px) 12vh; max-width: 900px; margin: 0 auto">
+      <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="280px,14px">The Lovers · Open to the next chapter</x-import>
+      <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(24px, 3.1vw, 58px); line-height: 1.06; letter-spacing: -.01em; color: var(--parchment); white-space: {{ footWrap }}">Available for full-time <span style="font-style: italic; color: var(--gold)">Product Design</span> roles.</h2>
+      <p style="margin: 0; max-width: 58ch; font-size: 17px; line-height: 1.68; color: var(--ash); text-wrap: balance">Looking for a team building something that has to hold up, where research, systems and craft are treated as the same job.</p>
+
+      <div style="width: 280px; padding: 6px 0 2px">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Divider" ornament="full" hint-size="280px,16px"></x-import>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Button" href="mailto:arfianarya@gmail.com" hint-size="140px,42px">Email me</x-import>
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Button" variant="secondary" href="https://drive.google.com/drive/folders/1DG2bW8UIH0rnfBa0PBrw7l_vZZI6qqZW?usp=sharing" target="_blank" rel="noopener" hint-size="140px,42px">Download CV</x-import>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 28px; padding-top: 10px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase">
+        <a href="https://www.linkedin.com/in/arfianarya/" target="_blank" rel="noopener" style="color: var(--ash)" style-hover="color: var(--gold-bright)">LinkedIn</a>
+        <a href="https://www.behance.net/arfianarya8a40" target="_blank" rel="noopener" style="color: var(--ash)" style-hover="color: var(--gold-bright)">Behance</a>
+      </div>
+    </div>
+
+    <div style="position: relative; z-index: 1; display: grid; grid-template-columns: {{ footCols }}; justify-items: {{ footJustify }}; text-align: {{ footAlign }}; align-items: center; gap: {{ footGap }}; padding: 22px min(6vw, 92px) 28px">
+      <a href="index.html" style="display: flex; align-items: center; gap: 10px; color: var(--ash)" style-hover="color: var(--gold-bright)">
+        <img src="assets/wordmark.png" alt="Wayfarer" decoding="async" style="display: block; height: 24px; width: auto">
+      </a>
+      <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ash-dim); white-space: nowrap">Every step reveals something new</span>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: {{ footEnd }}; gap: 8px 20px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ash-dim)">
+        <span>© 2026 Arfian Arya</span>
+      </div>
+    </div>
+  </section>
+
+  <div style="position: fixed; inset: 0; background-image: url(assets/grain.svg); opacity: .05; mix-blend-mode: overlay; pointer-events: none; z-index: 20"></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;wordmark&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;LOGO&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { menu: false, mobile: typeof window !== "undefined" && window.innerWidth < 760, chapter: 0, scrolled: false, railFits: false };
+
+  fireflies = Array.from({ length: 18 }, (_, i) => {
+    const near = i % 3 === 0;
+    const s = near ? 3 + Math.random() * 2 : 1.2 + Math.random() * 1.5;
+    return {
+      left: (5 + Math.random() * 90).toFixed(1) + '%',
+      top: (12 + Math.random() * 76).toFixed(1) + '%',
+      size: s.toFixed(1) + 'px',
+      blur: (near ? 0.3 : 0.9 + Math.random()).toFixed(1) + 'px',
+      halo: (s * 2.6).toFixed(1) + 'px',
+      haloWide: (s * 6).toFixed(1) + 'px',
+      peak: near ? 1 : (0.4 + Math.random() * 0.35).toFixed(2),
+      dur: (2.8 + Math.random() * 4.5).toFixed(1) + 's',
+      pathDur: (14 + Math.random() * 16).toFixed(1) + 's',
+      delay: (-Math.random() * 9).toFixed(1) + 's',
+    };
+  });
+
+  pageNames = ['Opening', 'The Card', 'Background', 'Challenge', 'Requirements', 'Mapping', 'Lo-Fi', 'Hi-Fi', 'Screens', 'Result', 'Conclusion', 'Contact'];
+
+  chapterList = [
+    { num: '0', label: 'Overview', href: '#overview' },
+    { num: 'II', label: 'The Challenge', href: '#challenge' },
+    { num: 'III', label: 'Requirements', href: '#requirements' },
+    { num: 'IV', label: 'Mapping the Experience', href: '#flows' },
+    { num: 'V', label: 'Lo-Fi Design', href: '#lofi' },
+    { num: 'VI', label: 'Hi-Fi Design', href: '#hifi' },
+    { num: 'VII', label: 'The Result', href: '#result' },
+  ];
+
+  componentDidMount() {
+    this.onMq = () => { const m = window.innerWidth < 760; if (m !== this.state.mobile) this.setState({ mobile: m }); };
+    window.addEventListener('resize', this.onMq);
+    this.onMq();
+    const root = this.rootEl();
+    if (root) {
+      this.reveals = Array.from(root.querySelectorAll('[data-reveal]'));
+      const vh0 = window.innerHeight || 800;
+      this.reveals.forEach((el) => {
+        if (el.getBoundingClientRect().top > vh0 * 0.9) {
+          el.dataset.hidden = '1';
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(20px)';
+        }
+        el.style.transition = 'opacity 700ms cubic-bezier(.16,1,.3,1), transform 700ms cubic-bezier(.16,1,.3,1)';
+      });
+      const show = (el) => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; };
+      this.io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.intersectionRatio > 0.06) { show(e.target); this.io.unobserve(e.target); }
+        });
+      }, { threshold: [0, 0.06, 0.2] });
+      this.reveals.forEach((el) => this.io.observe(el));
+      this.revealFallback = setInterval(() => {
+        const h = window.innerHeight || 800;
+        this.reveals.forEach((el) => {
+          if (el.dataset.hidden && el.getBoundingClientRect().top < h * 0.92) { delete el.dataset.hidden; show(el); }
+        });
+      }, 400);
+      this.marks = Array.from(root.querySelectorAll('[data-chapter]'));
+      this.pages = Array.from(root.querySelectorAll('section[data-screen-label]'));
+    }
+    this.onKey = (e) => {
+      const t = e.target;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+      if (e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); this.page(1); }
+      if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); this.page(-1); }
+    };
+    window.addEventListener('keydown', this.onKey);
+    this.onScroll = () => {
+      if (this.frame) return;
+      this.frame = requestAnimationFrame(() => { this.frame = null; this.tick(); });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onScroll);
+    this.tick();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onMq);
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onScroll);
+    window.removeEventListener('keydown', this.onKey);
+    if (this.io) this.io.disconnect();
+    clearInterval(this.revealFallback);
+    if (this.frame) cancelAnimationFrame(this.frame);
+  }
+
+  rootEl() { return document; }
+
+  pageTo(i) {
+    const pages = this.pages || [];
+    if (!pages[i]) return;
+    const top = pages[i].getBoundingClientRect().top + (window.scrollY || 0);
+    window.scrollTo({ top: Math.max(0, Math.round(top)), behavior: 'smooth' });
+    this.setState({ page: i });
+  }
+
+  page(dir) {
+    const pages = this.pages || [];
+    if (!pages.length) return;
+    const i = Math.min(pages.length - 1, Math.max(0, (this.state.page || 0) + dir));
+    const top = pages[i].getBoundingClientRect().top + (window.scrollY || 0);
+    window.scrollTo({ top: Math.max(0, Math.round(top)), behavior: 'smooth' });
+    this.setState({ page: i });
+  }
+
+  tick() {
+    const y = window.scrollY || 0;
+    const scrolled = y > 60;
+    const vw = window.innerWidth;
+    const contentLeft = Math.max(0, (vw - 1400) / 2) + Math.min(vw * 0.06, 92);
+    const gutter = Math.max(0, (vw - 1400) / 2) + Math.min(vw * 0.06, 92);
+    const railFits = vw > 620;
+    if (railFits !== this.state.railFits || Math.abs((this.state.gutter || 0) - gutter) > 1) this.setState({ railFits, gutter });
+    let chapter = this.state.chapter;
+    if (this.marks && this.marks.length) {
+      const mid = window.innerHeight * 0.42;
+      let found = 0;
+      this.marks.forEach((el) => { if (el.getBoundingClientRect().top <= mid) found = Number(el.getAttribute('data-chapter')); });
+      chapter = found;
+    }
+    let page = this.state.page || 0;
+    if (this.pages && this.pages.length) {
+      const mid = window.innerHeight * 0.42;
+      let found = 0;
+      this.pages.forEach((el, i) => { if (el.getBoundingClientRect().top <= mid) found = i; });
+      page = found;
+    }
+    if (scrolled !== this.state.scrolled || chapter !== this.state.chapter || page !== this.state.page) this.setState({ scrolled, chapter, page });
+  }
+
+  renderVals() {
+    const { chapter, scrolled } = this.state;
+    return {
+      wordmark: this.props.wordmark ?? 'LOGO',
+      mob: !!this.state.mobile,
+      toggleMenu: () => this.setState({ menu: !this.state.menu }),
+      closeMenu: () => { if (this.state.menu) this.setState({ menu: false }); },
+      burgerDisplay: this.state.mobile ? 'flex' : 'none',
+      burgerTop: this.state.mobile ? (this.state.menu ? 'translateY(7px) rotate(45deg)' : 'none') : 'none',
+      burgerBot: this.state.mobile ? (this.state.menu ? 'translateY(-7px) rotate(-45deg)' : 'none') : 'none',
+      burgerMidOp: this.state.mobile ? (this.state.menu ? 0 : 1) : 1,
+      navLinksDisplay: this.state.mobile ? (this.state.menu ? 'flex' : 'none') : 'flex',
+      navDir: this.state.mobile ? 'column' : 'row',
+      navAlign: this.state.mobile ? 'flex-start' : 'center',
+      navGap: this.state.mobile ? '2px' : 'min(36px, 5.6vw)',
+      navItemW: this.state.mobile ? '100%' : 'auto',
+      navItemMinH: this.state.mobile ? '44px' : 'auto',
+      navItemAlign: this.state.mobile ? 'stretch' : 'center',
+      goHome: () => { window.location.href = 'index.html'; },
+      goProjects: () => { window.location.href = 'projects.html'; },
+      goAbout: () => { window.location.href = 'about.html'; },
+      navMenuPos: this.state.mobile ? 'absolute' : 'static',
+      navMenuTop: this.state.mobile ? '100%' : 'auto',
+      navMenuSide: this.state.mobile ? '0' : 'auto',
+      navMenuPad: this.state.mobile ? '22px min(6vw, 92px) 26px' : '0',
+      navMenuBg: this.state.mobile ? 'rgba(11,9,6,.96)' : 'transparent',
+      navMenuLine: this.state.mobile ? '1px solid var(--line)' : 'none',
+      navMenuBlur: this.state.mobile ? 'blur(12px)' : 'none',
+      footCols: this.state.mobile ? 'minmax(0, 1fr)' : '1fr auto 1fr',
+      footJustify: this.state.mobile ? 'center' : 'stretch',
+      footAlign: this.state.mobile ? 'center' : 'left',
+      footEnd: this.state.mobile ? 'center' : 'flex-end',
+      footStart: this.state.mobile ? 'center' : 'flex-start',
+      footGap: this.state.mobile ? '12px' : '14px 40px',
+      footWrap: this.state.mobile ? 'normal' : 'nowrap',
+      trueVal: true,
+      fireflies: this.fireflies,
+      navVeil: this.state.mobile ? '.9' : (scrolled ? '.86' : '0'),
+      navLine: this.state.mobile ? '.16' : (scrolled ? '.16' : '0'),
+      railOp: this.state.railFits ? 1 : 0,
+      railRight: (this.state.gutter || 0) > 62 ? 'min(3vw, 30px)' : '8px',
+      pageNav: this.pageNames.map((label, i) => {
+        const on = i === (this.state.page || 0);
+        const compact = (this.state.gutter || 0) <= 62;
+        const roomForLabel = (this.state.gutter || 0) > 200;
+        return {
+          label,
+          num: String(i + 1).padStart(2, '0'),
+          color: on ? 'var(--gold)' : 'var(--ash-dim)',
+          tick: compact ? (on ? '20px' : '9px') : (on ? '30px' : '12px'),
+          numDisplay: compact ? 'none' : 'inline',
+          numOp: on ? 1 : 0.5,
+          labelOp: on && roomForLabel ? 1 : 0,
+          labelX: on ? '0px' : '8px',
+          go: () => this.pageTo(i),
+        };
+      }),
+      railDisplay: this.state.railFits ? 'flex' : 'none',
+      chapters: this.chapterList.map((c, i) => ({
+        num: c.num,
+        label: c.label,
+        href: c.href,
+        color: i === chapter ? 'var(--gold)' : 'var(--ash-dim)',
+        tick: i === chapter ? '26px' : '12px',
+        labelOp: i === chapter ? 1 : 0.42,
+      })),
+      meta: [
+        { label: 'Client', value: 'RSG' },
+        { label: 'Year', value: '2026' },
+        { label: 'Role', value: 'UI/UX Designer' },
+      ],
+      challenges: [
+        { num: 'I', title: 'Complex Insurance Flows', body: 'The purchase journey involved multiple steps and decisions. The challenge was to organize these steps so they felt straightforward without overwhelming users.' },
+        { num: 'II', title: 'Different Policy Structures', body: 'iuGO supports both stacked and non-stacked policies, which require different ways of managing Life Insured and Beneficiary information. The challenge was making these differences clear while keeping the experience consistent.' },
+        { num: 'III', title: 'Information Overload', body: 'Insurance products carry a lot of information: coverage, benefits, add-ons, certificates, payment options. I needed a clear hierarchy so users could quickly find what mattered most.' },
+        { num: 'IV', title: 'Balancing Security and Usability', body: 'Login, PIN, and security-trigger flows needed to meet security requirements without adding steps that make the experience frustrating.' },
+        { num: 'V', title: 'Translating Requirements into UX', body: 'Some business requirements involved logic that was not immediately clear from documentation, requiring close collaboration with the BA, PM, developers, and design team to avoid unnecessary rework.' },
+      ],
+      focus: [
+        { num: 'I', title: 'Business Requirements', body: 'Understanding the rules and conditions behind each insurance journey.' },
+        { num: 'II', title: 'User Flows', body: 'Mapping the end-to-end journey and its different scenarios.' },
+        { num: 'III', title: 'Product Logic', body: 'Clarifying the difference between stacked and non-stacked policies.' },
+        { num: 'IV', title: 'Cross-functional Alignment', body: 'Working with the BA, PM, developers, and design team to confirm intended behaviour.' },
+      ],
+      flow: [
+        { num: '01', label: 'Product Selection', arrow: 'flex' },
+        { num: '02', label: 'Add-ons', arrow: 'flex' },
+        { num: '03', label: 'Quotation', arrow: 'flex' },
+        { num: '04', label: 'Personal Information', arrow: 'flex' },
+        { num: '05', label: 'Payment', arrow: 'flex' },
+        { num: '06', label: 'Policy', arrow: 'none' },
+      ],
+      explored: [
+        { label: 'Product purchase journey' },
+        { label: 'Homepage and wallet' },
+        { label: 'Product and add-on selection' },
+        { label: 'Policy and certificate management' },
+        { label: 'Stacked vs. non-stacked policy' },
+      ],
+      hifi: [
+        { num: 'I', title: 'Purchase Experience', src: 'assets/rsg/purchase.png', alt: 'High-fidelity purchase journey screens',
+          body: 'I refined the purchase journey to make each step easier to understand, from selecting a product and providing personal information to choosing add-ons and reviewing the quotation.' },
+        { num: 'II', title: 'Login & Account Access', src: 'assets/rsg/login.png', alt: 'Login and account creation screens',
+          body: 'A simple entry point for both new and returning users, allowing them to access iuGO through their email or phone number with OTP verification.' },
+        { num: 'III', title: 'Homepage', src: 'assets/rsg/homepage.png', alt: 'Homepage and coverage overview screens',
+          body: 'The homepage gives users an overview of their coverage while keeping important information and actions easy to reach. Coverage trends help users understand how their protection stands.' },
+        { num: 'IV', title: 'Policy Management', src: 'assets/rsg/policy.png', alt: 'Policy, certificate, life insured and beneficiary screens',
+          body: 'A clear hierarchy for coverage, certificates, Life Insured, and Beneficiary information, with different layouts to support stacked and non-stacked policies.' },
+        { num: 'V', title: 'PIN & Two-Factor Authentication', src: 'assets/rsg/pin.png', alt: 'PIN entry and OTP verification screens',
+          body: 'Verification is applied based on the sensitivity of the action: a PIN for protected actions, OTP when a PIN needs resetting, keeping the security layer in place without adding friction to everyday interactions.' },
+      ],
+      results: [
+        { num: 'I', title: 'Simplified Insurance Flows', body: 'Restructured complex journeys into clear, step-by-step flows, helping users complete tasks without feeling overwhelmed.' },
+        { num: 'II', title: 'Clearer Policy Structures', body: 'Dedicated experiences for stacked and non-stacked policies, making Life Insured and Beneficiary information easier to understand and manage.' },
+        { num: 'III', title: 'Better Information Hierarchy', body: 'Prioritized coverage, benefits, add-ons, certificates, and payment details so users could find relevant information faster.' },
+        { num: 'IV', title: 'Seamless Security Experience', body: 'Integrated login, PIN, and security-trigger flows while minimizing unnecessary steps and interruptions throughout the journey.' },
+        { num: 'V', title: 'Consistent Design System', body: 'Established consistent components, layouts, and interaction patterns for a more cohesive and predictable experience across iuGO.' },
+        { num: 'VI', title: 'Continuous Client Collaboration', body: 'Worked closely with the client throughout the process to validate requirements, gather feedback, and refine solutions against both business needs and user experience.' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

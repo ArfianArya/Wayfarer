@@ -1,0 +1,16 @@
+:root{
+  --ease-fast: cubic-bezier(.4,0,.2,1); /* @kind other */
+  --ease-slow: cubic-bezier(.16,1,.3,1); /* @kind other */
+
+  --dur-fast: 150ms; /* @kind other */   /* hover / focus feedback */
+  --dur-base: 250ms; /* @kind other */   /* card lift, panel state */
+  --dur-slow: 450ms; /* @kind other */   /* section reveal on scroll */
+  --dur-twinkle: 6s; /* @kind other */   /* ambient starfield loop */
+
+  --transition-fast: var(--dur-fast) var(--ease-fast); /* @kind other */
+  --transition-base: var(--dur-base) var(--ease-slow); /* @kind other */
+  --transition-slow: var(--dur-slow) var(--ease-slow); /* @kind other */
+
+  --lift-card: translateY(-4px); /* @kind other */
+  --lift-button: translateY(-1px); /* @kind other */
+}

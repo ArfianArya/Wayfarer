@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/colors.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/typography.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/motion.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/effects.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/base.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/styles.css">
+<script src="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/_ds_bundle.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; background: #0B0906; }
+  html { scroll-behavior: smooth; }
+  a { color: var(--ash); text-decoration: none; }
+  a:hover { color: var(--gold-bright); }
+  @keyframes twinkle { 0%, 100% { opacity: .28 } 50% { opacity: .62 } }
+  @keyframes firefly-glow { 0%, 100% { opacity: .06; transform: scale(.75) } 38% { opacity: 1; transform: scale(1.18) } 64% { opacity: .3; transform: scale(.92) } }
+  @keyframes firefly-path { 0% { transform: translate3d(0,0,0) } 30% { transform: translate3d(22px,-16px,0) } 60% { transform: translate3d(-14px,-30px,0) } 100% { transform: translate3d(9px,-46px,0) } }
+  @keyframes forest-breathe { 0%, 100% { transform: scale(1.02) translate3d(0,0,0) } 50% { transform: scale(1.06) translate3d(-14px,8px,0) } }
+  @keyframes card-float { 0%, 100% { transform: translate3d(0,0,0) rotate(0deg) } 50% { transform: translate3d(0,-13px,0) rotate(.35deg) } }
+  @keyframes sheen-sweep { 0% { transform: translateX(-160%) rotate(8deg) } 55%, 100% { transform: translateX(190%) rotate(8deg) } }
+  @keyframes mote-orbit { 0%, 100% { transform: translate3d(0,0,0) scale(.9); opacity: .18 } 45% { transform: translate3d(14px,-22px,0) scale(1.1); opacity: .85 } 75% { transform: translate3d(-10px,-34px,0) scale(.95); opacity: .4 } }
+  @keyframes hint-drop { 0%, 100% { transform: translateY(0); opacity: .5 } 50% { transform: translateY(6px); opacity: 1 } }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important } }
+</style>
+</helmet>
+
+<div style="position: relative; width: 100%; background: #0B0906; font-family: Geist, system-ui, sans-serif; overflow-x: hidden">
+
+  <div style="position: fixed; inset: 0; z-index: 0; pointer-events: none">
+    <div style="position: absolute; inset: -8%; background-image: url(assets/forest.jpg); background-size: cover; background-position: 50% 42%; filter: brightness(.56) contrast(1.06); animation: forest-breathe 46s ease-in-out infinite"></div>
+    <div style="position: absolute; inset: 0; background: radial-gradient(68% 52% at 50% 38%, rgba(11,9,6,.46), rgba(11,9,6,.9) 78%), linear-gradient(180deg, rgba(11,9,6,.78), rgba(11,9,6,.5) 30%, rgba(11,9,6,.94))"></div>
+    <div style="position: absolute; inset: -14%; background: radial-gradient(42% 30% at 62% 24%, rgba(214,178,120,.10), rgba(214,178,120,0) 70%)"></div>
+    <sc-for list="{{ fireflies }}" as="f" hint-placeholder-count="12">
+      <div style="position: absolute; left: {{ f.left }}; top: {{ f.top }}; animation: firefly-path {{ f.pathDur }} ease-in-out infinite alternate; animation-delay: {{ f.delay }}">
+        <div style="width: {{ f.size }}; height: {{ f.size }}; border-radius: 50%; background: #F2DCAF; filter: blur({{ f.blur }}); box-shadow: 0 0 {{ f.halo }} rgba(227,192,138,.8), 0 0 {{ f.haloWide }} rgba(192,152,97,.4); opacity: {{ f.peak }}; animation: firefly-glow {{ f.dur }} ease-in-out infinite; animation-delay: {{ f.delay }}"></div>
+      </div>
+    </sc-for>
+    <div style="position: absolute; top: 14%; left: 12%; width: 1px; height: 1px; border-radius: 50%; background: #FFF6D6; opacity: .5; animation: twinkle 6s ease-in-out infinite; box-shadow: 0 0 0 .5px rgba(255,246,214,.6), 24vw 5vh 0 0 #FFF6D6, 44vw -2vh 0 0 rgba(255,246,214,.7), 61vw 9vh 0 0 #FFF6D6, 72vw 3vh 0 0 rgba(255,246,214,.55), 14vw 28vh 0 0 rgba(255,246,214,.7), 36vw 40vh 0 0 #FFF6D6, 50vw 22vh 0 0 rgba(255,246,214,.5), 66vw 46vh 0 0 rgba(255,246,214,.8), 79vw 32vh 0 0 #FFF6D6, 6vw 54vh 0 0 rgba(255,246,214,.6), 30vw 65vh 0 0 rgba(255,246,214,.75), 55vw 60vh 0 0 #FFF6D6, 74vw 70vh 0 0 rgba(255,246,214,.5), 20vw 76vh 0 0 rgba(255,246,214,.65), 46vw 82vh 0 0 #FFF6D6"></div>
+  </div>
+
+  <div style="position: fixed; top: 0; left: 0; right: 0; z-index: 12; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px min(6vw, 92px); background: rgba(11,9,6,{{ navVeil }}); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(192,152,97,{{ navLine }}); transition: background 400ms ease, border-color 400ms ease">
+    <a href="index.html" style="display: flex; align-items: center; gap: 10px; color: var(--parchment)" style-hover="color: var(--gold-bright)">
+      <img src="assets/wordmark.png" alt="Wayfarer" decoding="async" style="display: block; height: clamp(22px, 6vw, 30px); width: auto">
+    </a>
+    <button type="button" onClick="{{ toggleMenu }}" aria-label="Menu" style="display: {{ burgerDisplay }}; flex-direction: column; align-items: center; justify-content: center; gap: 6px; width: 44px; height: 44px; margin-right: -10px; padding: 0; background: none; border: 0; cursor: pointer">
+      <span style="display: block; width: 22px; height: 1px; background: var(--gold); transform: {{ burgerTop }}; transition: transform 300ms cubic-bezier(.4,0,.2,1)"></span>
+      <span style="display: block; width: 22px; height: 1px; background: var(--gold); opacity: {{ burgerMidOp }}; transition: opacity 180ms ease"></span>
+      <span style="display: block; width: 22px; height: 1px; background: var(--gold); transform: {{ burgerBot }}; transition: transform 300ms cubic-bezier(.4,0,.2,1)"></span>
+    </button>
+    <div onClick="{{ closeMenu }}" style="display: {{ navLinksDisplay }}; flex-direction: {{ navDir }}; align-items: {{ navAlign }}; gap: {{ navGap }}; position: {{ navMenuPos }}; top: {{ navMenuTop }}; left: {{ navMenuSide }}; right: {{ navMenuSide }}; padding: {{ navMenuPad }}; background: {{ navMenuBg }}; border-bottom: {{ navMenuLine }}; backdrop-filter: {{ navMenuBlur }}">
+      <div data-nav-item="true" onClick="{{ goHome }}" style="display: flex; align-items: {{ navItemAlign }}; cursor: pointer; width: {{ navItemW }}; min-height: {{ navItemMinH }}">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.NavLink" href="index.html" hint-size="60px,18px">Home</x-import>
+      </div>
+      <div data-nav-item="true" onClick="{{ goProjects }}" style="display: flex; align-items: {{ navItemAlign }}; cursor: pointer; width: {{ navItemW }}; min-height: {{ navItemMinH }}">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.NavLink" href="projects.html" hint-size="70px,18px">Projects</x-import>
+      </div>
+      <div data-nav-item="true" onClick="{{ goAbout }}" style="display: flex; align-items: {{ navItemAlign }}; cursor: pointer; width: {{ navItemW }}; min-height: {{ navItemMinH }}">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.NavLink" href="about.html" active="{{ trueVal }}" hint-size="80px,18px">About Me</x-import>
+      </div>
+    </div>
+  </div>
+
+  <section data-screen-label="About opening" style="position: relative; z-index: 2; min-height: 100vh; box-sizing: border-box; display: flex; align-items: flex-end; padding: 22vh min(6vw, 92px) 12vh">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 48px 40px; width: 100%; max-width: 1400px; margin: 0 auto">
+      <div data-reveal="true" style="flex: 1 1 520px; display: flex; flex-direction: column; gap: 22px">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="320px,14px">Behind the work</x-import>
+        <h1 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(38px, 7vmin, 104px); line-height: 1.02; letter-spacing: -.015em; color: var(--parchment)">Most of design happens<br><span style="font-style: italic; color: var(--gold)">before</span> anyone sees it.</h1>
+        <p style="margin: 0; max-width: 62ch; font-size: clamp(15px, 1.2vw, 18px); line-height: 1.68; color: var(--ash); text-wrap: pretty">Behind every interface is a process of research, exploration, and iteration.</p>
+        <div style="display: flex; align-items: center; gap: 10px; padding-top: 10px">
+          <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ash-dim)">Follow the path</span>
+          <span style="width: 1px; height: 18px; background: linear-gradient(180deg, var(--gold-dim), transparent); animation: hint-drop 2.6s ease-in-out infinite"></span>
+        </div>
+      </div>
+
+      <div data-reveal="true" style="flex: 0 1 320px; display: flex; flex-direction: column; align-items: center; gap: 16px; width: min(100%, 320px)">
+        <div style="position: relative; width: 100%; aspect-ratio: 902 / 1352; perspective: 1500px">
+
+          <div style="position: absolute; inset: -12% -26%; pointer-events: none">
+            <sc-for list="{{ motes }}" as="m" hint-placeholder-count="10">
+              <div style="position: absolute; left: {{ m.left }}; top: {{ m.top }}; width: {{ m.size }}; height: {{ m.size }}; border-radius: 50%; background: #F2DCAF; box-shadow: 0 0 {{ m.halo }} rgba(227,192,138,.75); animation: mote-orbit {{ m.dur }} ease-in-out infinite; animation-delay: {{ m.delay }}"></div>
+            </sc-for>
+          </div>
+
+          <div ref="{{ tiltRef }}" style="position: absolute; inset: 0; transform-style: preserve-3d; will-change: transform; transition: transform 620ms cubic-bezier(.16,1,.3,1)">
+            <div style="position: absolute; inset: 0; transform-style: preserve-3d; animation: card-float 9.5s ease-in-out infinite">
+              <div role="button" tabindex="0" aria-label="Flip the card" onClick="{{ onFlip }}" onKeyDown="{{ onFlipKey }}" style="position: absolute; inset: 0; transform-style: preserve-3d; transform: rotateY({{ flipDeg }}); transition: transform 900ms cubic-bezier(.22,1,.28,1); cursor: pointer; outline: none">
+
+                <div style="position: absolute; inset: 0; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden">
+                  <img src="assets/about-tarot.png" alt="Arfian Arya, drawn as a tarot plate" decoding="async" fetchpriority="high" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: .96">
+                  <div ref="{{ shineRef }}" style="position: absolute; inset: 0; background: radial-gradient(42% 30% at 50% 32%, rgba(255,246,214,.12), rgba(255,246,214,0) 72%); mix-blend-mode: screen; pointer-events: none"></div>
+                  <div style="position: absolute; top: -30%; bottom: -30%; left: 0; width: 26%; background: linear-gradient(90deg, rgba(255,246,214,0), rgba(255,246,214,.11), rgba(255,246,214,0)); animation: sheen-sweep 11s ease-in-out infinite; pointer-events: none"></div>
+                </div>
+
+                <div style="position: absolute; inset: 0; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; transform: rotateY(180deg)">
+                  <img src="assets/about-real.png" alt="Arfian Arya" loading="lazy" decoding="async" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: .96">
+                  <div style="position: absolute; inset: 0; background: radial-gradient(46% 34% at 50% 30%, rgba(227,192,138,.10), rgba(227,192,138,0) 74%); mix-blend-mode: screen; pointer-events: none"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="button" onClick="{{ onFlip }}" style="display: flex; align-items: center; gap: 9px; background: none; border: 0; padding: 2px 0; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ash-dim); cursor: pointer; transition: color 250ms cubic-bezier(.4,0,.2,1)" style-hover="color: var(--gold-bright)">
+          <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Sparkle" size="{{ sparkleSize }}" hint-size="9px,9px"></x-import>
+          <span style="color: inherit">{{ flipHint }}</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Origin" style="position: relative; z-index: 2">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 40px 72px; max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div data-reveal="true" style="display: flex; flex-direction: column; gap: 14px">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="240px,14px">How I got here</x-import>
+        <h2 style="margin: 0; max-width: 18ch; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(28px, 3.2vw, 54px); line-height: 1.06; color: var(--parchment)">The road here was never a <span style="font-style: italic; color: var(--gold)">straight line</span>.</h2>
+      </div>
+      <div data-reveal="true" style="display: flex; flex-direction: column; gap: 18px; max-width: 60ch">
+        <p style="margin: 0; font-size: 16px; line-height: 1.74; color: var(--ash); text-wrap: pretty">I&rsquo;m Arfian Arya, a UI/UX Designer who enjoys turning complex problems into simple, meaningful experiences. My curiosity led me to design, and I&rsquo;ve been exploring the field since college, growing through internships, real-world projects, and plenty of self-driven learning.</p>
+        <p style="margin: 0; font-size: 16px; line-height: 1.74; color: var(--ash); text-wrap: pretty">I enjoy understanding why people do what they do, finding the story behind a problem, and turning those insights into thoughtful digital experiences. When I&rsquo;m not designing, I&rsquo;m usually watching movies, playing games, listening to music, and traveling.</p>
+        <p style="margin: 0; font-size: 16px; line-height: 1.74; color: var(--ash); text-wrap: pretty">Curious by nature, always learning, and always looking for the next path to explore.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="The path" style="position: relative; z-index: 2">
+    <div style="max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div data-reveal="true" style="display: flex; flex-direction: column; gap: 14px; max-width: 52ch; padding-bottom: 7vh">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="240px,14px">The path so far</x-import>
+        <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(28px, 3.2vw, 54px); line-height: 1.06; color: var(--parchment)">Where the road has <span style="font-style: italic; color: var(--gold)">taken me</span>.</h2>
+      </div>
+
+      <div data-reveal="true" style="position: relative; padding-left: 40px">
+        <div style="position: absolute; left: 3px; top: 8px; bottom: 8px; width: 1px; background: linear-gradient(180deg, rgba(192,152,97,0), rgba(192,152,97,.42) 12%, rgba(192,152,97,.42) 88%, rgba(192,152,97,0))"></div>
+        <sc-for list="{{ waypoints }}" as="w" hint-placeholder-count="5">
+          <div style="position: relative; display: flex; flex-wrap: wrap; align-items: baseline; gap: 14px 44px; padding: 30px min(3vw, 34px); border-bottom: {{ w.rule }}; transition: background 250ms cubic-bezier(.4,0,.2,1)" style-hover="background: rgba(192,152,97,.04)">
+            <span style="position: absolute; left: -41px; top: 42px; width: 7px; height: 7px; border: 1px solid var(--gold); background: #0B0906; transform: rotate(45deg)"></span>
+            <div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 6px">
+              <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-dim)">{{ w.period }}</span>
+              <span style="font-family: 'Libertinus Serif Display', serif; font-size: clamp(22px, 2.2vw, 34px); line-height: 1.12; color: var(--parchment)">{{ w.role }}</span>
+              <span style="font-size: 14px; color: var(--ash-dim)">{{ w.company }}</span>
+            </div>
+            <p style="flex: 1 1 320px; margin: 0; max-width: 52ch; font-size: 15px; line-height: 1.7; color: var(--ash); text-wrap: pretty">{{ w.body }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Philosophy" style="position: relative; z-index: 2">
+    <div style="max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div data-reveal="true" style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 18px 48px; padding-bottom: 7vh">
+        <div style="display: flex; flex-direction: column; gap: 14px; max-width: 56ch">
+          <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="240px,14px">How I work</x-import>
+          <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(28px, 3.2vw, 54px); line-height: 1.06; color: var(--parchment)">Four habits that <span style="font-style: italic; color: var(--gold)">survived</span> every project.</h2>
+        </div>
+        <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ash-dim)">Draw a card</span>
+      </div>
+
+      <div data-reveal="true" style="display: flex; flex-wrap: wrap; align-items: stretch; gap: 0 1px; background: var(--line); border: 1px solid var(--line)">
+
+        <div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 1px; background: var(--line)">
+          <sc-for list="{{ tenets }}" as="t" hint-placeholder-count="4">
+            <div onMouseEnter="{{ t.enter }}" onClick="{{ t.enter }}" style="position: relative; flex: 1 1 0; display: flex; align-items: center; gap: 18px; min-height: 92px; padding: 22px min(3vw, 34px); background: {{ t.rowBg }}; cursor: pointer; transition: background 300ms cubic-bezier(.4,0,.2,1)">
+              <span style="position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: {{ t.spine }}; transition: background 300ms ease"></span>
+              <span style="flex: none; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .14em; color: {{ t.numColor }}; transition: color 300ms ease">{{ t.num }}</span>
+              <span style="font-family: 'Libertinus Serif Display', serif; font-size: clamp(21px, 1.9vw, 30px); line-height: 1.1; color: {{ t.titleColor }}; transition: color 300ms ease">{{ t.title }}</span>
+              <span style="margin-left: auto; width: 7px; height: 7px; border: 1px solid var(--gold); background: {{ t.dot }}; transform: rotate(45deg); box-shadow: {{ t.glow }}; transition: background 300ms ease, box-shadow 300ms ease"></span>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="flex: 1 1 420px; position: relative; display: flex; flex-direction: column; justify-content: center; gap: 22px; min-height: 400px; padding: 48px min(4vw, 52px); background: radial-gradient(80% 70% at 76% 22%, rgba(192,152,97,.09), rgba(11,9,6,0) 72%), linear-gradient(180deg, var(--ink-raised), var(--ink)); overflow: hidden">
+          <div style="position: absolute; left: min(4vw, 52px); top: 40px; width: 34px; height: 1px; background: var(--gold-dim)"></div>
+          <div style="display: flex; flex-direction: column; gap: 20px; opacity: {{ plateOp }}; transform: translateY({{ plateY }}); transition: opacity 380ms cubic-bezier(.16,1,.3,1), transform 480ms cubic-bezier(.16,1,.3,1)">
+            <span style="max-width: 18ch; font-family: 'Libertinus Serif Display', serif; font-size: clamp(30px, 3.4vw, 52px); line-height: 1.04; color: var(--parchment)">{{ activeTitle }}</span>
+            <p style="margin: 0; max-width: 46ch; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">{{ activeBody }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Constellation" style="position: relative; z-index: 2">
+    <div style="max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div data-reveal="true" style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 48px; padding-bottom: 8vh">
+        <div style="display: flex; flex-direction: column; gap: 14px; max-width: 52ch">
+          <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="240px,14px">The constellation</x-import>
+          <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(28px, 3.2vw, 54px); line-height: 1.06; color: var(--parchment)">Where the <span style="font-style: italic; color: var(--gold)">craft</span> sits.</h2>
+        </div>
+        <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ash-dim)">Hover a star</span>
+      </div>
+
+      <div data-reveal="true" ref="{{ fieldRef }}" style="position: relative; display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: center; gap: 26px 40px">
+        <svg width="{{ fieldW }}" height="{{ fieldH }}" viewBox="{{ fieldBox }}" style="position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 0">
+          <sc-for list="{{ links }}" as="l" hint-placeholder-count="0">
+            <line x1="{{ l.x1 }}" y1="{{ l.y1 }}" x2="{{ l.x2 }}" y2="{{ l.y2 }}" stroke="{{ l.stroke }}" stroke-width="1" stroke-dasharray="{{ l.dash }}" style="transition: stroke 320ms ease"></line>
+          </sc-for>
+          <sc-for list="{{ links }}" as="l" hint-placeholder-count="0">
+            <circle cx="{{ l.dot1x }}" cy="{{ l.dot1y }}" r="{{ l.r }}" fill="{{ l.fill }}" style="transition: fill 320ms ease"></circle>
+          </sc-for>
+          <sc-for list="{{ links }}" as="l" hint-placeholder-count="0">
+            <circle cx="{{ l.dot2x }}" cy="{{ l.dot2y }}" r="{{ l.r }}" fill="{{ l.fill }}" style="transition: fill 320ms ease"></circle>
+          </sc-for>
+        </svg>
+        <sc-for list="{{ stars }}" as="s" hint-placeholder-count="6">
+          <div data-star="true" onMouseEnter="{{ s.enter }}" onMouseLeave="{{ s.leave }}" style="position: relative; z-index: 1; flex: 0 1 {{ s.basis }}; min-width: 240px; margin-top: {{ s.offset }}; padding: 26px 26px 24px; border: 1px solid {{ s.border }}; background: {{ s.bg }}; cursor: default; transition: border-color 300ms cubic-bezier(.4,0,.2,1), background 300ms cubic-bezier(.4,0,.2,1), transform 400ms cubic-bezier(.16,1,.3,1); transform: translateY({{ s.lift }})">
+            <div style="display: flex; align-items: center; gap: 12px">
+              <span style="width: 7px; height: 7px; border: 1px solid var(--gold); background: {{ s.dot }}; transform: rotate(45deg); box-shadow: {{ s.glow }}; transition: background 300ms ease, box-shadow 300ms ease"></span>
+              <span style="font-family: 'Libertinus Serif Display', serif; font-size: clamp(20px, 1.8vw, 27px); line-height: 1.16; color: {{ s.titleColor }}; transition: color 300ms ease">{{ s.title }}</span>
+            </div>
+            <div style="overflow: hidden; max-height: {{ s.max }}; opacity: {{ s.op }}; transition: max-height 420ms cubic-bezier(.16,1,.3,1), opacity 320ms ease">
+              <p style="margin: 14px 0 0; max-width: 40ch; font-size: 14px; line-height: 1.66; color: var(--ash); text-wrap: pretty">{{ s.body }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Instruments" style="position: relative; z-index: 2">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 40px 72px; max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div data-reveal="true" style="display: flex; flex-direction: column; gap: 14px">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="240px,14px">Instruments</x-import>
+        <h2 style="margin: 0; max-width: 16ch; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(28px, 3.2vw, 54px); line-height: 1.06; color: var(--parchment)">Tools are <span style="font-style: italic; color: var(--gold)">habits</span>, not identity.</h2>
+        <p style="margin: 0; max-width: 44ch; font-size: 15px; line-height: 1.7; color: var(--ash-dim); text-wrap: pretty">I care more about the method than the software. These are simply the ones I reach for most.</p>
+      </div>
+      <div data-reveal="true" style="display: flex; flex-direction: column; gap: 34px">
+        <sc-for list="{{ kits }}" as="k" hint-placeholder-count="3">
+          <div style="display: flex; flex-direction: column; gap: 14px">
+            <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-dim)">{{ k.label }}</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px">
+              <sc-for list="{{ k.items }}" as="i" hint-placeholder-count="5">
+                <span style="padding: 9px 15px; border: 1px solid var(--line-strong); font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .1em; color: var(--ash); transition: border-color 250ms cubic-bezier(.4,0,.2,1), color 250ms cubic-bezier(.4,0,.2,1)" style-hover="border-color: var(--gold); color: var(--gold-bright)">{{ i.name }}</span>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="About footer" style="position: relative; z-index: 2; border-top: 1px solid var(--line); min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; border-top: 1px solid var(--line)">
+    <div style="position: absolute; inset: 0; background: radial-gradient(56% 44% at 50% 42%, rgba(192,152,97,.11), rgba(11,9,6,0) 74%), linear-gradient(180deg, rgba(11,9,6,0) 0%, rgba(11,9,6,.10) 34%, rgba(11,9,6,.46) 100%); pointer-events: none"></div>
+
+    <div style="position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px; padding: 22vh min(6vw, 92px) 12vh; max-width: 900px; margin: 0 auto">
+      <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="280px,14px">Open to the next chapter</x-import>
+      <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(24px, 3.1vw, 58px); line-height: 1.06; letter-spacing: -.01em; color: var(--parchment); white-space: {{ footWrap }}">Available for full-time <span style="font-style: italic; color: var(--gold)">Product Design</span> roles.</h2>
+      <p style="margin: 0; max-width: 58ch; font-size: 17px; line-height: 1.68; color: var(--ash); text-wrap: balance">Looking for a team building something that has to hold up, where research, systems and craft are treated as the same job.</p>
+
+      <div style="width: 280px; padding: 6px 0 2px">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Divider" ornament="full" hint-size="280px,16px"></x-import>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Button" href="mailto:arfianarya@gmail.com" hint-size="140px,42px">Email me</x-import>
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Button" variant="secondary" href="https://drive.google.com/drive/folders/1DG2bW8UIH0rnfBa0PBrw7l_vZZI6qqZW?usp=sharing" target="_blank" rel="noopener" hint-size="150px,42px">Download CV</x-import>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 28px; padding-top: 10px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase">
+        <a href="https://www.linkedin.com/in/arfianarya/" target="_blank" rel="noopener" style="color: var(--ash)" style-hover="color: var(--gold-bright)">LinkedIn</a>
+        <a href="https://www.behance.net/arfianarya8a40" target="_blank" rel="noopener" style="color: var(--ash)" style-hover="color: var(--gold-bright)">Behance</a>
+      </div>
+    </div>
+
+    <div style="position: relative; z-index: 1; display: grid; grid-template-columns: {{ footCols }}; justify-items: {{ footJustify }}; text-align: {{ footAlign }}; align-items: center; gap: {{ footGap }}; padding: 22px min(6vw, 92px) 28px">
+      <a href="index.html" style="display: flex; align-items: center; gap: 10px; color: var(--ash)" style-hover="color: var(--gold-bright)">
+        <img src="assets/wordmark.png" alt="Wayfarer" decoding="async" style="display: block; height: 24px; width: auto">
+      </a>
+      <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ash-dim); white-space: nowrap">Every step reveals something new</span>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: {{ footEnd }}; gap: 8px 20px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ash-dim)">
+        <span>© 2026 Arfian Arya</span>
+      </div>
+    </div>
+  </section>
+
+  <div style="position: fixed; inset: 0; background-image: url(assets/grain.svg); opacity: .05; mix-blend-mode: overlay; pointer-events: none; z-index: 20"></div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;wordmark&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;LOGO&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { menu: false, mobile: typeof window !== "undefined" && window.innerWidth < 760, scrolled: false, star: -1, tenet: 0, flip: 0, cardFlip: false, pts: [], field: { w: 0, h: 0 } };
+
+  edges = [[0,1],[1,2],[0,3],[3,4],[4,5],[1,4],[2,5]];
+  fieldRef = React.createRef();
+  tiltRef = React.createRef();
+  shineRef = React.createRef();
+
+  motes = Array.from({ length: 12 }, () => ({
+    left: (Math.random() * 100).toFixed(1) + '%',
+    top: (Math.random() * 100).toFixed(1) + '%',
+    size: (1.4 + Math.random() * 2.4).toFixed(1) + 'px',
+    halo: (5 + Math.random() * 9).toFixed(1) + 'px',
+    dur: (9 + Math.random() * 11).toFixed(1) + 's',
+    delay: (-Math.random() * 12).toFixed(1) + 's',
+  }));
+
+  fireflies = Array.from({ length: 20 }, (_, i) => {
+    const near = i % 3 === 0;
+    const s = near ? 3 + Math.random() * 2 : 1.2 + Math.random() * 1.5;
+    return {
+      left: (5 + Math.random() * 90).toFixed(1) + '%',
+      top: (12 + Math.random() * 76).toFixed(1) + '%',
+      size: s.toFixed(1) + 'px',
+      blur: (near ? 0.3 : 0.9 + Math.random()).toFixed(1) + 'px',
+      halo: (s * 2.6).toFixed(1) + 'px',
+      haloWide: (s * 6).toFixed(1) + 'px',
+      peak: near ? 1 : (0.4 + Math.random() * 0.35).toFixed(2),
+      dur: (2.8 + Math.random() * 4.5).toFixed(1) + 's',
+      pathDur: (14 + Math.random() * 16).toFixed(1) + 's',
+      delay: (-Math.random() * 9).toFixed(1) + 's',
+    };
+  });
+
+  starData = [
+    { title: 'UI/UX Design', body: 'Research, interaction and information architecture, turned into interfaces that explain themselves.', basis: '30%', offset: '0px' },
+    { title: 'Design Systems', body: 'Components, patterns, tokens and the documentation that keeps a team honest at scale.', basis: '30%', offset: '46px' },
+    { title: 'Prototyping & Testing', body: 'Interactive prototypes, usability testing, and the iteration that follows what people actually do.', basis: '30%', offset: '14px' },
+    { title: 'Product Thinking', body: 'Reading business goals and user needs in the same pass, so the work solves something real.', basis: '30%', offset: '58px' },
+    { title: 'Visual Craft', body: 'Typography, hierarchy and restraint, carried over from a background in creative and marketing design.', basis: '30%', offset: '10px' },
+    { title: 'AI-assisted Practice', body: 'Using AI for research synthesis, copy iteration, documentation and repetitive production work.', basis: '30%', offset: '42px' },
+  ];
+
+  componentDidMount() {
+    this.onMq = () => { const m = window.innerWidth < 760; if (m !== this.state.mobile) this.setState({ mobile: m }); };
+    window.addEventListener('resize', this.onMq);
+    this.onMq();
+    this.reveals = Array.from(document.querySelectorAll('[data-reveal]'));
+    this.reveals.forEach((el) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(22px)';
+      el.style.transition = 'opacity 700ms cubic-bezier(.16,1,.3,1), transform 700ms cubic-bezier(.16,1,.3,1)';
+    });
+    this.io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.intersectionRatio > 0.06) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+          this.io.unobserve(e.target);
+        }
+      });
+    }, { threshold: [0, 0.06, 0.2] });
+    const vh = window.innerHeight || 0;
+    this.reveals.forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.top < vh * 0.94 && r.bottom > 0) {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      } else {
+        this.io.observe(el);
+      }
+    });
+
+    this.onScroll = () => {
+      const scrolled = (window.scrollY || 0) > 60;
+      if (scrolled !== this.state.scrolled) this.setState({ scrolled });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+
+    this.measure = () => {
+      const host = this.fieldRef.current;
+      if (!host) return;
+      const box = host.getBoundingClientRect();
+      const pts = Array.from(host.querySelectorAll('[data-star]')).map((el) => {
+        const r = el.getBoundingClientRect();
+        return { x: r.left - box.left + r.width / 2, y: r.top - box.top + r.height / 2, hw: r.width / 2, hh: r.height / 2 };
+      });
+      const same = pts.length === this.state.pts.length && pts.every((p, i) => Math.abs(p.x - this.state.pts[i].x) < 1 && Math.abs(p.y - this.state.pts[i].y) < 1);
+      if (!same || Math.abs(box.width - this.state.field.w) > 1 || Math.abs(box.height - this.state.field.h) > 1) {
+        this.setState({ pts, field: { w: box.width, h: box.height } });
+      }
+    };
+    this.ro = new ResizeObserver(() => this.measure());
+    if (this.fieldRef.current) this.ro.observe(this.fieldRef.current);
+    this.measure();
+    setTimeout(this.measure, 500);
+    window.addEventListener('resize', this.measure);
+
+    this.onPointer = (e) => {
+      const nx = e.clientX / window.innerWidth - 0.5;
+      const ny = e.clientY / window.innerHeight - 0.5;
+      const tilt = this.tiltRef.current;
+      if (tilt) tilt.style.transform =
+        'rotateY(' + (nx * 9).toFixed(2) + 'deg) rotateX(' + (-ny * 7).toFixed(2) + 'deg) translate3d(' + (nx * -16).toFixed(1) + 'px,' + (ny * -10).toFixed(1) + 'px,0)';
+      const shine = this.shineRef.current;
+      if (shine) shine.style.background =
+        'radial-gradient(42% 30% at ' + (50 + nx * 46).toFixed(1) + '% ' + (32 + ny * 34).toFixed(1) + '%, rgba(255,246,214,.14), rgba(255,246,214,0) 72%)';
+    };
+    this.onPointerLeave = () => {
+      const tilt = this.tiltRef.current;
+      if (tilt) tilt.style.transform = '';
+    };
+    window.addEventListener('pointermove', this.onPointer, { passive: true });
+    window.addEventListener('pointerleave', this.onPointerLeave);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onMq);
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.measure);
+    window.removeEventListener('pointermove', this.onPointer);
+    window.removeEventListener('pointerleave', this.onPointerLeave);
+    if (this.ro) this.ro.disconnect();
+    if (this.io) this.io.disconnect();
+  }
+
+  renderVals() {
+    const { scrolled } = this.state;
+    const last = (i, n) => (i === n - 1 ? 'none' : '1px solid var(--line)');
+    const tenets = [
+      { num: '01', title: 'Ask first, draw later', body: 'The first version of a problem is never the real one. I spend the early hours on research, questions and constraints, because a clear brief makes the interface almost inevitable.', against: 'The opposite: a beautiful screen that answers a question nobody asked.' },
+      { num: '02', title: 'Clear beats clever', body: 'If a screen needs explaining, it is not finished. I would rather ship the obvious thing done well than the inventive thing people have to decode.', against: 'The opposite: an interface that impresses designers and confuses everyone else.' },
+      { num: '03', title: 'Build the kit, not the screen', body: 'Every decision is a precedent. Naming, spacing, states and components are designed to be reused, so the tenth screen costs less than the first.', against: 'The opposite: forty screens, thirty greys, and no way to change any of it.' },
+      { num: '04', title: 'Better with other people', body: 'Engineers, analysts and stakeholders all hold part of the answer. The best work I have done came from arguing well, early, with people who saw it differently.', against: 'The opposite: a perfect file handed over the wall, and rebuilt without you.' },
+    ];
+    const waypoints = [
+      { period: 'Apr 2025 - Aug 2026', role: 'UI/UX Designer', company: 'Madison Technologies', body: 'End-to-end web and mobile design, working with cross-functional teams and building scalable design systems.' },
+      { period: 'Jun 2023 - Mar 2025', role: 'Creative Designer', company: 'Syailendra Raya Group', body: 'Digital and print marketing design for real estate projects: campaigns, creative strategy, and visual communication.' },
+      { period: 'Apr 2023 - May 2023', role: 'UI/UX Designer', company: 'Rakamin Academy', body: 'Used research and a Design Sprint to redesign FundEx\u2019s landing page for a young audience.' },
+      { period: 'Sep 2022 - Dec 2022', role: 'UI/UX Designer', company: 'Sekawan Media', body: 'Designed and shipped 3+ websites with reusable components, presenting concepts to clients and stakeholders.' },
+      { period: 'Sep 2022 - Oct 2022', role: 'UI/UX Designer', company: 'Rakamin Academy', body: 'Redesigned Niagahoster\u2019s checkout with usability testing: 100% task completion and a 6.5 SEQ score.' },
+    ];
+    return {
+      wordmark: this.props.wordmark ?? 'LOGO',
+      mob: !!this.state.mobile,
+      toggleMenu: () => this.setState({ menu: !this.state.menu }),
+      closeMenu: () => { if (this.state.menu) this.setState({ menu: false }); },
+      burgerDisplay: this.state.mobile ? 'flex' : 'none',
+      burgerTop: this.state.mobile ? (this.state.menu ? 'translateY(7px) rotate(45deg)' : 'none') : 'none',
+      burgerBot: this.state.mobile ? (this.state.menu ? 'translateY(-7px) rotate(-45deg)' : 'none') : 'none',
+      burgerMidOp: this.state.mobile ? (this.state.menu ? 0 : 1) : 1,
+      navLinksDisplay: this.state.mobile ? (this.state.menu ? 'flex' : 'none') : 'flex',
+      navDir: this.state.mobile ? 'column' : 'row',
+      navAlign: this.state.mobile ? 'flex-start' : 'center',
+      navGap: this.state.mobile ? '2px' : 'min(36px, 5.6vw)',
+      navItemW: this.state.mobile ? '100%' : 'auto',
+      navItemMinH: this.state.mobile ? '44px' : 'auto',
+      navItemAlign: this.state.mobile ? 'stretch' : 'center',
+      goHome: () => { window.location.href = 'index.html'; },
+      goProjects: () => { window.location.href = 'projects.html'; },
+      goAbout: () => { window.location.href = 'about.html'; },
+      navMenuPos: this.state.mobile ? 'absolute' : 'static',
+      navMenuTop: this.state.mobile ? '100%' : 'auto',
+      navMenuSide: this.state.mobile ? '0' : 'auto',
+      navMenuPad: this.state.mobile ? '22px min(6vw, 92px) 26px' : '0',
+      navMenuBg: this.state.mobile ? 'rgba(11,9,6,.96)' : 'transparent',
+      navMenuLine: this.state.mobile ? '1px solid var(--line)' : 'none',
+      navMenuBlur: this.state.mobile ? 'blur(12px)' : 'none',
+      footCols: this.state.mobile ? 'minmax(0, 1fr)' : '1fr auto 1fr',
+      footJustify: this.state.mobile ? 'center' : 'stretch',
+      footAlign: this.state.mobile ? 'center' : 'left',
+      footEnd: this.state.mobile ? 'center' : 'flex-end',
+      footStart: this.state.mobile ? 'center' : 'flex-start',
+      footGap: this.state.mobile ? '12px' : '14px 40px',
+      footWrap: this.state.mobile ? 'normal' : 'nowrap',
+      trueVal: true,
+      fireflies: this.fireflies,
+      navVeil: this.state.mobile ? '.9' : (scrolled ? '.86' : '0'),
+      navLine: this.state.mobile ? '.16' : (scrolled ? '.16' : '0'),
+      waypoints: waypoints.map((w, i) => ({ ...w, rule: last(i, waypoints.length) })),
+      tenets: tenets.map((t, i) => {
+        const on = this.state.tenet === i;
+        return {
+          num: t.num,
+          title: t.title,
+          rowBg: on ? 'linear-gradient(90deg, rgba(192,152,97,.09), rgba(11,9,6,.4))' : 'rgba(11,9,6,.42)',
+          spine: on ? 'var(--gold)' : 'transparent',
+          numColor: on ? 'var(--gold)' : 'var(--ash-dim)',
+          titleColor: on ? 'var(--gold-bright)' : 'var(--parchment)',
+          dot: on ? 'var(--gold)' : 'transparent',
+          glow: on ? '0 0 14px rgba(192,152,97,.75)' : '0 0 0 rgba(192,152,97,0)',
+          enter: () => { if (this.state.tenet !== i) this.setState({ tenet: i, flip: 1 }, () => { clearTimeout(this._ft); this._ft = setTimeout(() => this.setState({ flip: 0 }), 30); }); },
+        };
+      }),
+      activeNum: (tenets[this.state.tenet] || tenets[0]).num,
+      activeTitle: (tenets[this.state.tenet] || tenets[0]).title,
+      activeBody: (tenets[this.state.tenet] || tenets[0]).body,
+      activeAgainst: (tenets[this.state.tenet] || tenets[0]).against,
+      plateOp: this.state.flip ? 0 : 1,
+      plateY: this.state.flip ? '14px' : '0px',
+      sparkleSize: 9,
+      flipDeg: this.state.cardFlip ? '180deg' : '0deg',
+      flipHint: this.state.cardFlip ? 'Back to the plate' : 'Flip the card',
+      onFlip: () => this.setState((st) => ({ cardFlip: !st.cardFlip })),
+      onFlipKey: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this.setState((st) => ({ cardFlip: !st.cardFlip })); } },
+      tiltRef: this.tiltRef,
+      shineRef: this.shineRef,
+      motes: this.motes,
+      fieldRef: this.fieldRef,
+      fieldW: this.state.field.w || 1,
+      fieldH: this.state.field.h || 1,
+      fieldBox: '0 0 ' + (this.state.field.w || 1) + ' ' + (this.state.field.h || 1),
+      links: this.edges.filter(([a, b]) => this.state.pts[a] && this.state.pts[b]).map(([a, b]) => {
+        const hot = this.state.star === a || this.state.star === b;
+        const p = this.state.pts[a], q = this.state.pts[b];
+        const edgePt = (from, to) => {
+          const dx = to.x - from.x, dy = to.y - from.y;
+          if (!dx && !dy) return { x: from.x, y: from.y };
+          const t = Math.min(dx ? (from.hw + 2) / Math.abs(dx) : Infinity, dy ? (from.hh + 2) / Math.abs(dy) : Infinity);
+          return { x: from.x + dx * t, y: from.y + dy * t };
+        };
+        const s1 = edgePt(p, q), s2 = edgePt(q, p);
+        return {
+          x1: s1.x, y1: s1.y, x2: s2.x, y2: s2.y,
+          dot1x: s1.x, dot1y: s1.y, dot2x: s2.x, dot2y: s2.y,
+          r: hot ? 2.6 : 1.8,
+          stroke: hot ? 'rgba(192,152,97,.62)' : 'rgba(192,152,97,.17)',
+          fill: hot ? 'rgba(227,192,138,.9)' : 'rgba(192,152,97,.3)',
+          dash: hot ? 'none' : '3 5',
+        };
+      }),
+      stars: this.starData.map((s, i) => {
+        const on = this.state.star === i;
+        return {
+          title: s.title,
+          body: s.body,
+          basis: s.basis,
+          offset: s.offset,
+          border: on ? 'var(--gold)' : 'var(--line)',
+          bg: on ? 'linear-gradient(180deg, rgba(192,152,97,.07), rgba(11,9,6,.35))' : 'rgba(11,9,6,.28)',
+          dot: on ? 'var(--gold)' : 'transparent',
+          glow: on ? '0 0 14px rgba(192,152,97,.75)' : '0 0 0 rgba(192,152,97,0)',
+          titleColor: on ? 'var(--gold-bright)' : 'var(--parchment)',
+          lift: on ? '-4px' : '0px',
+          max: on ? '180px' : '0px',
+          op: on ? 1 : 0,
+          enter: () => this.setState({ star: i }),
+          leave: () => this.setState({ star: -1 }),
+        };
+      }),
+      kits: [
+        { label: 'Design & prototyping', items: [{ name: 'Figma' }, { name: 'FigJam' }, { name: 'Adobe CC' }] },
+        { label: 'Method', items: [{ name: 'Design Sprint' }, { name: 'User interviews' }, { name: 'Usability testing' }, { name: 'Heuristic audit' }, { name: 'WCAG 2.1 AA' }, { name: 'Journey mapping' }] },
+        { label: 'Working with teams', items: [{ name: 'Jira' }, { name: 'Notion' }, { name: 'Slack' }, { name: 'ChatGPT' }, { name: 'Claude' }] },
+      ],
+    };
+  }
+}
+
+</script>
+</body>
+</html>

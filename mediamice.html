@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/colors.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/typography.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/motion.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/effects.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/base.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/styles.css">
+<script src="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/_ds_bundle.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; background: #0B0906; }
+  html { scroll-snap-type: y proximity; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-snap-type: none; scroll-behavior: auto } }
+  a { color: var(--ash); text-decoration: none; }
+  a:hover { color: var(--gold-bright); }
+  @keyframes twinkle { 0%, 100% { opacity: .28 } 50% { opacity: .62 } }
+  @keyframes firefly-glow { 0%, 100% { opacity: .06; transform: scale(.75) } 38% { opacity: 1; transform: scale(1.18) } 64% { opacity: .3; transform: scale(.92) } }
+  @keyframes firefly-path { 0% { transform: translate3d(0,0,0) } 30% { transform: translate3d(22px,-16px,0) } 60% { transform: translate3d(-14px,-30px,0) } 100% { transform: translate3d(9px,-46px,0) } }
+  @keyframes forest-breathe { 0%, 100% { transform: scale(1.02) translate3d(0,0,0) } 50% { transform: scale(1.06) translate3d(-14px,8px,0) } }
+  @keyframes hint-drop { 0%, 100% { transform: translateY(0); opacity: .5 } 50% { transform: translateY(6px); opacity: 1 } }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important } }
+</style>
+</helmet>
+
+<div style="position: relative; width: 100%; background: #0B0906; font-family: Geist, system-ui, sans-serif; overflow-x: hidden">
+
+  <div style="position: fixed; inset: 0; z-index: 0; pointer-events: none">
+    <div style="position: absolute; inset: -8%; background-image: url(assets/forest.jpg); background-size: cover; background-position: 50% 40%; filter: brightness(.6) contrast(1.06); animation: forest-breathe 46s ease-in-out infinite"></div>
+    <div style="position: absolute; inset: 0; background: radial-gradient(70% 54% at 50% 40%, rgba(11,9,6,.44), rgba(11,9,6,.9) 78%), linear-gradient(180deg, rgba(11,9,6,.74), rgba(11,9,6,.48) 30%, rgba(11,9,6,.93))"></div>
+    <div style="position: absolute; inset: -14%; background: radial-gradient(44% 32% at 42% 26%, rgba(214,178,120,.10), rgba(214,178,120,0) 70%)"></div>
+    <sc-for list="{{ fireflies }}" as="f" hint-placeholder-count="12">
+      <div style="position: absolute; left: {{ f.left }}; top: {{ f.top }}; animation: firefly-path {{ f.pathDur }} ease-in-out infinite alternate; animation-delay: {{ f.delay }}">
+        <div style="width: {{ f.size }}; height: {{ f.size }}; border-radius: 50%; background: #F2DCAF; filter: blur({{ f.blur }}); box-shadow: 0 0 {{ f.halo }} rgba(227,192,138,.8), 0 0 {{ f.haloWide }} rgba(192,152,97,.4); opacity: {{ f.peak }}; animation: firefly-glow {{ f.dur }} ease-in-out infinite; animation-delay: {{ f.delay }}"></div>
+      </div>
+    </sc-for>
+    <div style="position: absolute; top: 14%; left: 12%; width: 1px; height: 1px; border-radius: 50%; background: #FFF6D6; opacity: .5; animation: twinkle 6s ease-in-out infinite; box-shadow: 0 0 0 .5px rgba(255,246,214,.6), 24vw 5vh 0 0 #FFF6D6, 44vw -2vh 0 0 rgba(255,246,214,.7), 61vw 9vh 0 0 #FFF6D6, 72vw 3vh 0 0 rgba(255,246,214,.55), 14vw 28vh 0 0 rgba(255,246,214,.7), 36vw 40vh 0 0 #FFF6D6, 50vw 22vh 0 0 rgba(255,246,214,.5), 66vw 46vh 0 0 rgba(255,246,214,.8), 79vw 32vh 0 0 #FFF6D6, 6vw 54vh 0 0 rgba(255,246,214,.6), 30vw 65vh 0 0 rgba(255,246,214,.75), 55vw 60vh 0 0 #FFF6D6, 74vw 70vh 0 0 rgba(255,246,214,.5), 20vw 76vh 0 0 rgba(255,246,214,.65), 46vw 82vh 0 0 #FFF6D6"></div>
+  </div>
+
+  <div style="position: fixed; top: 0; left: 0; right: 0; z-index: 12; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px min(6vw, 92px); background: rgba(11,9,6,{{ navVeil }}); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(192,152,97,{{ navLine }}); transition: background 400ms ease, border-color 400ms ease">
+    <a href="index.html" style="display: flex; align-items: center; gap: 10px; color: var(--parchment)" style-hover="color: var(--gold-bright)">
+      <img src="assets/wordmark.png" alt="Wayfarer" decoding="async" style="display: block; height: clamp(22px, 6vw, 30px); width: auto">
+    </a>
+    <button type="button" onClick="{{ toggleMenu }}" aria-label="Menu" style="display: {{ burgerDisplay }}; flex-direction: column; align-items: center; justify-content: center; gap: 6px; width: 44px; height: 44px; margin-right: -10px; padding: 0; background: none; border: 0; cursor: pointer">
+      <span style="display: block; width: 22px; height: 1px; background: var(--gold); transform: {{ burgerTop }}; transition: transform 300ms cubic-bezier(.4,0,.2,1)"></span>
+      <span style="display: block; width: 22px; height: 1px; background: var(--gold); opacity: {{ burgerMidOp }}; transition: opacity 180ms ease"></span>
+      <span style="display: block; width: 22px; height: 1px; background: var(--gold); transform: {{ burgerBot }}; transition: transform 300ms cubic-bezier(.4,0,.2,1)"></span>
+    </button>
+    <div onClick="{{ closeMenu }}" style="display: {{ navLinksDisplay }}; flex-direction: {{ navDir }}; align-items: {{ navAlign }}; gap: {{ navGap }}; position: {{ navMenuPos }}; top: {{ navMenuTop }}; left: {{ navMenuSide }}; right: {{ navMenuSide }}; padding: {{ navMenuPad }}; background: {{ navMenuBg }}; border-bottom: {{ navMenuLine }}; backdrop-filter: {{ navMenuBlur }}">
+      <div data-nav-item="true" onClick="{{ goHome }}" style="display: flex; align-items: {{ navItemAlign }}; cursor: pointer; width: {{ navItemW }}; min-height: {{ navItemMinH }}">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.NavLink" href="index.html" hint-size="60px,18px">Home</x-import>
+      </div>
+      <div data-nav-item="true" onClick="{{ goProjects }}" style="display: flex; align-items: {{ navItemAlign }}; cursor: pointer; width: {{ navItemW }}; min-height: {{ navItemMinH }}">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.NavLink" href="projects.html" active="{{ trueVal }}" hint-size="70px,18px">Projects</x-import>
+      </div>
+      <div data-nav-item="true" onClick="{{ goAbout }}" style="display: flex; align-items: {{ navItemAlign }}; cursor: pointer; width: {{ navItemW }}; min-height: {{ navItemMinH }}">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.NavLink" href="about.html" hint-size="80px,18px">About Me</x-import>
+      </div>
+    </div>
+  </div>
+
+  <div style="position: fixed; top: 50%; right: {{ railRight }}; z-index: 11; transform: translateY(-50%); display: {{ railDisplay }}; flex-direction: column; align-items: flex-end; gap: 2px; pointer-events: none; opacity: {{ railOp }}; transition: opacity 600ms ease">
+    <sc-for list="{{ pageNav }}" as="p" hint-placeholder-count="13">
+      <div onClick="{{ p.go }}" title="{{ p.label }}" style="position: relative; display: flex; align-items: center; justify-content: flex-end; gap: 12px; height: 22px; padding-left: 14px; pointer-events: auto; cursor: pointer; color: {{ p.color }}; transition: color 300ms cubic-bezier(.4,0,.2,1)" style-hover="color: var(--gold-bright)">
+        <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; position: absolute; right: 46px; opacity: {{ p.labelOp }}; transform: translateX({{ p.labelX }}); pointer-events: none; transition: opacity 300ms cubic-bezier(.4,0,.2,1), transform 300ms cubic-bezier(.4,0,.2,1)">{{ p.label }}</span>
+        <span style="display: {{ p.numDisplay }}; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .1em; opacity: {{ p.numOp }}; transition: opacity 300ms cubic-bezier(.4,0,.2,1)">{{ p.num }}</span>
+        <span style="width: {{ p.tick }}; height: 1px; background: currentColor; transition: width 300ms cubic-bezier(.4,0,.2,1)"></span>
+      </div>
+    </sc-for>
+  </div>
+
+  <section data-screen-label="Case hero" style="position: relative; z-index: 2; scroll-snap-align: start; min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 min(6vw, 92px) 16vh; max-width: 1400px; margin: 0 auto">
+    <div data-reveal="true" style="display: flex; flex-direction: column; gap: 20px">
+      <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="300px,14px">Product · Website · 2025</x-import>
+      <h1 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(40px, 7.4vmin, 116px); line-height: 1.0; letter-spacing: -.015em; color: var(--parchment); text-wrap: balance">MediaMICE — <span style="color: var(--gold)">Website Redesign</span></h1>
+      <p style="margin: 0; max-width: 58ch; font-size: clamp(15px, 1.2vw, 18px); line-height: 1.66; color: var(--ash); text-wrap: pretty">Transforming MediaMICE into a cohesive digital magazine experience through thoughtful content structure, navigation, and visual storytelling.</p>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px; margin-top: 8vh">
+      <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ash-dim)">Read the case</span>
+      <span style="width: 1px; height: 18px; background: linear-gradient(180deg, var(--gold-dim), transparent); animation: hint-drop 2.6s ease-in-out infinite"></span>
+    </div>
+  </section>
+
+  <section id="overview" data-screen-label="Cover" style="position: relative; z-index: 2; scroll-snap-align: start; height: 100vh; box-sizing: border-box; display: flex; align-items: center">
+    <div data-reveal="true" style="display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 5vh; width: 100%; height: 100%; box-sizing: border-box; max-width: 1400px; margin: 0 auto; padding: 7vh min(6vw, 92px)">
+      <div style="position: relative; min-height: 0; height: 100%; max-width: 100%; aspect-ratio: 16 / 8.4; justify-self: center; border: 1px solid var(--line-strong); background: radial-gradient(70% 90% at 50% 30%, rgba(192,152,97,.09), rgba(11,9,6,0) 72%), linear-gradient(180deg, var(--ink-raised), var(--ink)); overflow: hidden">
+        <img src="assets/mm/cover-wide.png" alt="MediaMICE website screens" loading="lazy" decoding="async" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%">
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(8px, 2.6vw, 32px)">
+        <sc-for list="{{ meta }}" as="m" hint-placeholder-count="3">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center">
+            <span style="font-family: 'Libertinus Serif Display', serif; font-size: clamp(16px, 4.2vw, 25px); color: var(--gold)">{{ m.label }}</span>
+            <span style="font-size: clamp(11.5px, 3.1vw, 24px); font-weight: 600; white-space: nowrap; color: var(--parchment)">{{ m.value }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="brief" data-screen-label="The Brief" style="position: relative; z-index: 2; scroll-snap-align: start">
+    <div style="display: flex; flex-direction: column; gap: 10vh; max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+
+      <div data-reveal="true" style="display: flex; flex-wrap: wrap; gap: 40px 56px">
+        <div style="flex: 1 1 220px; max-width: 260px; display: flex; flex-direction: column; gap: 8px">
+          <span style="font-family: 'Libertinus Serif Display', serif; font-style: italic; font-size: 21px; color: var(--ash-dim)">Where the story began</span>
+        </div>
+        <div style="flex: 3 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 34px">
+          <div style="display: flex; flex-direction: column; gap: 18px; max-width: 62ch">
+            <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(32px, 3.6vw, 62px); line-height: 1.06; color: var(--gold)">The Problem</h2>
+            <p style="margin: 0; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">MediaMICE publishes across a wide editorial landscape: news, magazines, conference coverage, and industry-specific reporting for the global eye care community. During the initial review of the existing website, we identified several challenges that made it difficult for users to navigate and discover that content.</p>
+          </div>
+          <div style="display: flex; flex-direction: column">
+            <sc-for list="{{ problems }}" as="p" hint-placeholder-count="2">
+              <div style="display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 16px 24px; padding: 30px 0; border-top: 1px solid var(--line); transition: background 250ms cubic-bezier(.4,0,.2,1)" style-hover="background: rgba(192,152,97,.04)">
+                <span style="font-family: 'Libertinus Serif Display', serif; font-size: 32px; line-height: .9; color: var(--gold-dim)">{{ p.num }}</span>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px 36px">
+                  <span style="flex: 1 1 200px; max-width: 280px; font-family: 'Libertinus Serif Display', serif; font-size: clamp(22px, 2vw, 30px); line-height: 1.12; color: var(--parchment)">{{ p.title }}</span>
+                  <p style="flex: 2 1 320px; margin: 0; max-width: 56ch; font-size: 15px; line-height: 1.7; color: var(--ash); text-wrap: pretty">{{ p.body }}</p>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <div data-reveal="true" style="display: flex; flex-wrap: wrap; gap: 40px 56px">
+        <div style="flex: 1 1 220px; max-width: 260px; display: flex; flex-direction: column; gap: 8px">
+          <span style="font-family: 'Libertinus Serif Display', serif; font-style: italic; font-size: 21px; color: var(--ash-dim)">What the client asked for</span>
+        </div>
+        <div style="flex: 3 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+          <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(32px, 3.6vw, 62px); line-height: 1.06; color: var(--gold)">What They Wanted</h2>
+          <p style="margin: 0; max-width: 62ch; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">Create a clearer, more intuitive experience that helps readers discover content easily, and gives MediaMICE a stronger, more cohesive digital presence.</p>
+        </div>
+      </div>
+
+      <div data-reveal="true" style="display: flex; flex-wrap: wrap; gap: 40px 56px">
+        <div style="flex: 1 1 220px; max-width: 260px; display: flex; flex-direction: column; gap: 8px">
+          <span style="font-family: 'Libertinus Serif Display', serif; font-style: italic; font-size: 21px; color: var(--ash-dim)">My part in it</span>
+        </div>
+        <div style="flex: 3 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+          <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(32px, 3.6vw, 62px); line-height: 1.06; color: var(--gold)">My Role</h2>
+          <p style="margin: 0; max-width: 62ch; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">Designing and refining the MediaMICE web experience, focused on UX structure, navigation, content discovery, and visual consistency. I collaborated with cross-functional stakeholders to translate business and content requirements into a clearer, more intuitive digital experience.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; padding-top: 4px">
+            <sc-for list="{{ roleTags }}" as="t" hint-placeholder-count="4">
+              <span style="padding: 8px 14px; border: 1px solid var(--line-strong); font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ash)">{{ t.label }}</span>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="discovery" data-screen-label="Discovery" style="position: relative; z-index: 2; scroll-snap-align: start">
+    <div style="display: flex; flex-direction: column; gap: 7vh; max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div data-reveal="true" style="display: flex; flex-direction: column; gap: 18px; max-width: 62ch">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="300px,14px">Strategic Discovery</x-import>
+        <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(30px, 3.2vw, 54px); line-height: 1.06; color: var(--gold)">Two directions, laid on the table.</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">To establish the visual direction, we explored concepts that could balance the platform's content-heavy nature with its existing brand identity, then compared them with the client on readability, content focus, and visual character.</p>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 48px">
+
+        <div data-reveal="true" style="flex: 1 1 420px; display: flex; flex-direction: column; gap: 20px">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--gold-dim)">
+            <span style="font-family: 'Libertinus Serif Display', serif; font-size: clamp(26px, 2.4vw, 38px); line-height: 1.05; color: var(--gold)">01 · Minimalistic</span>
+            <span style="flex: none; padding: 6px 12px; border: 1px solid var(--gold); font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-bright)">Selected</span>
+          </div>
+          <p style="margin: 0; font-size: 15px; line-height: 1.7; color: var(--ash); text-wrap: pretty">A clean, focused approach that keeps articles and industry news at the centre of the experience, using subtle visual elements to give the platform personality.</p>
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-dim)">Key visual identities</span>
+            <sc-for list="{{ minTraits }}" as="t" hint-placeholder-count="4">
+              <span style="display: grid; grid-template-columns: 14px minmax(0, 1fr); gap: 10px; font-size: 14px; line-height: 1.6; color: var(--ash)"><span style="color: var(--gold-dim)">·</span><span>{{ t.label }}</span></span>
+            </sc-for>
+          </div>
+          <div style="border: 1px solid var(--line-strong); background: var(--ink)">
+            <img src="assets/mm/dir-min.jpg" alt="Minimalistic direction board for the MediaMICE homepage" loading="lazy" decoding="async" style="display: block; width: 100%; height: auto; opacity: .92; transition: opacity 300ms cubic-bezier(.4,0,.2,1)" style-hover="opacity: 1">
+          </div>
+        </div>
+
+        <div data-reveal="true" style="flex: 1 1 420px; display: flex; flex-direction: column; gap: 20px">
+          <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--line-strong)">
+            <span style="font-family: 'Libertinus Serif Display', serif; font-size: clamp(26px, 2.4vw, 38px); line-height: 1.05; color: var(--ash)">02 · Neo Brutalism</span>
+            <span style="flex: none; padding: 6px 12px; border: 1px solid var(--line-strong); font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ash-dim)">Explored</span>
+          </div>
+          <p style="margin: 0; font-size: 15px; line-height: 1.7; color: var(--ash); text-wrap: pretty">A bold, expressive direction combining raw layouts with playful graphic elements to give the platform a more distinctive and energetic personality.</p>
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-dim)">Key visual identities</span>
+            <sc-for list="{{ neoTraits }}" as="t" hint-placeholder-count="5">
+              <span style="display: grid; grid-template-columns: 14px minmax(0, 1fr); gap: 10px; font-size: 14px; line-height: 1.6; color: var(--ash)"><span style="color: var(--gold-dim)">·</span><span>{{ t.label }}</span></span>
+            </sc-for>
+          </div>
+          <div style="border: 1px solid var(--line-strong); background: var(--ink)">
+            <img src="assets/mm/dir-neo.jpg" alt="Neo brutalist direction board for the MediaMICE homepage" loading="lazy" decoding="async" style="display: block; width: 100%; height: auto; opacity: .92; transition: opacity 300ms cubic-bezier(.4,0,.2,1)" style-hover="opacity: 1">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="decision" data-screen-label="Decision" style="position: relative; z-index: 2; scroll-snap-align: start; min-height: 100vh; box-sizing: border-box; display: flex; align-items: center; justify-content: center">
+    <div data-reveal="true" style="display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; max-width: 940px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="220px,14px">The Decision</x-import>
+      <h2 style="margin: 0; max-width: 30ch; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(30px, 4.4vmin, 68px); line-height: 1.06; color: var(--parchment); text-wrap: balance">The client chose <span style="font-style: italic; color: var(--gold)">restraint</span>.</h2>
+      <p style="margin: 0; max-width: 66ch; font-size: 17px; line-height: 1.7; color: var(--ash); text-wrap: pretty">Minimalistic aligned most closely with the goal of making MediaMICE feel like a digital magazine, while keeping readability and content discovery intact.</p>
+      <p style="margin: 0; max-width: 66ch; font-size: 16px; line-height: 1.72; color: var(--ash-dim); text-wrap: pretty">That direction became the foundation of the final visual language, and was refined across navigation, content sections, article layouts, and supporting components.</p>
+    </div>
+  </section>
+
+  <section id="solution" data-screen-label="The Solution" style="position: relative; z-index: 2; scroll-snap-align: start">
+    <div style="display: flex; flex-direction: column; gap: 7vh; max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div data-reveal="true" style="display: flex; flex-direction: column; gap: 18px; max-width: 62ch">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="300px,14px">The Solution</x-import>
+        <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(30px, 3.2vw, 54px); line-height: 1.06; color: var(--gold)">Turning a website into a magazine.</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">The final design works on four fronts at once: how it reads, how it is structured, how it invites browsing, and how it reaches an international audience.</p>
+      </div>
+
+      <div data-reveal="true" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: 56px 64px">
+
+        <div style="display: flex; flex-direction: column; gap: 18px">
+          <div style="display: flex; align-items: baseline; gap: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line)">
+            <span style="font-family: 'Libertinus Serif Display', serif; font-size: 30px; line-height: 1; color: var(--gold-dim)">A</span>
+            <span style="font-family: 'Libertinus Serif Display', serif; font-size: clamp(21px, 1.8vw, 28px); line-height: 1.14; color: var(--gold)">Editorial Visual Language</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 14px">
+            <p style="margin: 0; font-size: 15px; line-height: 1.68; color: var(--ash); text-wrap: pretty"><span style="color: var(--parchment); font-weight: 600">Content first.</span> A minimal visual language keeps articles, images, and headlines as the primary focus of the experience.</p>
+            <p style="margin: 0; font-size: 15px; line-height: 1.68; color: var(--ash); text-wrap: pretty"><span style="color: var(--parchment); font-weight: 600">Strong hierarchy.</span> Typography, spacing, and section dividers separate headlines, categories, and supporting content the way a print spread would.</p>
+            <p style="margin: 0; font-size: 15px; line-height: 1.68; color: var(--ash); text-wrap: pretty"><span style="color: var(--parchment); font-weight: 600">Selective accents.</span> MediaMICE's vibrant brand colours appear in small doses, enough for personality, never enough to compete with the story.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 18px">
+          <div style="display: flex; align-items: baseline; gap: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line)">
+            <span style="font-family: 'Libertinus Serif Display', serif; font-size: 30px; line-height: 1; color: var(--gold-dim)">B</span>
+            <span style="font-family: 'Libertinus Serif Display', serif; font-size: clamp(21px, 1.8vw, 28px); line-height: 1.14; color: var(--gold)">Structure &amp; Navigation</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 14px">
+            <p style="margin: 0; font-size: 15px; line-height: 1.68; color: var(--ash); text-wrap: pretty"><span style="color: var(--parchment); font-weight: 600">Simplified navigation.</span> Major areas, news, subspecialties, conference coverage, magazines, were reorganised into a hierarchy users can hold in their head.</p>
+            <p style="margin: 0; font-size: 15px; line-height: 1.68; color: var(--ash); text-wrap: pretty"><span style="color: var(--parchment); font-weight: 600">Clear categories.</span> Content is grouped into recognisable sections, so readers identify what they want without navigating unnecessary layers.</p>
+            <p style="margin: 0; font-size: 15px; line-height: 1.68; color: var(--ash); text-wrap: pretty"><span style="color: var(--parchment); font-weight: 600">Improved discoverability.</span> Search and key navigation elements were given clearer placement for moving between content types.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 18px">
+          <div style="display: flex; align-items: baseline; gap: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line)">
+            <span style="font-family: 'Libertinus Serif Display', serif; font-size: 30px; line-height: 1; color: var(--gold-dim)">C</span>
+            <span style="font-family: 'Libertinus Serif Display', serif; font-size: clamp(21px, 1.8vw, 28px); line-height: 1.14; color: var(--gold)">The Magazine Experience</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 14px">
+            <p style="margin: 0; font-size: 15px; line-height: 1.68; color: var(--ash); text-wrap: pretty"><span style="color: var(--parchment); font-weight: 600">An editorial homepage.</span> Instead of a corporate landing page, the layout leads with featured stories, headlines, imagery, and industry news.</p>
+            <p style="margin: 0; font-size: 15px; line-height: 1.68; color: var(--ash); text-wrap: pretty"><span style="color: var(--parchment); font-weight: 600">Visual storytelling.</span> Large imagery, prominent headlines, and structured blocks give important stories real weight on the page.</p>
+            <p style="margin: 0; font-size: 15px; line-height: 1.68; color: var(--ash); text-wrap: pretty"><span style="color: var(--parchment); font-weight: 600">Beyond articles.</span> News, magazines, conference coverage, and specialty content sit together in one cohesive editorial platform.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 18px">
+          <div style="display: flex; align-items: baseline; gap: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line)">
+            <span style="font-family: 'Libertinus Serif Display', serif; font-size: 30px; line-height: 1; color: var(--gold-dim)">D</span>
+            <span style="font-family: 'Libertinus Serif Display', serif; font-size: clamp(21px, 1.8vw, 28px); line-height: 1.14; color: var(--gold)">Reach &amp; Consistency</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 14px">
+            <p style="margin: 0; font-size: 15px; line-height: 1.68; color: var(--ash); text-wrap: pretty"><span style="color: var(--parchment); font-weight: 600">Language switching.</span> A dedicated selector makes the platform accessible to an international readership.</p>
+            <p style="margin: 0; font-size: 15px; line-height: 1.68; color: var(--ash); text-wrap: pretty"><span style="color: var(--parchment); font-weight: 600">Consistent components.</span> Navigation, buttons, cards, and categories follow one visual system across the experience.</p>
+            <p style="margin: 0; font-size: 15px; line-height: 1.68; color: var(--ash); text-wrap: pretty"><span style="color: var(--parchment); font-weight: 600">Scalable design.</span> The system accommodates new kinds of editorial content without breaking hierarchy or tone.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="homepage" data-screen-label="Homepage" style="position: relative; z-index: 2; scroll-snap-align: start">
+    <div style="display: flex; flex-direction: column; gap: 5vh; max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div data-reveal="true">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="340px,14px">Selected Screens</x-import>
+      </div>
+      <div data-reveal="true" style="display: flex; flex-wrap: wrap; gap: 32px 56px; align-items: flex-end; width: 100%">
+        <div style="flex: 1 1 300px; max-width: 34ch; display: flex; flex-direction: column; gap: 12px">
+          <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .18em; color: var(--gold-dim)">01</span>
+          <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(28px, 3vw, 50px); line-height: 1.06; color: var(--gold)">Homepage</h2>
+        </div>
+        <p style="flex: 2 1 460px; margin: 0; max-width: 66ch; font-size: 15px; line-height: 1.7; color: var(--ash); text-wrap: pretty">Designed as a magazine cover: the latest and most important stories sit at the centre of the interface, with the surrounding columns letting readers scan the news, discover topics, and move into the rest of the platform.</p>
+      </div>
+      <div data-reveal="true" style="width: 100%; padding: 22px; box-sizing: border-box; border: 1px solid var(--line-strong); background: linear-gradient(180deg, var(--ink-raised), var(--ink)); transition: border-color 300ms cubic-bezier(.4,0,.2,1), box-shadow 300ms cubic-bezier(.4,0,.2,1)" style-hover="border-color: var(--gold); box-shadow: 0 0 0 1px rgba(192,152,97,.28), 0 0 60px rgba(192,152,97,.16), 0 24px 90px rgba(0,0,0,.5)">
+        <img src="assets/mm/home-full.jpg" alt="MediaMICE homepage design" loading="lazy" decoding="async" style="display: block; width: 100%; height: auto; opacity: .92; transition: opacity 300ms cubic-bezier(.4,0,.2,1)" style-hover="opacity: 1">
+      </div>
+    </div>
+  </section>
+
+  <section id="magazines" data-screen-label="Magazines" style="position: relative; z-index: 2; scroll-snap-align: start">
+    <div style="display: flex; flex-direction: column; gap: 5vh; max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div data-reveal="true" style="display: flex; flex-wrap: wrap; gap: 32px 56px; align-items: flex-end; width: 100%">
+        <div style="flex: 1 1 300px; max-width: 34ch; display: flex; flex-direction: column; gap: 12px">
+          <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .18em; color: var(--gold-dim)">02</span>
+          <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(28px, 3vw, 50px); line-height: 1.06; color: var(--gold)">Magazines</h2>
+        </div>
+        <p style="flex: 2 1 460px; margin: 0; max-width: 66ch; font-size: 15px; line-height: 1.7; color: var(--ash); text-wrap: pretty">A dedicated hub for the latest issue and trending stories across publications. Prominent covers are paired with curated articles, so readers can explore a new issue or fall into a related story from the same page.</p>
+      </div>
+      <div data-reveal="true" style="width: 100%; padding: 22px; box-sizing: border-box; border: 1px solid var(--line-strong); background: linear-gradient(180deg, var(--ink-raised), var(--ink)); transition: border-color 300ms cubic-bezier(.4,0,.2,1), box-shadow 300ms cubic-bezier(.4,0,.2,1)" style-hover="border-color: var(--gold); box-shadow: 0 0 0 1px rgba(192,152,97,.28), 0 0 60px rgba(192,152,97,.16), 0 24px 90px rgba(0,0,0,.5)">
+        <img src="assets/mm/mag-full.jpg" alt="MediaMICE magazines hub design" loading="lazy" decoding="async" style="display: block; width: 100%; height: auto; opacity: .92; transition: opacity 300ms cubic-bezier(.4,0,.2,1)" style-hover="opacity: 1">
+      </div>
+    </div>
+  </section>
+
+  <section id="article" data-screen-label="Article" style="position: relative; z-index: 2; scroll-snap-align: start">
+    <div style="display: flex; flex-direction: column; gap: 5vh; max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div data-reveal="true" style="display: flex; flex-wrap: wrap; gap: 32px 56px; align-items: flex-end; width: 100%">
+        <div style="flex: 1 1 300px; max-width: 34ch; display: flex; flex-direction: column; gap: 12px">
+          <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .18em; color: var(--gold-dim)">03</span>
+          <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(28px, 3vw, 50px); line-height: 1.06; color: var(--gold)">Article Details</h2>
+        </div>
+        <p style="flex: 2 1 460px; margin: 0; max-width: 66ch; font-size: 15px; line-height: 1.7; color: var(--ash); text-wrap: pretty">A focused reading layout: category, contributors, publication details, and supporting imagery arranged in a clear editorial structure, an "At a Glance" summary up front, and a measured column width that keeps long-form medical writing readable.</p>
+      </div>
+      <div data-reveal="true" style="width: 100%; padding: 22px; box-sizing: border-box; border: 1px solid var(--line-strong); background: linear-gradient(180deg, var(--ink-raised), var(--ink)); transition: border-color 300ms cubic-bezier(.4,0,.2,1), box-shadow 300ms cubic-bezier(.4,0,.2,1)" style-hover="border-color: var(--gold); box-shadow: 0 0 0 1px rgba(192,152,97,.28), 0 0 60px rgba(192,152,97,.16), 0 24px 90px rgba(0,0,0,.5)">
+        <img src="assets/mm/article-full.jpg" alt="MediaMICE article detail page design" loading="lazy" decoding="async" style="display: block; width: 100%; height: auto; opacity: .92; transition: opacity 300ms cubic-bezier(.4,0,.2,1)" style-hover="opacity: 1">
+      </div>
+    </div>
+  </section>
+
+  <section id="publications" data-screen-label="Publications" style="position: relative; z-index: 2; scroll-snap-align: start">
+    <div style="display: flex; flex-direction: column; gap: 5vh; max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div data-reveal="true" style="display: flex; flex-wrap: wrap; gap: 32px 56px; align-items: flex-end; width: 100%">
+        <div style="flex: 1 1 300px; max-width: 34ch; display: flex; flex-direction: column; gap: 12px">
+          <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .18em; color: var(--gold-dim)">04</span>
+          <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(28px, 3vw, 50px); line-height: 1.06; color: var(--gold)">Publications</h2>
+        </div>
+        <p style="flex: 2 1 460px; margin: 0; max-width: 66ch; font-size: 15px; line-height: 1.7; color: var(--ash); text-wrap: pretty">The archive, made browsable. Featured publications lead the page, while show dailies and standalone supplements are organised into rows of covers, turning years of back issues into something a reader can flick through.</p>
+      </div>
+      <div data-reveal="true" style="width: 100%; padding: 22px; box-sizing: border-box; border: 1px solid var(--line-strong); background: linear-gradient(180deg, var(--ink-raised), var(--ink)); transition: border-color 300ms cubic-bezier(.4,0,.2,1), box-shadow 300ms cubic-bezier(.4,0,.2,1)" style-hover="border-color: var(--gold); box-shadow: 0 0 0 1px rgba(192,152,97,.28), 0 0 60px rgba(192,152,97,.16), 0 24px 90px rgba(0,0,0,.5)">
+        <img src="assets/mm/pub-full.jpg" alt="MediaMICE publications hub design" loading="lazy" decoding="async" style="display: block; width: 100%; height: auto; opacity: .92; transition: opacity 300ms cubic-bezier(.4,0,.2,1)" style-hover="opacity: 1">
+      </div>
+    </div>
+  </section>
+
+  <section id="result" data-screen-label="The Results" style="position: relative; z-index: 2; scroll-snap-align: start">
+    <div style="max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div data-reveal="true" style="display: flex; flex-direction: column; gap: 18px; max-width: 62ch">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="300px,14px">The Results</x-import>
+        <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(32px, 3.6vw, 62px); line-height: 1.06; color: var(--gold)">The Results</h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">The final concept turned MediaMICE into a more cohesive, magazine-style digital experience, editorial storytelling on one side, clear discovery and navigation on the other.</p>
+      </div>
+
+      <div data-reveal="true" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 1px; margin-top: 7vh">
+        <sc-for list="{{ results }}" as="r" hint-placeholder-count="4">
+          <div style="display: flex; flex-direction: column; gap: 12px; padding: 32px 30px; outline: 1px solid var(--line); transition: background 250ms cubic-bezier(.4,0,.2,1)" style-hover="background: rgba(192,152,97,.045)">
+            <span style="font-family: 'Libertinus Serif Display', serif; font-size: 30px; line-height: 1; color: var(--gold-dim)">{{ r.num }}</span>
+            <span style="font-family: 'Libertinus Serif Display', serif; font-size: clamp(22px, 1.9vw, 30px); line-height: 1.12; color: var(--parchment)">{{ r.title }}</span>
+            <p style="margin: 0; max-width: 46ch; font-size: 15px; line-height: 1.66; color: var(--ash); text-wrap: pretty">{{ r.body }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Conclusion" style="position: relative; z-index: 2; scroll-snap-align: start; min-height: 100vh; box-sizing: border-box; display: flex; align-items: center; justify-content: center">
+    <div data-reveal="true" style="display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; max-width: 900px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="200px,14px">Conclusion</x-import>
+      <h2 style="margin: 0; max-width: 34ch; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(30px, 3.6vw, 58px); line-height: 1.06; color: var(--parchment); text-wrap: pretty">A publisher's website should <span style="font-style: italic; color: var(--gold)">read</span> like a publication.</h2>
+      <p style="margin: 0; max-width: 74ch; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">The work was less about decoration than about structure: deciding what earns the centre of the page, what belongs in a category, and how a reader moves from a headline to an issue to an archive without losing their place.</p>
+      <p style="margin: 0; max-width: 74ch; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">The result is a platform that carries MediaMICE's range of editorial content in one voice, and reads like the magazine it always was.</p>
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; padding-top: 6px">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Button" href="https://mediamice.com/" hint-size="160px,42px">Visit live website</x-import>
+      </div>
+      <p style="margin: 0; max-width: 62ch; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--ash-dim)">Selected screens shown for portfolio purposes · Details adapted to respect confidentiality</p>
+    </div>
+  </section>
+
+  <section data-screen-label="Case footer" style="position: relative; z-index: 2; border-top: 1px solid var(--line); scroll-snap-align: start; min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden">
+
+    <div style="position: absolute; inset: 0; background: radial-gradient(56% 44% at 50% 42%, rgba(192,152,97,.11), rgba(11,9,6,0) 74%), linear-gradient(180deg, rgba(11,9,6,0) 0%, rgba(11,9,6,.10) 34%, rgba(11,9,6,.46) 100%); pointer-events: none"></div>
+
+    <div style="position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px; padding: 22vh min(6vw, 92px) 12vh; max-width: 900px; margin: 0 auto">
+      <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="280px,14px">The Lovers · Open to the next chapter</x-import>
+      <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(24px, 3.1vw, 58px); line-height: 1.06; letter-spacing: -.01em; color: var(--parchment); white-space: {{ footWrap }}">Available for full-time <span style="font-style: italic; color: var(--gold)">Product Design</span> roles.</h2>
+      <p style="margin: 0; max-width: 58ch; font-size: 17px; line-height: 1.68; color: var(--ash); text-wrap: balance">Looking for a team building something that has to hold up, where research, systems and craft are treated as the same job.</p>
+
+      <div style="width: 280px; padding: 6px 0 2px">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Divider" ornament="full" hint-size="280px,16px"></x-import>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Button" href="mailto:arfianarya@gmail.com" hint-size="140px,42px">Email me</x-import>
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Button" variant="secondary" href="https://drive.google.com/drive/folders/1DG2bW8UIH0rnfBa0PBrw7l_vZZI6qqZW?usp=sharing" target="_blank" rel="noopener" hint-size="140px,42px">Download CV</x-import>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 28px; padding-top: 10px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase">
+        <a href="https://www.linkedin.com/in/arfianarya/" target="_blank" rel="noopener" style="color: var(--ash)" style-hover="color: var(--gold-bright)">LinkedIn</a>
+        <a href="https://www.behance.net/arfianarya8a40" target="_blank" rel="noopener" style="color: var(--ash)" style-hover="color: var(--gold-bright)">Behance</a>
+      </div>
+    </div>
+
+    <div style="position: relative; z-index: 1; display: grid; grid-template-columns: {{ footCols }}; justify-items: {{ footJustify }}; text-align: {{ footAlign }}; align-items: center; gap: {{ footGap }}; padding: 22px min(6vw, 92px) 28px">
+      <a href="index.html" style="display: flex; align-items: center; gap: 10px; color: var(--ash)" style-hover="color: var(--gold-bright)">
+        <img src="assets/wordmark.png" alt="Wayfarer" decoding="async" style="display: block; height: 24px; width: auto">
+      </a>
+      <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ash-dim); white-space: nowrap">Every step reveals something new</span>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: {{ footEnd }}; gap: 8px 20px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ash-dim)">
+        <span>© 2026 Arfian Arya</span>
+      </div>
+    </div>
+  </section>
+
+  <div style="position: fixed; inset: 0; background-image: url(assets/grain.svg); opacity: .05; mix-blend-mode: overlay; pointer-events: none; z-index: 20"></div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;wordmark&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;LOGO&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { menu: false, mobile: typeof window !== "undefined" && window.innerWidth < 760, scrolled: false, railFits: false, page: 0, gutter: 0 };
+
+  fireflies = Array.from({ length: 18 }, (_, i) => {
+    const near = i % 3 === 0;
+    const s = near ? 3 + Math.random() * 2 : 1.2 + Math.random() * 1.5;
+    return {
+      left: (5 + Math.random() * 90).toFixed(1) + '%',
+      top: (12 + Math.random() * 76).toFixed(1) + '%',
+      size: s.toFixed(1) + 'px',
+      blur: (near ? 0.3 : 0.9 + Math.random()).toFixed(1) + 'px',
+      halo: (s * 2.6).toFixed(1) + 'px',
+      haloWide: (s * 6).toFixed(1) + 'px',
+      peak: near ? 1 : (0.4 + Math.random() * 0.35).toFixed(2),
+      dur: (2.8 + Math.random() * 4.5).toFixed(1) + 's',
+      pathDur: (14 + Math.random() * 16).toFixed(1) + 's',
+      delay: (-Math.random() * 9).toFixed(1) + 's',
+    };
+  });
+
+  pageNames = ['Opening', 'Cover', 'The Brief', 'Discovery', 'Decision', 'The Solution', 'Homepage', 'Magazines', 'Article', 'Publications', 'Results', 'Conclusion', 'Contact'];
+
+  componentDidMount() {
+    this.onMq = () => { const m = window.innerWidth < 760; if (m !== this.state.mobile) this.setState({ mobile: m }); };
+    window.addEventListener('resize', this.onMq);
+    this.onMq();
+    this.reveals = Array.from(document.querySelectorAll('[data-reveal]'));
+    const vh = window.innerHeight || 800;
+    this.reveals.forEach((el) => {
+      if (el.getBoundingClientRect().top > vh * 0.9) {
+        el.dataset.hidden = '1';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+      }
+      el.style.transition = 'opacity 700ms cubic-bezier(.16,1,.3,1), transform 700ms cubic-bezier(.16,1,.3,1)';
+    });
+    const show = (el) => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; };
+    this.io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.intersectionRatio > 0.06) { show(e.target); this.io.unobserve(e.target); }
+      });
+    }, { threshold: [0, 0.06, 0.2] });
+    this.reveals.forEach((el) => this.io.observe(el));
+    this.revealFallback = setInterval(() => {
+      const h = window.innerHeight || 800;
+      this.reveals.forEach((el) => {
+        if (el.dataset.hidden && el.getBoundingClientRect().top < h * 0.92) { delete el.dataset.hidden; show(el); }
+      });
+    }, 400);
+    this.pages = Array.from(document.querySelectorAll('section[data-screen-label]'));
+
+    this.onKey = (e) => {
+      const t = e.target;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+      if (e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); this.page(1); }
+      if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); this.page(-1); }
+    };
+    window.addEventListener('keydown', this.onKey);
+    this.onScroll = () => {
+      if (this.frame) return;
+      this.frame = requestAnimationFrame(() => { this.frame = null; this.tick(); });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onScroll);
+    this.tick();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onMq);
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onScroll);
+    window.removeEventListener('keydown', this.onKey);
+    if (this.io) this.io.disconnect();
+    clearInterval(this.revealFallback);
+    if (this.frame) cancelAnimationFrame(this.frame);
+  }
+
+  pageTo(i) {
+    const pages = this.pages || [];
+    if (!pages[i]) return;
+    const top = pages[i].getBoundingClientRect().top + (window.scrollY || 0);
+    window.scrollTo({ top: Math.max(0, Math.round(top)), behavior: 'smooth' });
+    this.setState({ page: i });
+  }
+
+  page(dir) {
+    const pages = this.pages || [];
+    if (!pages.length) return;
+    this.pageTo(Math.min(pages.length - 1, Math.max(0, (this.state.page || 0) + dir)));
+  }
+
+  tick() {
+    const y = window.scrollY || 0;
+    const scrolled = y > 60;
+    const vw = window.innerWidth;
+    const gutter = Math.max(0, (vw - 1400) / 2) + Math.min(vw * 0.06, 92);
+    const railFits = vw > 620;
+    if (railFits !== this.state.railFits || Math.abs((this.state.gutter || 0) - gutter) > 1) this.setState({ railFits, gutter });
+    let page = this.state.page || 0;
+    if (this.pages && this.pages.length) {
+      const mid = window.innerHeight * 0.42;
+      let found = 0;
+      this.pages.forEach((el, i) => { if (el.getBoundingClientRect().top <= mid) found = i; });
+      page = found;
+    }
+    if (scrolled !== this.state.scrolled || page !== this.state.page) this.setState({ scrolled, page });
+  }
+
+  renderVals() {
+    const { scrolled } = this.state;
+    const compact = (this.state.gutter || 0) <= 62;
+    const roomForLabel = (this.state.gutter || 0) > 200;
+    return {
+      wordmark: this.props.wordmark ?? 'LOGO',
+      mob: !!this.state.mobile,
+      toggleMenu: () => this.setState({ menu: !this.state.menu }),
+      closeMenu: () => { if (this.state.menu) this.setState({ menu: false }); },
+      burgerDisplay: this.state.mobile ? 'flex' : 'none',
+      burgerTop: this.state.mobile ? (this.state.menu ? 'translateY(7px) rotate(45deg)' : 'none') : 'none',
+      burgerBot: this.state.mobile ? (this.state.menu ? 'translateY(-7px) rotate(-45deg)' : 'none') : 'none',
+      burgerMidOp: this.state.mobile ? (this.state.menu ? 0 : 1) : 1,
+      navLinksDisplay: this.state.mobile ? (this.state.menu ? 'flex' : 'none') : 'flex',
+      navDir: this.state.mobile ? 'column' : 'row',
+      navAlign: this.state.mobile ? 'flex-start' : 'center',
+      navGap: this.state.mobile ? '2px' : 'min(36px, 5.6vw)',
+      navItemW: this.state.mobile ? '100%' : 'auto',
+      navItemMinH: this.state.mobile ? '44px' : 'auto',
+      navItemAlign: this.state.mobile ? 'stretch' : 'center',
+      goHome: () => { window.location.href = 'index.html'; },
+      goProjects: () => { window.location.href = 'projects.html'; },
+      goAbout: () => { window.location.href = 'about.html'; },
+      navMenuPos: this.state.mobile ? 'absolute' : 'static',
+      navMenuTop: this.state.mobile ? '100%' : 'auto',
+      navMenuSide: this.state.mobile ? '0' : 'auto',
+      navMenuPad: this.state.mobile ? '22px min(6vw, 92px) 26px' : '0',
+      navMenuBg: this.state.mobile ? 'rgba(11,9,6,.96)' : 'transparent',
+      navMenuLine: this.state.mobile ? '1px solid var(--line)' : 'none',
+      navMenuBlur: this.state.mobile ? 'blur(12px)' : 'none',
+      footCols: this.state.mobile ? 'minmax(0, 1fr)' : '1fr auto 1fr',
+      footJustify: this.state.mobile ? 'center' : 'stretch',
+      footAlign: this.state.mobile ? 'center' : 'left',
+      footEnd: this.state.mobile ? 'center' : 'flex-end',
+      footStart: this.state.mobile ? 'center' : 'flex-start',
+      footGap: this.state.mobile ? '12px' : '14px 40px',
+      footWrap: this.state.mobile ? 'normal' : 'nowrap',
+      trueVal: true,
+      fireflies: this.fireflies,
+      navVeil: this.state.mobile ? '.9' : (scrolled ? '.86' : '0'),
+      navLine: this.state.mobile ? '.16' : (scrolled ? '.16' : '0'),
+      railOp: this.state.railFits ? 1 : 0,
+      railDisplay: this.state.railFits ? 'flex' : 'none',
+      railRight: (this.state.gutter || 0) > 62 ? 'min(3vw, 30px)' : '8px',
+      pageNav: this.pageNames.map((label, i) => {
+        const on = i === (this.state.page || 0);
+        return {
+          label,
+          num: String(i + 1).padStart(2, '0'),
+          color: on ? 'var(--gold)' : 'var(--ash-dim)',
+          tick: compact ? (on ? '20px' : '9px') : (on ? '30px' : '12px'),
+          numDisplay: compact ? 'none' : 'inline',
+          numOp: on ? 1 : 0.5,
+          labelOp: on && roomForLabel ? 1 : 0,
+          labelX: on ? '0px' : '8px',
+          go: () => this.pageTo(i),
+        };
+      }),
+      meta: [
+        { label: 'Client', value: 'MediaMICE' },
+        { label: 'Year', value: '2025' },
+        { label: 'Role', value: 'UI/UX Designer' },
+      ],
+      problems: [
+        { num: 'I', title: 'Complex content structure', body: 'MediaMICE carries news, magazines, conference coverage, and industry-specific topics. The existing structure made it hard to see how those sections related to one another, each felt like a separate site.' },
+        { num: 'II', title: 'Unclear navigation', body: 'The navigation held many categories and content types but lacked a clear hierarchy, so readers could not quickly get to the content they came for.' },
+      ],
+      roleTags: [
+        { label: 'UX structure' },
+        { label: 'Navigation' },
+        { label: 'Content discovery' },
+        { label: 'Visual consistency' },
+      ],
+      minTraits: [
+        { label: 'Simple lines to divide sections and organise content' },
+        { label: 'Minimal treatment for interactive elements' },
+        { label: 'Curved graphic accents for a touch of movement' },
+        { label: 'Brand gradients used sparingly, as highlights' },
+        { label: 'Considered use of colour to guide the eye' },
+      ],
+      neoTraits: [
+        { label: 'Bold typography and unconventional layouts' },
+        { label: 'Pseudo-shadows and colourful drop shadows for depth' },
+        { label: 'Vibrant gradients and saturated colour usage' },
+        { label: 'Curved graphic elements to create movement' },
+        { label: 'Playful doodles to bring personality into the interface' },
+      ],
+      results: [
+        { num: 'I', title: 'Stronger editorial identity', body: 'The visual direction gives MediaMICE a distinctive, magazine-like presence while keeping the content at the centre of the experience.' },
+        { num: 'II', title: 'Improved content discovery', body: 'A clearer hierarchy and structured navigation make it easier to browse news, magazines, conference coverage, and specialty content.' },
+        { num: 'III', title: 'One cohesive system', body: 'Different content types now share a consistent visual system, so the platform reads as one publication rather than several.' },
+        { num: 'IV', title: 'Client alignment', body: 'The final direction was approved by the client, translating their vision of MediaMICE into a modern digital magazine experience.' },
+      ],
+    };
+  }
+}
+
+</script>
+</body>
+</html>

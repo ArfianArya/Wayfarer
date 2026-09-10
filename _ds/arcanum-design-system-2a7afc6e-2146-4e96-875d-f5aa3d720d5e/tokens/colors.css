@@ -1,0 +1,64 @@
+:root{
+  color-scheme: dark;
+
+  /* --- base inks (grounds) --- */
+  --ink:          #0B0906;
+  --ink-raised:   #17120B;
+  --ink-raised-2: #1E1811;
+
+  /* --- gold (the one accent) --- */
+  --gold:        #C09861;
+  --gold-bright: #E3C08A;
+  --gold-dim:    #8A6B45;
+
+  /* --- light inks (text) --- */
+  --parchment: #FFF6D6;
+  --ash:       #B9AE9C;
+  --ash-dim:   #7C7566;
+
+  /* --- semantic / destructive --- */
+  --oxblood:        #8C3A3A;
+  --oxblood-bright: #B15252;
+
+  /* --- hairlines --- */
+  --line:        rgba(192,152,97,0.16);
+  --line-strong: rgba(192,152,97,0.34);
+
+  /* --- gold at alpha (glows, washes, focus rings) --- */
+  --gold-a04: rgba(192,152,97,0.04);
+  --gold-a07: rgba(192,152,97,0.07);
+  --gold-a10: rgba(192,152,97,0.10);
+  --gold-a14: rgba(192,152,97,0.14);
+  --gold-a16: rgba(192,152,97,0.16);
+  --gold-a22: rgba(192,152,97,0.22);
+  --gold-a40: rgba(192,152,97,0.40);
+
+  /* --- semantic aliases --- */
+  --surface-ground:  var(--ink);
+  --surface-card:    var(--ink-raised);
+  --surface-raised:  var(--ink-raised-2);
+  --surface-field:   var(--ink-raised);
+  --surface-plate:   linear-gradient(180deg, var(--ink-raised), var(--ink)); /* @kind color */
+
+  --text-display: var(--parchment);
+  --text-body:    var(--ash);
+  --text-muted:   var(--ash-dim);
+  --text-accent:  var(--gold);
+  --text-accent-hover: var(--gold-bright);
+  --text-on-gold: var(--ink);
+
+  --border-quiet:  var(--line);
+  --border-strong: var(--line-strong);
+  --border-accent: var(--gold);
+
+  --action-primary-bg:      var(--gold);
+  --action-primary-bg-hover: var(--gold-bright);
+  --action-primary-fg:      var(--ink);
+  --action-secondary-fg:    var(--parchment);
+  --action-secondary-bg-hover: var(--gold-a10);
+  --action-danger-bg:       var(--oxblood);
+  --action-danger-bg-hover: var(--oxblood-bright);
+  --action-danger-fg:       var(--parchment);
+
+  --focus-ring: 0 0 0 3px var(--gold-a14); /* @kind shadow */
+}
