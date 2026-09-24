@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "wayfarer",
+  "compatibility_date": "2026-09-21",
+  "observability": {
+    "enabled": true
+  },
+  // Copy the site into dist/ without .git so only site files are uploaded.
+  "build": {
+    "command": "rm -rf dist && mkdir dist && tar --exclude=./.git --exclude=./dist --exclude=./node_modules --exclude=./.wrangler -cf - . | tar -xf - -C dist"
+  },
+  "assets": {
+    "directory": "./dist"
+  }
+}
