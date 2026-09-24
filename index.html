@@ -19,6 +19,7 @@
 <script src="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/_ds_bundle.js"></script>
 <script src="./image-slot.js"></script>
 <style>
+  :root { --ash: #D8D0C0; --ash-dim: #A39B8B; }
   html, body { margin: 0; padding: 0; background: #0B0906; overflow: hidden; }
   a { color: var(--ash); text-decoration: none; }
   a:hover { color: var(--gold-bright); }
@@ -136,7 +137,7 @@
 
             <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: start; width: 300px">
               <sc-for list="{{ markers }}" as="m" hint-placeholder-count="3">
-                <button type="button" onClick="{{ m.onSelect }}" style="justify-self: {{ m.justify }}; background: none; border: 0; padding: 0; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: {{ m.color }}; cursor: pointer; transition: color 250ms cubic-bezier(.4,0,.2,1)" style-hover="color: var(--gold-bright)">{{ m.label }}</button>
+                <button type="button" onClick="{{ m.onSelect }}" style="justify-self: {{ m.justify }}; background: none; border: 0; padding: 15px 0; margin: -15px 0; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: {{ m.color }}; cursor: pointer; transition: color 250ms cubic-bezier(.4,0,.2,1)" style-hover="color: var(--gold-bright)">{{ m.label }}</button>
               </sc-for>
             </div>
           </div>
@@ -154,7 +155,7 @@
               <span style="display: block; white-space: {{ titleWrap }}">{{ line2 }} <span style="color: var(--gold)">{{ line2Gold }}</span></span>
             </h1>
           </div>
-          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 14px; opacity: {{ contentOp }}; transform: translateY({{ heroY }}) translateX({{ leftX }}); transition: opacity 520ms ease, transform 1300ms cubic-bezier(.16,1,.3,1) 680ms">
+          <div style="display: flex; flex-wrap: nowrap; white-space: nowrap; align-items: center; gap: 12px 14px; opacity: {{ contentOp }}; transform: translateY({{ heroY }}) translateX({{ leftX }}); transition: opacity 520ms ease, transform 1300ms cubic-bezier(.16,1,.3,1) 680ms">
             <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Button" href="mailto:arfianarya@gmail.com" hint-size="130px,42px">Email me</x-import>
             <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Button" variant="secondary" href="https://drive.google.com/drive/folders/1DG2bW8UIH0rnfBa0PBrw7l_vZZI6qqZW?usp=sharing" target="_blank" rel="noopener" hint-size="150px,42px">Download CV</x-import>
           </div>
@@ -264,6 +265,9 @@
         <span style="flex: none; display: flex; align-items: center; justify-content: center; height: 104px; transform: translateY(8px)">
           <img src="assets/clients/9.png" alt="Client logo" decoding="async" style="display: block; height: 46px; width: auto; opacity: .38; filter: grayscale(1) brightness(1.08) contrast(.92); transition: opacity 250ms cubic-bezier(.4,0,.2,1), filter 250ms cubic-bezier(.4,0,.2,1)" style-hover="opacity: .95; filter: grayscale(1) brightness(1.35) drop-shadow(0 0 18px rgba(192,152,97,.45))">
         </span>
+        <span style="flex: none; display: flex; align-items: center; justify-content: center; height: 104px; transform: translateY(-6px)">
+          <img src="assets/clients/10.png" alt="Client logo" decoding="async" style="display: block; height: 50px; width: auto; opacity: .38; filter: grayscale(1) brightness(1.08) contrast(.92); transition: opacity 250ms cubic-bezier(.4,0,.2,1), filter 250ms cubic-bezier(.4,0,.2,1)" style-hover="opacity: .95; filter: grayscale(1) brightness(1.35) drop-shadow(0 0 18px rgba(192,152,97,.45))">
+        </span>
         <span style="flex: none; display: flex; align-items: center; justify-content: center; height: 104px; transform: translateY(4px)">
           <img src="assets/clients/6.png" alt="Client logo" decoding="async" style="display: block; height: 42px; width: auto; opacity: .38; filter: grayscale(1) brightness(1.08) contrast(.92); transition: opacity 250ms cubic-bezier(.4,0,.2,1), filter 250ms cubic-bezier(.4,0,.2,1)" style-hover="opacity: .95; filter: grayscale(1) brightness(1.35) drop-shadow(0 0 18px rgba(192,152,97,.45))">
         </span>
@@ -276,19 +280,22 @@
         <span style="flex: none; display: flex; align-items: center; justify-content: center; height: 104px; transform: translateY(8px)">
           <img src="assets/clients/9.png" alt="Client logo" decoding="async" style="display: block; height: 46px; width: auto; opacity: .38; filter: grayscale(1) brightness(1.08) contrast(.92); transition: opacity 250ms cubic-bezier(.4,0,.2,1), filter 250ms cubic-bezier(.4,0,.2,1)" style-hover="opacity: .95; filter: grayscale(1) brightness(1.35) drop-shadow(0 0 18px rgba(192,152,97,.45))">
         </span>
+        <span style="flex: none; display: flex; align-items: center; justify-content: center; height: 104px; transform: translateY(-6px)">
+          <img src="assets/clients/10.png" alt="Client logo" decoding="async" style="display: block; height: 50px; width: auto; opacity: .38; filter: grayscale(1) brightness(1.08) contrast(.92); transition: opacity 250ms cubic-bezier(.4,0,.2,1), filter 250ms cubic-bezier(.4,0,.2,1)" style-hover="opacity: .95; filter: grayscale(1) brightness(1.35) drop-shadow(0 0 18px rgba(192,152,97,.45))">
+        </span>
       </div>
     </div>
   </section>
 
-  <section ref="{{ projRef }}" data-screen-label="Projects" style="position: relative; z-index: 3; height: 420vh">
-    <div style="position: sticky; top: 0; height: 100vh; box-sizing: border-box; padding: {{ projPad }}; overflow: hidden; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; row-gap: {{ projRowGap }}">
+  <section ref="{{ projRef }}" data-screen-label="Projects" style="position: relative; z-index: 3; height: 100vh">
+    <div style="position: relative; height: 100vh; box-sizing: border-box; padding: {{ projPad }}; overflow: hidden; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; row-gap: {{ projRowGap }}">
       <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; padding: 0 min(6vw, 92px)">
         <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold)">The Emperor</span>
         <span style="font-family: 'Libertinus Serif Display', serif; font-style: italic; font-size: 22px; color: var(--ash)">Four cards, laid face up</span>
       </div>
 
       <div style="position: relative; min-height: 0; overflow-x: hidden; overflow-y: {{ projScroll }}; display: flex; align-items: {{ pAlign }}">
-        <div ref="{{ trackInnerRef }}" style="display: flex; align-items: {{ pAlign }}; gap: calc(2 * min(6vw, 92px)); padding: 0 min(6vw, 92px); width: max-content; height: {{ pTrackH }}; will-change: transform">
+        <div ref="{{ trackInnerRef }}" style="display: flex; align-items: {{ pAlign }}; gap: calc(2 * min(6vw, 92px)); padding: 0 min(6vw, 92px); width: max-content; height: {{ pTrackH }}; transform: translate3d({{ projX }}, 0, 0); transition: transform 760ms cubic-bezier(.16,1,.3,1); will-change: transform">
 
         <article style="flex: none; width: calc(100vw - 2 * min(6vw, 92px)); height: {{ pArtH }}; max-height: {{ pArtMaxH }}; display: grid; grid-template-columns: {{ pCols }}; grid-template-rows: {{ pRows }}; gap: {{ pGap }}; align-items: center">
           <div style="grid-column: {{ pTextCol }}; grid-row: {{ pTextRow }}; display: flex; flex-direction: column; gap: 14px; min-height: 0">
@@ -333,6 +340,28 @@
             <span style="font-family: 'Libertinus Serif Display', serif; font-size: clamp(32px, 8vmin, 150px); line-height: .8; color: var(--gold-dim); opacity: .5">III</span>
             <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ash-dim)">
               <span>Product</span>
+              <span>· App &amp; Admin</span>
+              <span>· 2025</span>
+            </div>
+            <h3 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(26px, 3.6vmin, 52px); line-height: 1.06; color: var(--parchment)">Gamuda Land — <span style="font-style: italic; color: var(--gold)">Designing a Connected Resident Experience</span></h3>
+            <p style="margin: 0; max-width: 44ch; font-size: 15px; line-height: 1.65; color: var(--ash); text-wrap: pretty">A resident app and management console designed to keep a township, its services, and the people who run it in one connected experience.</p>
+            <div style="display: flex; padding-top: 10px">
+              <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Button" variant="secondary" href="gamuda.html" hint-size="150px,42px">Read the case</x-import>
+            </div>
+          </div>
+          <div style="grid-column: {{ pImgCol }}; grid-row: {{ pImgRow }}; position: relative; height: {{ pImgH }}; aspect-ratio: {{ pImgAR }}; min-height: 0; overflow: hidden; border: 1px solid var(--line-strong); background: linear-gradient(180deg, var(--ink-raised), var(--ink)); transition: border-color 300ms cubic-bezier(.4,0,.2,1), box-shadow 300ms cubic-bezier(.4,0,.2,1)" style-hover="border-color: var(--gold); box-shadow: 0 0 0 1px rgba(192,152,97,.22), 0 0 46px rgba(192,152,97,.14)">
+            <img src="assets/gamuda/thumb.jpg" alt="Gamuda Land resident app and admin platform cover" loading="lazy" decoding="async" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; opacity: .9; transition: opacity 400ms cubic-bezier(.4,0,.2,1), transform 600ms cubic-bezier(.16,1,.3,1)" style-hover="opacity: 1; transform: scale(1.04)">
+          </div>
+        </article>
+
+        <article style="flex: none; width: calc(100vw - 2 * min(6vw, 92px)); height: {{ pArtH }}; max-height: {{ pArtMaxH }}; display: grid; grid-template-columns: {{ pCols }}; grid-template-rows: {{ pRows }}; gap: {{ pGap }}; align-items: center">
+          <div style="grid-column: {{ pImgCol }}; grid-row: {{ pImgRow }}; position: relative; height: {{ pImgH }}; aspect-ratio: {{ pImgAR }}; min-height: 0; overflow: hidden; border: 1px solid var(--line-strong); background: linear-gradient(180deg, var(--ink-raised), var(--ink)); transition: border-color 300ms cubic-bezier(.4,0,.2,1), box-shadow 300ms cubic-bezier(.4,0,.2,1)" style-hover="border-color: var(--gold); box-shadow: 0 0 0 1px rgba(192,152,97,.22), 0 0 46px rgba(192,152,97,.14)">
+            <img src="assets/mm/cover.png" alt="MediaMICE website cover" loading="lazy" decoding="async" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; opacity: .9; transition: opacity 400ms cubic-bezier(.4,0,.2,1), transform 600ms cubic-bezier(.16,1,.3,1)" style-hover="opacity: 1; transform: scale(1.04)">
+          </div>
+          <div style="grid-column: {{ pTextCol }}; grid-row: {{ pTextRow }}; display: flex; flex-direction: column; gap: 14px; min-height: 0">
+            <span style="font-family: 'Libertinus Serif Display', serif; font-size: clamp(32px, 8vmin, 150px); line-height: .8; color: var(--gold-dim); opacity: .5">IV</span>
+            <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ash-dim)">
+              <span>Product</span>
               <span>· Website</span>
               <span>· 2025</span>
             </div>
@@ -340,33 +369,6 @@
             <p style="margin: 0; max-width: 46ch; font-size: 15px; line-height: 1.65; color: var(--ash); text-wrap: pretty">Transforming MediaMICE into a cohesive digital magazine experience through thoughtful content structure, navigation, and visual storytelling.</p>
             <div style="display: flex; padding-top: 10px">
               <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Button" variant="secondary" href="mediamice.html" hint-size="150px,42px">Read the case</x-import>
-            </div>
-          </div>
-          <div style="grid-column: {{ pImgCol }}; grid-row: {{ pImgRow }}; position: relative; height: {{ pImgH }}; aspect-ratio: {{ pImgAR }}; min-height: 0; overflow: hidden; border: 1px solid var(--line-strong); background: linear-gradient(180deg, var(--ink-raised), var(--ink)); transition: border-color 300ms cubic-bezier(.4,0,.2,1), box-shadow 300ms cubic-bezier(.4,0,.2,1)" style-hover="border-color: var(--gold); box-shadow: 0 0 0 1px rgba(192,152,97,.22), 0 0 46px rgba(192,152,97,.14)">
-            <img src="assets/mm/cover.png" alt="MediaMICE website cover" loading="lazy" decoding="async" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; opacity: .9; transition: opacity 400ms cubic-bezier(.4,0,.2,1), transform 600ms cubic-bezier(.16,1,.3,1)" style-hover="opacity: 1; transform: scale(1.04)">
-          </div>
-        </article>
-
-        <article style="flex: none; width: calc(100vw - 2 * min(6vw, 92px)); height: {{ pArtH }}; max-height: {{ pArtMaxH }}; display: grid; grid-template-columns: {{ pCols }}; grid-template-rows: {{ pRows }}; gap: {{ pGap }}; align-items: center">
-          <div style="grid-column: {{ pImgCol }}; grid-row: {{ pImgRow }}; position: relative; height: {{ pImgH }}; aspect-ratio: {{ pImgAR }}; min-height: 0; overflow: hidden; border: 1px solid var(--line-strong); background: linear-gradient(180deg, var(--ink-raised), var(--ink)); transition: border-color 300ms cubic-bezier(.4,0,.2,1), box-shadow 300ms cubic-bezier(.4,0,.2,1)" style-hover="border-color: var(--gold); box-shadow: 0 0 0 1px rgba(192,152,97,.22), 0 0 46px rgba(192,152,97,.14)">
-            <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; background: radial-gradient(70% 90% at 50% 30%, rgba(192,152,97,.07), rgba(11,9,6,0) 72%)">
-              <span style="color: var(--gold-dim); opacity: .5">
-                <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Sparkle" size="{{ crescentSize }}" hint-size="14px,14px"></x-import>
-              </span>
-              <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ash-dim)">Not available</span>
-            </div>
-          </div>
-          <div style="grid-column: {{ pTextCol }}; grid-row: {{ pTextRow }}; display: flex; flex-direction: column; gap: 14px; min-height: 0">
-            <span style="font-family: 'Libertinus Serif Display', serif; font-size: clamp(32px, 8vmin, 150px); line-height: .8; color: var(--gold-dim); opacity: .5">IV</span>
-            <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--ash-dim)">
-              <span>Product</span>
-              <span>· App &amp; Admin</span>
-              <span>· 2025</span>
-            </div>
-            <h3 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(26px, 3.6vmin, 52px); line-height: 1.06; color: var(--parchment)">Gamuda Land — <span style="font-style: italic; color: var(--gold)">Designing a Connected Resident Experience</span></h3>
-            <p style="margin: 0; max-width: 44ch; font-size: 15px; line-height: 1.65; color: var(--ash); text-wrap: pretty">A resident app and management console designed to keep a township, its services, and the people who run it in one connected experience.</p>
-            <div style="display: flex; padding-top: 10px">
-              <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Button" variant="secondary" disabled="{{ trueVal }}" hint-size="150px,42px">Coming soon</x-import>
             </div>
           </div>
         </article>
@@ -377,9 +379,12 @@
       <div style="display: flex; align-items: center; gap: 20px; padding: 0 min(6vw, 92px)">
         <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .16em; color: var(--gold)">{{ projLabel }}</span>
         <div style="position: relative; flex: 1; height: 1px; background: var(--line)">
-          <div ref="{{ projFillRef }}" style="position: absolute; inset: 0 auto 0 0; height: 1px; width: 0%; background: linear-gradient(90deg, var(--gold-dim), var(--gold-bright))"></div>
+          <div style="position: absolute; inset: 0 auto 0 0; height: 1px; width: {{ projFillW }}; background: linear-gradient(90deg, var(--gold-dim), var(--gold-bright)); transition: width 760ms cubic-bezier(.16,1,.3,1)"></div>
         </div>
-        <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ash-dim)">Keep scrolling</span>
+        <div style="display: flex; align-items: center; gap: 10px">
+          <button type="button" onClick="{{ projPrev }}" aria-label="Previous project" style="display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; padding: 0; border: 1px solid var(--gold-dim); background: rgba(192,152,97,.06); font-family: 'Geist Mono', ui-monospace, monospace; font-size: 15px; line-height: 1; color: var(--gold); opacity: {{ projPrevOp }}; cursor: {{ projPrevCur }}; transition: border-color 250ms cubic-bezier(.4,0,.2,1), background 250ms cubic-bezier(.4,0,.2,1), color 250ms cubic-bezier(.4,0,.2,1), box-shadow 250ms cubic-bezier(.4,0,.2,1), transform 250ms cubic-bezier(.4,0,.2,1)" style-hover="border-color: var(--gold-bright); background: rgba(192,152,97,.18); color: var(--gold-bright); box-shadow: 0 0 0 4px rgba(192,152,97,.16), 0 0 26px rgba(192,152,97,.3); transform: translateY(-1px)">&#8592;</button>
+          <button type="button" onClick="{{ projNext }}" aria-label="Next project" style="display: flex; align-items: center; justify-content: center; width: 42px; height: 42px; padding: 0; border: 1px solid var(--gold-dim); background: rgba(192,152,97,.06); font-family: 'Geist Mono', ui-monospace, monospace; font-size: 15px; line-height: 1; color: var(--gold); opacity: {{ projNextOp }}; cursor: {{ projNextCur }}; transition: border-color 250ms cubic-bezier(.4,0,.2,1), background 250ms cubic-bezier(.4,0,.2,1), color 250ms cubic-bezier(.4,0,.2,1), box-shadow 250ms cubic-bezier(.4,0,.2,1), transform 250ms cubic-bezier(.4,0,.2,1)" style-hover="border-color: var(--gold-bright); background: rgba(192,152,97,.18); color: var(--gold-bright); box-shadow: 0 0 0 4px rgba(192,152,97,.16), 0 0 26px rgba(192,152,97,.3); transform: translateY(-1px)">&#8594;</button>
+        </div>
       </div>
     </div>
   </section>
@@ -430,8 +435,8 @@
       </div>
 
       <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 28px; padding-top: 10px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase">
-        <a href="https://www.linkedin.com/in/arfianarya/" target="_blank" rel="noopener" style="color: var(--ash)" style-hover="color: var(--gold-bright)">LinkedIn</a>
-        <a href="https://www.behance.net/arfianarya8a40" target="_blank" rel="noopener" style="color: var(--ash)" style-hover="color: var(--gold-bright)">Behance</a>
+        <a href="https://www.linkedin.com/in/arfianarya/" target="_blank" rel="noopener" style="display: inline-block; padding: 12px 4px; color: var(--ash)" style-hover="color: var(--gold-bright)">LinkedIn</a>
+        <a href="https://www.behance.net/arfianarya8a40" target="_blank" rel="noopener" style="display: inline-block; padding: 12px 4px; color: var(--ash)" style-hover="color: var(--gold-bright)">Behance</a>
       </div>
     </div>
 
@@ -461,7 +466,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;wordmark&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;LOGO&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;revealMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;tap&quot;,&quot;auto&quot;],&quot;default&quot;:&quot;tap&quot;,&quot;tsType&quot;:&quot;'tap' | 'auto'&quot;,&quot;section&quot;:&quot;Sequence&quot;},&quot;loadDuration&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:2200,&quot;min&quot;:800,&quot;max&quot;:5000,&quot;step&quot;:100,&quot;unit&quot;:&quot;ms&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Sequence&quot;},&quot;showReplay&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sequence&quot;},&quot;parallax&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Card&quot;}}">
 class Component extends DCLogic {
-  state = { menu: false, mobile: typeof window !== "undefined" && window.innerWidth < 760, phase: 'load', pct: 0, flipped: false, chapter: 0, dir: 1, turning: false, navItem: 'Home', projIdx: 0, fbHover: null };
+  state = { menu: false, mobile: typeof window !== "undefined" && (window.innerWidth < 760 || (window.innerWidth < 1200 && window.innerHeight >= window.innerWidth * 0.9)), phone: typeof window !== "undefined" && window.innerWidth < 760, tablet: typeof window !== "undefined" && window.innerWidth >= 760 && window.innerWidth < 1200 && window.innerHeight >= window.innerWidth * 0.9, phase: 'load', pct: 0, flipped: false, chapter: 0, dir: 1, turning: false, navItem: 'Home', projIdx: 0, fbHover: null };
 
   chapters = [
     {
@@ -564,7 +569,7 @@ class Component extends DCLogic {
   contactRef = React.createRef();
 
   componentDidMount() {
-    this.onMq = () => { const m = window.innerWidth < 760; if (m !== this.state.mobile) this.setState({ mobile: m }); };
+    this.onMq = () => { const w = window.innerWidth, h = window.innerHeight; const phone = w < 760, tablet = !phone && w < 1200 && h >= w * 0.9, m = phone || tablet; if (m !== this.state.mobile || phone !== this.state.phone || tablet !== this.state.tablet) this.setState({ mobile: m, phone, tablet }); };
     window.addEventListener('resize', this.onMq);
     this.onMq();
     window.__seq = this;
@@ -605,8 +610,6 @@ class Component extends DCLogic {
 
   start() {
     this.clear();
-    const sc = this.scrollRef.current;
-    if (sc) sc.scrollTop = 0;
     this.setState({ phase: 'load', pct: 0, flipped: false, chapter: 0, turning: false, navItem: 'Home' });
     const dur = Math.max(400, this.props.loadDuration ?? 2200);
     const t0 = performance.now();
@@ -684,18 +687,6 @@ class Component extends DCLogic {
       if (this.rowBRef.current) this.rowBRef.current.style.transform = 'translate3d(' + (-30 + p * 22).toFixed(2) + '%,0,0)';
     }
 
-    const pr = this.projRef.current;
-    const track = this.trackInnerRef.current;
-    if (pr && track) {
-      const r = pr.getBoundingClientRect();
-      const p = this.clamp01(-r.top / (r.height - vh));
-      const max = Math.max(0, track.scrollWidth - sc.clientWidth);
-      track.style.transform = 'translate3d(' + (-p * max).toFixed(1) + 'px,0,0)';
-      if (this.projFillRef.current) this.projFillRef.current.style.width = (p * 100).toFixed(1) + '%';
-      const idx = Math.min(3, Math.floor(p * 3.999));
-      if (idx !== this.state.projIdx) this.setState({ projIdx: idx });
-    }
-
     const wrap = this.threadWrapRef.current;
     if (wrap) {
       const items = wrap.querySelectorAll('[data-fb]');
@@ -714,7 +705,7 @@ class Component extends DCLogic {
       });
       const r = wrap.getBoundingClientRect();
       if (this.threadRef.current) {
-        this.threadRef.current.style.display = window.innerWidth < 760 ? 'none' : 'block';
+        this.threadRef.current.style.display = this.state.mobile ? 'none' : 'block';
         this.threadRef.current.style.height = (this.clamp01((vh * 0.5 - r.top) / r.height) * 100).toFixed(1) + '%';
       }
     }
@@ -760,33 +751,33 @@ class Component extends DCLogic {
       mob: !!this.state.mobile,
       toggleMenu: () => this.setState({ menu: !this.state.menu }),
       closeMenu: () => { if (this.state.menu) this.setState({ menu: false }); },
-      burgerDisplay: this.state.mobile ? 'flex' : 'none',
-      burgerTop: this.state.mobile ? (this.state.menu ? 'translateY(7px) rotate(45deg)' : 'none') : 'none',
-      burgerBot: this.state.mobile ? (this.state.menu ? 'translateY(-7px) rotate(-45deg)' : 'none') : 'none',
-      burgerMidOp: this.state.mobile ? (this.state.menu ? 0 : 1) : 1,
-      navLinksDisplay: this.state.mobile ? (this.state.menu ? 'flex' : 'none') : 'flex',
-      navDir: this.state.mobile ? 'column' : 'row',
-      navAlign: this.state.mobile ? 'flex-start' : 'center',
-      navGap: this.state.mobile ? '2px' : 'min(36px, 5.6vw)',
-      navItemW: this.state.mobile ? '100%' : 'auto',
-      navItemMinH: this.state.mobile ? '44px' : 'auto',
-      navItemAlign: this.state.mobile ? 'stretch' : 'center',
+      burgerDisplay: this.state.phone ? 'flex' : 'none',
+      burgerTop: this.state.phone ? (this.state.menu ? 'translateY(7px) rotate(45deg)' : 'none') : 'none',
+      burgerBot: this.state.phone ? (this.state.menu ? 'translateY(-7px) rotate(-45deg)' : 'none') : 'none',
+      burgerMidOp: this.state.phone ? (this.state.menu ? 0 : 1) : 1,
+      navLinksDisplay: this.state.phone ? (this.state.menu ? 'flex' : 'none') : 'flex',
+      navDir: this.state.phone ? 'column' : 'row',
+      navAlign: this.state.phone ? 'flex-start' : 'center',
+      navGap: this.state.phone ? '2px' : 'min(36px, 5.6vw)',
+      navItemW: this.state.phone ? '100%' : 'auto',
+      navItemMinH: this.state.phone ? '44px' : 'auto',
+      navItemAlign: this.state.phone ? 'stretch' : 'center',
       goHome: () => { window.location.href = 'index.html'; },
       goProjects: () => { window.location.href = 'projects.html'; },
       goAbout: () => { window.location.href = 'about.html'; },
-      navMenuPos: this.state.mobile ? 'absolute' : 'static',
-      navMenuTop: this.state.mobile ? '100%' : 'auto',
-      navMenuSide: this.state.mobile ? '0' : 'auto',
-      navMenuPad: this.state.mobile ? '22px min(6vw, 92px) 26px' : '0',
-      navMenuBg: this.state.mobile ? 'rgba(11,9,6,.96)' : 'transparent',
-      navMenuLine: this.state.mobile ? '1px solid var(--line)' : 'none',
-      navMenuBlur: this.state.mobile ? 'blur(12px)' : 'none',
+      navMenuPos: this.state.phone ? 'absolute' : 'static',
+      navMenuTop: this.state.phone ? '100%' : 'auto',
+      navMenuSide: this.state.phone ? '0' : 'auto',
+      navMenuPad: this.state.phone ? '22px min(6vw, 92px) 26px' : '0',
+      navMenuBg: this.state.phone ? 'rgba(11,9,6,.96)' : 'transparent',
+      navMenuLine: this.state.phone ? '1px solid var(--line)' : 'none',
+      navMenuBlur: this.state.phone ? 'blur(12px)' : 'none',
       footCols: this.state.mobile ? 'minmax(0, 1fr)' : '1fr auto 1fr',
       footJustify: this.state.mobile ? 'center' : 'stretch',
       footAlign: this.state.mobile ? 'center' : 'left',
       footEnd: this.state.mobile ? 'center' : 'flex-end',
       footStart: this.state.mobile ? 'center' : 'flex-start',
-      footGap: this.state.mobile ? '12px' : '14px 40px',
+      footGap: this.state.tablet ? '16px' : this.state.mobile ? '12px' : '14px 40px',
       footWrap: this.state.mobile ? 'normal' : 'nowrap',
       scrollMode: open ? 'auto' : 'hidden',
       pctLabel: this.state.pct + '%',
@@ -807,7 +798,7 @@ class Component extends DCLogic {
       starShift: open ? ch.star : '0px',
       cardOp: closed ? 0 : 1,
       cardY: closed ? '34px' : '0px',
-      cardH: this.state.mobile ? (open ? 'min(30vh, 300px)' : 'min(40vh, 350px)') : (open ? '62vh' : '54vh'),
+      cardH: this.state.tablet ? (open ? 'min(36vh, 440px)' : 'min(44vh, 520px)') : this.state.mobile ? (open ? 'min(30vh, 300px)' : 'min(40vh, 350px)') : (open ? 'min(62vh, calc((44vw - 310px) * 3.05))' : 'min(54vh, calc((44vw - 310px) * 3.05))'),
       cardHalf: open ? 'calc(62vh * 700 / 1066 / 2)' : 'calc(54vh * 700 / 1066 / 2)',
       chapterTf: turning
         ? 'rotateY(' + (dir * 11 + restRy) + 'deg) scale(.955) translateY(-8px)'
@@ -885,32 +876,32 @@ class Component extends DCLogic {
       }),
       panelW: 'clamp(240px, 26vw, 460px)',
       stageDisplay: this.state.mobile ? 'flex' : 'block',
-      stagePad: this.state.mobile ? '104px min(6vw, 92px) 18px' : '0',
+      stagePad: this.state.tablet ? '132px 9vw 56px' : this.state.mobile ? '104px min(6vw, 92px) 18px' : '0',
       zonePos: this.state.mobile ? 'static' : 'absolute',
       zoneInset: this.state.mobile ? 'auto' : '0',
       cardJustify: this.state.mobile ? 'flex-start' : 'center',
-      cardGap: this.state.mobile ? '18px' : '26px',
+      cardGap: this.state.tablet ? '24px' : this.state.mobile ? '18px' : '26px',
       sliderH: this.state.mobile ? '104px' : '96px',
-      sliderW: this.state.mobile ? '300px' : '340px',
+      sliderW: this.state.tablet ? '360px' : this.state.mobile ? '300px' : '340px',
       overlayDisplay: this.state.mobile ? 'contents' : 'block',
-      stageGap: this.state.mobile ? '38px' : '0px',
+      stageGap: this.state.tablet ? '64px' : this.state.mobile ? '38px' : '0px',
       stageOverflowY: this.state.mobile ? 'auto' : 'hidden',
-      rpMinH: this.state.mobile ? '190px' : '0',
+      rpMinH: this.state.tablet ? '220px' : this.state.mobile ? '190px' : '0',
       cardOrder: this.state.mobile ? 2 : 0,
       lpOrder: this.state.mobile ? 1 : 0,
       rpOrder: this.state.mobile ? 3 : 0,
       overlayFlex: this.state.mobile ? '1 1 auto' : 'none',
       lpTop: this.state.mobile ? 'auto' : '50%',
       lpLeft: this.state.mobile ? 'auto' : 'min(6vw, 92px)',
-      lpW: this.state.mobile ? '100%' : 'min(38vw, 560px, calc(50% - ' + (open ? 'calc(62vh * 700 / 1066 / 2)' : 'calc(54vh * 700 / 1066 / 2)') + ' - 40px - min(6vw, 92px)))',
+      lpW: this.state.mobile ? '100%' : 'min(38vw, 560px, calc(50% - ' + (open ? 'calc(min(62vh, calc((44vw - 310px) * 3.05)) * 700 / 1066 / 2)' : 'calc(min(54vh, calc((44vw - 310px) * 3.05)) * 700 / 1066 / 2)') + ' - 40px - min(6vw, 92px)))',
       lpTf: this.state.mobile ? 'none' : 'translateY(-50%)',
-      lpGap: this.state.mobile ? '14px' : '28px',
+      lpGap: this.state.tablet ? '20px' : this.state.mobile ? '14px' : '28px',
       titleW: this.state.mobile ? 'auto' : 'max-content',
       titleWrap: this.state.mobile ? 'normal' : 'nowrap',
       rpTop: this.state.mobile ? 'auto' : '104px',
       rpBottom: this.state.mobile ? 'auto' : '104px',
       rpRight: this.state.mobile ? 'auto' : 'min(6vw, 92px)',
-      rpW: this.state.mobile ? '100%' : 'min(clamp(240px, 26vw, 460px), calc(50% - ' + (open ? 'calc(62vh * 700 / 1066 / 2)' : 'calc(54vh * 700 / 1066 / 2)') + ' - 48px - min(6vw, 92px)))',
+      rpW: this.state.mobile ? '100%' : 'min(clamp(240px, 26vw, 460px), calc(50% - ' + (open ? 'calc(min(62vh, calc((44vw - 310px) * 3.05)) * 700 / 1066 / 2)' : 'calc(min(54vh, calc((44vw - 310px) * 3.05)) * 700 / 1066 / 2)') + ' - 48px - min(6vw, 92px)))',
       rpFlex: this.state.mobile ? '1 1 auto' : 'none',
       rpJustify: this.state.mobile ? 'flex-start' : 'center',
       hintDisplay: this.state.mobile ? 'none' : 'flex',
@@ -923,9 +914,9 @@ class Component extends DCLogic {
       projScroll: this.state.mobile ? 'auto' : 'hidden',
       pImgH: this.state.mobile ? 'auto' : '100%',
       pImgAR: this.state.mobile ? '16 / 9' : 'auto',
-      projPad: this.state.mobile ? '84px 0 34px' : '96px 0 44px',
-      projRowGap: this.state.mobile ? '14px' : '20px',
-      pGap: this.state.mobile ? '16px' : '44px',
+      projPad: this.state.tablet ? '112px 0 56px' : this.state.mobile ? '84px 0 34px' : '96px 0 44px',
+      projRowGap: this.state.tablet ? '22px' : this.state.mobile ? '14px' : '20px',
+      pGap: this.state.tablet ? '28px' : this.state.mobile ? '16px' : '44px',
       pTextCol: '1',
       pTextRow: '1',
       pImgCol: this.state.mobile ? '1' : '2',
@@ -937,6 +928,14 @@ class Component extends DCLogic {
       scrollHint: chapter === last ? 'Scroll on to the clients' : 'Scroll to continue',
       scrollHintOp: open && !turning ? 1 : 0,
       projLabel: ['I', 'II', 'III', 'IV'][projIdx] + ' / IV',
+      projX: 'calc(' + (-projIdx) + ' * (100vw - 2 * min(6vw, 92px) + 2 * min(6vw, 92px)))',
+      projFillW: (((projIdx + 1) / 4) * 100).toFixed(1) + '%',
+      projPrev: () => this.setState((st) => ({ projIdx: Math.max(0, st.projIdx - 1) })),
+      projNext: () => this.setState((st) => ({ projIdx: Math.min(3, st.projIdx + 1) })),
+      projPrevOp: projIdx === 0 ? 0.3 : 1,
+      projNextOp: projIdx === 3 ? 0.3 : 1,
+      projPrevCur: projIdx === 0 ? 'not-allowed' : 'pointer',
+      projNextCur: projIdx === 3 ? 'not-allowed' : 'pointer',
       heroOp: open ? 1 : 0,
       heroY: open ? '0px' : '18px',
       heroPE: open ? 'auto' : 'none',
@@ -985,7 +984,6 @@ class Component extends DCLogic {
           leave: () => this.setState((st) => (st.fbHover === i ? { fbHover: null } : null)),
         };
       }),
-      onReplay: () => this.start(),
       scrollRef: this.scrollRef,
       navRef: this.navRef,
       stageRef: this.stageRef,

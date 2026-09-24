@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/colors.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/typography.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/motion.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/effects.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/base.css">
+<link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/styles.css">
+<script src="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/_ds_bundle.js"></script>
+<style>
+  :root { --ash: #D8D0C0; --ash-dim: #A39B8B; }
+  html, body { margin: 0; padding: 0; background: #0B0906; }
+  html { scroll-snap-type: y proximity; scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-snap-type: none; scroll-behavior: auto } }
+  a { color: var(--ash); text-decoration: none; }
+  a:hover { color: var(--gold-bright); }
+  @keyframes twinkle { 0%, 100% { opacity: .28 } 50% { opacity: .62 } }
+  @keyframes firefly-glow { 0%, 100% { opacity: .06; transform: scale(.75) } 38% { opacity: 1; transform: scale(1.18) } 64% { opacity: .3; transform: scale(.92) } }
+  @keyframes firefly-path { 0% { transform: translate3d(0,0,0) } 30% { transform: translate3d(22px,-16px,0) } 60% { transform: translate3d(-14px,-30px,0) } 100% { transform: translate3d(9px,-46px,0) } }
+  @keyframes forest-breathe { 0%, 100% { transform: scale(1.02) translate3d(0,0,0) } 50% { transform: scale(1.06) translate3d(-14px,8px,0) } }
+  @keyframes hint-drop { 0%, 100% { transform: translateY(0); opacity: .5 } 50% { transform: translateY(6px); opacity: 1 } }
+  @media (prefers-reduced-motion: reduce) { * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important } }
+</style>
+</helmet>
+
+<div style="position: relative; width: 100%; background: #0B0906; font-family: Geist, system-ui, sans-serif; overflow-x: clip">
+
+  <div style="position: fixed; inset: 0; z-index: 0; pointer-events: none">
+    <div style="position: absolute; inset: -8%; background-image: url(assets/forest.jpg); background-size: cover; background-position: 50% 40%; filter: brightness(.58) contrast(1.06); animation: forest-breathe 46s ease-in-out infinite"></div>
+    <div style="position: absolute; inset: 0; background: radial-gradient(70% 54% at 50% 40%, rgba(11,9,6,.46), rgba(11,9,6,.9) 78%), linear-gradient(180deg, rgba(11,9,6,.76), rgba(11,9,6,.5) 30%, rgba(11,9,6,.94))"></div>
+    <div style="position: absolute; inset: -14%; background: radial-gradient(44% 32% at 42% 26%, rgba(214,178,120,.10), rgba(214,178,120,0) 70%)"></div>
+    <sc-for list="{{ fireflies }}" as="f" hint-placeholder-count="12">
+      <div style="position: absolute; left: {{ f.left }}; top: {{ f.top }}; animation: firefly-path {{ f.pathDur }} ease-in-out infinite alternate; animation-delay: {{ f.delay }}">
+        <div style="width: {{ f.size }}; height: {{ f.size }}; border-radius: 50%; background: #F2DCAF; filter: blur({{ f.blur }}); box-shadow: 0 0 {{ f.halo }} rgba(227,192,138,.8), 0 0 {{ f.haloWide }} rgba(192,152,97,.4); opacity: {{ f.peak }}; animation: firefly-glow {{ f.dur }} ease-in-out infinite; animation-delay: {{ f.delay }}"></div>
+      </div>
+    </sc-for>
+    <div style="position: absolute; top: 14%; left: 12%; width: 1px; height: 1px; border-radius: 50%; background: #FFF6D6; opacity: .5; animation: twinkle 6s ease-in-out infinite; box-shadow: 0 0 0 .5px rgba(255,246,214,.6), 24vw 5vh 0 0 #FFF6D6, 44vw -2vh 0 0 rgba(255,246,214,.7), 61vw 9vh 0 0 #FFF6D6, 72vw 3vh 0 0 rgba(255,246,214,.55), 14vw 28vh 0 0 rgba(255,246,214,.7), 36vw 40vh 0 0 #FFF6D6, 50vw 22vh 0 0 rgba(255,246,214,.5), 66vw 46vh 0 0 rgba(255,246,214,.8), 79vw 32vh 0 0 #FFF6D6, 6vw 54vh 0 0 rgba(255,246,214,.6), 30vw 65vh 0 0 rgba(255,246,214,.75), 55vw 60vh 0 0 #FFF6D6, 74vw 70vh 0 0 rgba(255,246,214,.5), 20vw 76vh 0 0 rgba(255,246,214,.65), 46vw 82vh 0 0 #FFF6D6"></div>
+  </div>
+
+  <div style="position: fixed; top: 0; left: 0; right: 0; z-index: 12; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px min(6vw, 92px); background: rgba(11,9,6,{{ navVeil }}); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(192,152,97,{{ navLine }}); transition: background 400ms ease, border-color 400ms ease">
+    <a href="index.html" style="display: flex; align-items: center; gap: 10px; color: var(--parchment)" style-hover="color: var(--gold-bright)">
+      <img src="assets/wordmark.png" alt="Wayfarer" decoding="async" style="display: block; height: clamp(22px, 6vw, 30px); width: auto">
+    </a>
+    <button type="button" onClick="{{ toggleMenu }}" aria-label="Menu" style="display: {{ burgerDisplay }}; flex-direction: column; align-items: center; justify-content: center; gap: 6px; width: 44px; height: 44px; margin-right: -10px; padding: 0; background: none; border: 0; cursor: pointer">
+      <span style="display: block; width: 22px; height: 1px; background: var(--gold); transform: {{ burgerTop }}; transition: transform 300ms cubic-bezier(.4,0,.2,1)"></span>
+      <span style="display: block; width: 22px; height: 1px; background: var(--gold); opacity: {{ burgerMidOp }}; transition: opacity 180ms ease"></span>
+      <span style="display: block; width: 22px; height: 1px; background: var(--gold); transform: {{ burgerBot }}; transition: transform 300ms cubic-bezier(.4,0,.2,1)"></span>
+    </button>
+    <div onClick="{{ closeMenu }}" style="display: {{ navLinksDisplay }}; flex-direction: {{ navDir }}; align-items: {{ navAlign }}; gap: {{ navGap }}; position: {{ navMenuPos }}; top: {{ navMenuTop }}; left: {{ navMenuSide }}; right: {{ navMenuSide }}; padding: {{ navMenuPad }}; background: {{ navMenuBg }}; border-bottom: {{ navMenuLine }}; backdrop-filter: {{ navMenuBlur }}">
+      <div data-nav-item="true" onClick="{{ goHome }}" style="display: flex; align-items: {{ navItemAlign }}; cursor: pointer; width: {{ navItemW }}; min-height: {{ navItemMinH }}">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.NavLink" href="index.html" hint-size="60px,18px">Home</x-import>
+      </div>
+      <div data-nav-item="true" onClick="{{ goProjects }}" style="display: flex; align-items: {{ navItemAlign }}; cursor: pointer; width: {{ navItemW }}; min-height: {{ navItemMinH }}">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.NavLink" href="projects.html" active="{{ trueVal }}" hint-size="70px,18px">Projects</x-import>
+      </div>
+      <div data-nav-item="true" onClick="{{ goAbout }}" style="display: flex; align-items: {{ navItemAlign }}; cursor: pointer; width: {{ navItemW }}; min-height: {{ navItemMinH }}">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.NavLink" href="about.html" hint-size="80px,18px">About Me</x-import>
+      </div>
+    </div>
+  </div>
+
+  <div style="position: fixed; top: 50%; right: {{ railRight }}; z-index: 11; transform: translateY(-50%); display: {{ railDisplay }}; flex-direction: column; align-items: flex-end; gap: 2px; pointer-events: none; opacity: {{ railOp }}; transition: opacity 600ms ease">
+    <sc-for list="{{ pageNav }}" as="p" hint-placeholder-count="12">
+      <div onClick="{{ p.go }}" title="{{ p.label }}" style="position: relative; display: flex; align-items: center; justify-content: flex-end; gap: 12px; height: 22px; padding-left: 14px; pointer-events: auto; cursor: pointer; color: {{ p.color }}; transition: color 300ms cubic-bezier(.4,0,.2,1)" style-hover="color: var(--gold-bright)">
+        <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; position: absolute; right: 46px; opacity: {{ p.labelOp }}; transform: translateX({{ p.labelX }}); pointer-events: none; transition: opacity 300ms cubic-bezier(.4,0,.2,1), transform 300ms cubic-bezier(.4,0,.2,1)">{{ p.label }}</span>
+        <span style="display: {{ p.numDisplay }}; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .1em; opacity: {{ p.numOp }}; transition: opacity 300ms cubic-bezier(.4,0,.2,1)">{{ p.num }}</span>
+        <span style="width: {{ p.tick }}; height: 1px; background: currentColor; transition: width 300ms cubic-bezier(.4,0,.2,1)"></span>
+      </div>
+    </sc-for>
+  </div>
+
+  <section data-screen-label="Case hero" style="position: relative; z-index: 2; scroll-snap-align: start; min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 min(6vw, 92px) 16vh; max-width: 1400px; margin: 0 auto">
+    <div data-reveal="true" style="display: flex; flex-direction: column; gap: 20px">
+      <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="320px,14px">Product · Web &amp; Mobile · 2026</x-import>
+      <h1 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(38px, 7vmin, 108px); line-height: 1.0; letter-spacing: -.015em; color: var(--parchment); text-wrap: balance">Gamuda Land — <span style="color: var(--gold)">Designing a Connected Resident Experience</span></h1>
+      <p style="margin: 0; max-width: 58ch; font-size: clamp(15px, 1.2vw, 18px); line-height: 1.66; color: var(--ash); text-wrap: pretty">A resident app and management console designed to keep a township, its services, and the people who run it in one connected experience.</p>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px; margin-top: 8vh">
+      <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ash-dim)">Read the case</span>
+      <span style="width: 1px; height: 18px; background: linear-gradient(180deg, var(--gold-dim), transparent); animation: hint-drop 2.6s ease-in-out infinite"></span>
+    </div>
+  </section>
+
+  <section id="overview" data-screen-label="Cover" style="position: relative; z-index: 2; scroll-snap-align: start; min-height: 100vh; box-sizing: border-box; display: flex; align-items: center">
+    <div data-reveal="true" style="display: flex; flex-direction: column; gap: 6vh; width: 100%; box-sizing: border-box; max-width: 1400px; margin: 0 auto; padding: 10vh min(6vw, 92px)">
+      <div style="width: 100%; aspect-ratio: 16 / 8.6; overflow: hidden; border: 1px solid var(--line-strong)">
+        <img src="assets/gamuda/cover.jpg" alt="Gamuda Land Admin Platform, Resident App and Tab Guard App" decoding="async" style="display: block; width: 100%; height: 100%; object-fit: cover">
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 32px">
+        <sc-for list="{{ meta }}" as="m" hint-placeholder-count="3">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center">
+            <span style="font-family: 'Libertinus Serif Display', serif; font-size: 25px; color: var(--gold)">{{ m.label }}</span>
+            <span style="font-size: clamp(18px, 1.5vw, 24px); font-weight: 600; color: var(--parchment)">{{ m.value }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="background" data-screen-label="Background" style="position: relative; z-index: 2; scroll-snap-align: start">
+    <div style="display: flex; flex-direction: column; gap: 12vh; max-width: 1400px; margin: 0 auto; padding: 14vh min(6vw, 92px)">
+      <div data-reveal="true" style="display: flex; flex-wrap: wrap; gap: 22px 44px">
+        <div style="flex: 1 1 180px; max-width: 220px; display: flex; flex-direction: column; gap: 8px">
+          <span style="font-family: 'Libertinus Serif Display', serif; font-style: italic; font-size: 21px; color: var(--ash-dim)">Where it began</span>
+        </div>
+        <div style="flex: 3 1 340px; display: flex; flex-direction: column; gap: 18px; max-width: 62ch">
+          <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(32px, 3.6vw, 62px); line-height: 1.06; color: var(--parchment)">Project <span style="font-style: italic; color: var(--gold)">Background</span></h2>
+          <p style="margin: 0; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">Gamuda Land (GL) is a digital platform built to give property residents a more connected and convenient experience. It brings a range of services into one ecosystem, so residents can access information, manage their activities, and engage with their community more easily.</p>
+          <p style="margin: 0; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">As the platform grew, more services and more user needs made it harder to keep the experience clear, consistent, and easy to navigate.</p>
+          <p style="margin: 0; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">The project focused on refining user flows, simplifying interactions, and establishing a more consistent visual and design foundation across the platform.</p>
+        </div>
+      </div>
+
+      <div data-reveal="true" style="display: flex; flex-wrap: wrap; gap: 22px 44px">
+        <div style="flex: 1 1 180px; max-width: 220px; display: flex; flex-direction: column; gap: 8px">
+          <span style="font-family: 'Libertinus Serif Display', serif; font-style: italic; font-size: 21px; color: var(--ash-dim)">The hand that draws</span>
+        </div>
+        <div style="flex: 3 1 340px; display: flex; flex-direction: column; gap: 18px; max-width: 62ch">
+          <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(32px, 3.6vw, 62px); line-height: 1.06; color: var(--parchment)">My <span style="font-style: italic; color: var(--gold)">Role</span></h2>
+          <p style="margin: 0; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">As a UI/UX Designer, I worked on different parts of the GL platform, from exploring user flows and ideas to designing and refining the final UI. I collaborated closely with the BA, PM, design, and development teams throughout the process, and presented my designs to the client to gather feedback and make sure the solutions aligned with their needs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="challenge" data-screen-label="Challenge" style="position: relative; z-index: 2; scroll-snap-align: start">
+    <div style="display: flex; flex-direction: column; gap: 7vh; max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div data-reveal="true" style="display: flex; flex-direction: column; gap: 18px; max-width: 64ch">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="240px,14px">The Challenge</x-import>
+        <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(32px, 3.6vw, 62px); line-height: 1.06; color: var(--parchment)">Three platforms, <span style="font-style: italic; color: var(--gold)">one ecosystem</span></h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">The hardest part of GL was designing an ecosystem that connected different platforms for different users, each with its own responsibilities and workflows.</p>
+      </div>
+
+      <div data-reveal="true" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line)">
+        <sc-for list="{{ glTrio }}" as="t" hint-placeholder-count="3">
+          <div style="display: flex; flex-direction: column; gap: 14px; padding: 34px 30px; background: rgba(11,9,6,.88); transition: background 250ms cubic-bezier(.4,0,.2,1)" style-hover="background: rgba(23,18,11,.95)">
+            <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-dim)">{{ t.platform }}</span>
+            <span style="font-family: 'Libertinus Serif Display', serif; font-size: clamp(26px, 2.2vw, 34px); line-height: 1.1; color: var(--gold)">{{ t.who }}</span>
+            <p style="margin: 0; font-size: 14.5px; line-height: 1.66; color: var(--ash); text-wrap: pretty">{{ t.body }}</p>
+          </div>
+        </sc-for>
+      </div>
+
+      <div data-reveal="true" style="display: flex; flex-direction: column">
+        <sc-for list="{{ glKnots }}" as="k" hint-placeholder-count="3">
+          <div style="display: flex; flex-wrap: wrap; gap: 12px 48px; padding: 30px min(3vw, 34px); border-bottom: {{ k.rule }}">
+            <span style="flex: 1 1 260px; max-width: 360px; font-family: 'Libertinus Serif Display', serif; font-size: clamp(22px, 2vw, 30px); line-height: 1.14; color: var(--parchment)">{{ k.title }}</span>
+            <p style="flex: 2 1 380px; margin: 0; max-width: 64ch; font-size: 15px; line-height: 1.7; color: var(--ash); text-wrap: pretty">{{ k.body }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="process" data-screen-label="Process" style="position: relative; z-index: 2; scroll-snap-align: start">
+    <div style="display: flex; flex-direction: column; gap: 6vh; max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <div data-reveal="true" style="display: flex; flex-direction: column; gap: 18px; max-width: 62ch">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="240px,14px">Design Process</x-import>
+        <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(30px, 3.2vw, 54px); line-height: 1.06; color: var(--parchment)">How the pieces <span style="font-style: italic; color: var(--gold)">came together</span></h2>
+        <p style="margin: 0; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">Because GL involved multiple platforms and user roles, the process focused on understanding how each platform worked together as one ecosystem.</p>
+      </div>
+      <div data-reveal="true" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 0 64px">
+        <sc-for list="{{ glSteps }}" as="p" hint-placeholder-count="8">
+          <div onMouseEnter="{{ p.onEnter }}" onMouseLeave="{{ p.onLeave }}" onFocus="{{ p.onEnter }}" onBlur="{{ p.onLeave }}" tabindex="0" style="display: grid; grid-template-columns: 52px minmax(0, 1fr); align-items: baseline; gap: 0 18px; padding: 22px min(3vw, 34px); border-bottom: 1px solid var(--line); background: {{ p.bg }}; outline: none; cursor: default; transition: background 250ms cubic-bezier(.4,0,.2,1)">
+            <span style="font-family: 'Libertinus Serif Display', serif; font-size: 30px; line-height: 1; color: {{ p.numColor }}; transition: color 250ms cubic-bezier(.4,0,.2,1)">{{ p.num }}</span>
+            <span style="font-size: clamp(16px, 1.4vw, 20px); font-weight: 600; letter-spacing: .01em; color: var(--parchment)">{{ p.title }}</span>
+            <div style="grid-column: 2; overflow: hidden; max-height: {{ p.detailMax }}; opacity: {{ p.detailOp }}; transition: max-height 450ms cubic-bezier(.16,1,.3,1), opacity 350ms cubic-bezier(.4,0,.2,1)">
+              <p style="margin: 0; padding-top: 10px; max-width: 60ch; font-size: 14.5px; line-height: 1.66; color: var(--ash); text-wrap: pretty">{{ p.body }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="platforms" data-screen-label="Platforms" style="position: relative; z-index: 2; scroll-snap-align: start; min-height: 100vh; box-sizing: border-box; display: flex; align-items: center; justify-content: center">
+    <div data-reveal="true" style="display: flex; flex-direction: column; align-items: center; gap: 18px; max-width: 900px; padding: 12vh min(6vw, 92px); text-align: center">
+      <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="200px,14px">Design Process</x-import>
+      <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(32px, 4.4vw, 68px); line-height: 1.06; color: var(--parchment); text-wrap: balance">The Experience Across <span style="font-style: italic; color: var(--gold)">Different Platforms</span></h2>
+      <p style="margin: 0; max-width: 62ch; font-size: clamp(15px, 1.2vw, 18px); line-height: 1.7; color: var(--ash); text-wrap: pretty">Three products, three kinds of users, one ecosystem. Here is how residents, admins, and guards each meet GL, and how the work of one quietly reaches the others.</p>
+    </div>
+  </section>
+
+  <section id="ecosystem" data-screen-label="Ecosystem" style="position: relative; z-index: 2">
+    <div style="display: flex; flex-direction: column; gap: 5vh; max-width: 1400px; margin: 0 auto; padding: 12vh min(6vw, 92px) 8vh">
+      <div data-reveal="true" style="display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="200px,14px">The GL Ecosystem</x-import>
+        <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(32px, 3.6vw, 62px); line-height: 1.06; color: var(--parchment)">Choose a <span style="font-style: italic; color: var(--gold)">point of view</span></h2>
+      </div>
+
+      <div style="position: sticky; top: {{ glTabsTop }}; z-index: 6; display: flex; justify-content: center; padding: 12px 0; background: linear-gradient(180deg, rgba(11,9,6,.92), rgba(11,9,6,.78) 70%, rgba(11,9,6,0)); backdrop-filter: blur(6px)">
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; width: min(620px, 100%)">
+          <sc-for list="{{ glTabs }}" as="t" hint-placeholder-count="3">
+            <button type="button" onClick="{{ t.go }}" style="min-height: 44px; padding: 10px 12px; border: 1px solid {{ t.bd }}; border-radius: 2px; background: {{ t.bg }}; font-family: Geist, system-ui, sans-serif; font-size: clamp(12px, 1vw, 14px); font-weight: 500; color: {{ t.fg }}; cursor: pointer; transition: background 250ms cubic-bezier(.4,0,.2,1), color 250ms cubic-bezier(.4,0,.2,1), border-color 250ms cubic-bezier(.4,0,.2,1), box-shadow 250ms cubic-bezier(.4,0,.2,1)" style-hover="border-color: var(--gold-bright); box-shadow: 0 0 0 4px rgba(192,152,97,.12)">{{ t.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display: grid; max-width: 72ch; margin: 0 auto; text-align: center">
+        <sc-for list="{{ glIntros }}" as="i" hint-placeholder-count="1">
+          <div style="grid-area: 1 / 1; display: flex; flex-direction: column; gap: 14px; opacity: {{ i.op }}; transform: translateY({{ i.y }}); visibility: {{ i.vis }}; transition: opacity 600ms cubic-bezier(.16,1,.3,1), transform 700ms cubic-bezier(.16,1,.3,1), visibility 600ms">
+            <p style="margin: 0; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">{{ i.p1 }}</p>
+            <p style="margin: 0; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">{{ i.p2 }}</p>
+          </div>
+        </sc-for>
+      </div>
+
+      <div id="gl-show" style="display: grid; grid-template-columns: {{ glCols }}; gap: 0 5vw; align-items: start; padding-top: 4vh">
+        <div style="position: sticky; top: 17vh; height: 72vh; display: {{ glStageDisplay }}">
+          <div style="position: absolute; inset: 10% 12%; background: radial-gradient(closest-side, rgba(192,152,97,.2), rgba(192,152,97,0)); filter: blur(18px); pointer-events: none"></div>
+          <sc-for list="{{ glStage }}" as="s" hint-placeholder-count="0">
+            <div style="position: absolute; inset: 0 0 44px 0; display: flex; align-items: center; justify-content: center; gap: 2.6vw; opacity: {{ s.op }}; transform: {{ s.tf }}; filter: blur({{ s.blur }}); transition: opacity 700ms cubic-bezier(.16,1,.3,1), transform 900ms cubic-bezier(.16,1,.3,1), filter 700ms ease; pointer-events: none">
+              <sc-for list="{{ s.media }}" as="m" hint-placeholder-count="0">
+                <img src="{{ m.src }}" alt="{{ m.alt }}" loading="lazy" decoding="async" style="display: block; height: {{ m.h }}; width: auto; max-width: {{ m.maxW }}; max-height: 64vh; object-fit: contain; border-radius: {{ m.r }}; border: {{ m.bd }}; box-shadow: {{ m.sh }}; filter: {{ m.fx }}; transform: translateY({{ m.dy }})">
+              </sc-for>
+            </div>
+          </sc-for>
+          <div style="position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 14px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .14em; color: var(--ash-dim)">
+            <span style="color: var(--gold)">{{ glCount }}</span>
+            <span style="position: relative; flex: 1; height: 1px; background: var(--line)"><span style="position: absolute; left: 0; top: 0; bottom: 0; width: {{ glProg }}; background: var(--gold); transition: width 600ms cubic-bezier(.16,1,.3,1)"></span></span>
+            <span>{{ glTotal }}</span>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column">
+          <sc-for list="{{ glFeatures }}" as="f" hint-placeholder-count="0">
+            <div data-glfeat="{{ f.idx }}" style="min-height: {{ f.minH }}; display: flex; flex-direction: column; justify-content: center; gap: 18px; padding: {{ f.pad }}; border-bottom: {{ f.rule }}; opacity: {{ f.op }}; transition: opacity 500ms ease">
+              <div style="display: {{ f.inlineDisplay }}; align-items: flex-start; justify-content: center; gap: 12px; padding-bottom: 10px">
+                <sc-for list="{{ f.media }}" as="m" hint-placeholder-count="0">
+                  <img src="{{ m.src }}" alt="{{ m.alt }}" loading="lazy" decoding="async" style="display: block; width: {{ m.mw }}; height: auto; border-radius: {{ m.r }}; border: {{ m.bd }}; box-shadow: {{ m.sh }}; filter: {{ m.fx }}">
+                </sc-for>
+              </div>
+              <h3 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(26px, 2.4vw, 40px); line-height: 1.1; color: var(--gold); text-wrap: pretty">{{ f.title }}</h3>
+              <div style="display: flex; flex-direction: column; gap: 12px">
+                <sc-for list="{{ f.bullets }}" as="b" hint-placeholder-count="0">
+                  <div style="display: grid; grid-template-columns: 14px minmax(0, 1fr); gap: 12px; align-items: baseline">
+                    <span style="width: 5px; height: 5px; border: 1px solid var(--gold-dim); transform: translateY(-2px) rotate(45deg)"></span>
+                    <span style="font-size: 15px; line-height: 1.66; color: var(--ash); text-wrap: pretty">{{ b.t }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="connected" data-screen-label="Connected" style="position: relative; z-index: 2; scroll-snap-align: start; min-height: 100vh; box-sizing: border-box; display: flex; align-items: center">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 26vh; width: 100%; max-width: 900px; margin: 0 auto; padding: 22vh min(6vw, 92px) 14vh">
+      <p data-reveal="true" style="margin: 0; max-width: 66ch; padding-left: 20px; border-left: 1px solid var(--gold-dim); font-size: 15px; line-height: 1.7; color: var(--ash-dim); text-wrap: pretty; align-self: stretch">The screens here are only a selection of the work completed on GL. From resident requests and admin management to on-site actions handled by guards, each platform supports a different user while staying connected to the same ecosystem.</p>
+      <div data-reveal="true" style="display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="200px,14px">The Outcome</x-import>
+        <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(30px, 3.6vw, 58px); line-height: 1.06; color: var(--parchment); text-wrap: pretty">A <span style="font-style: italic; color: var(--gold)">connected</span> experience across platforms.</h2>
+        <p style="margin: 0; max-width: 74ch; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">GL brought the Resident App, Admin Platform, and Tab Guard App into one connected ecosystem. Each platform was designed around the needs of its users while keeping the experience consistent across touchpoints.</p>
+        <p style="margin: 0; max-width: 74ch; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">The final designs covered a wide range of resident and property workflows, from accessing services and submitting requests to managing activities and responding to them on-site.</p>
+        <p style="margin: 0; max-width: 74ch; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">Regular discussions, design presentations, and feedback sessions with the BA, PM, design, development, and client teams helped shape the solutions and keep every platform aligned.</p>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; padding-top: 6px">
+          <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Button" href="https://play.google.com/store/apps/details?id=com.gamudaland.gll&amp;hl=id" target="_blank" rel="noopener" hint-size="150px,42px">Check the App</x-import>
+        </div>
+        <p style="margin: 0; max-width: 62ch; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .12em; line-height: 1.8; text-transform: uppercase; color: var(--ash-dim)">Selected screens shown for portfolio purposes · Details adapted to respect confidentiality</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-screen-label="Conclusion" style="position: relative; z-index: 2; scroll-snap-align: start; min-height: 100vh; box-sizing: border-box; display: flex; align-items: center; justify-content: center">
+    <div data-reveal="true" style="display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; max-width: 900px; margin: 0 auto; padding: 12vh min(6vw, 92px)">
+      <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="200px,14px">Conclusion</x-import>
+      <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(30px, 3.6vw, 58px); line-height: 1.06; color: var(--parchment); text-wrap: pretty">Beyond a single screen, <span style="font-style: italic; color: var(--gold)">toward one experience</span></h2>
+      <p style="margin: 0; max-width: 68ch; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">Working on GL gave me the chance to think beyond individual interfaces and understand how different products can work together as one experience.</p>
+      <p style="margin: 0; max-width: 68ch; font-size: 16px; line-height: 1.72; color: var(--ash); text-wrap: pretty">It strengthened how I work across teams, communicate design decisions, present to clients, and iterate on feedback. Most of all, it showed me how much consistency and clear communication matter when designing for different users, platforms, and workflows within the same ecosystem.</p>
+    </div>
+  </section>
+
+  <section data-screen-label="Case footer" style="position: relative; z-index: 2; border-top: 1px solid var(--line); scroll-snap-align: start; min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden">
+
+    <div style="position: absolute; inset: 0; background: radial-gradient(56% 44% at 50% 42%, rgba(192,152,97,.11), rgba(11,9,6,0) 74%), linear-gradient(180deg, rgba(11,9,6,0) 0%, rgba(11,9,6,.10) 34%, rgba(11,9,6,.46) 100%); pointer-events: none"></div>
+
+    <div style="position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px; padding: 22vh min(6vw, 92px) 12vh; max-width: 900px; margin: 0 auto">
+      <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="280px,14px">The Lovers · Open to the next chapter</x-import>
+      <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(24px, 3.1vw, 58px); line-height: 1.06; letter-spacing: -.01em; color: var(--parchment); white-space: {{ footWrap }}">Available for full-time <span style="font-style: italic; color: var(--gold)">Product Design</span> roles.</h2>
+      <p style="margin: 0; max-width: 58ch; font-size: 17px; line-height: 1.68; color: var(--ash); text-wrap: balance">Looking for a team building something that has to hold up, where research, systems and craft are treated as the same job.</p>
+
+      <div style="width: 280px; padding: 6px 0 2px">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Divider" ornament="full" hint-size="280px,16px"></x-import>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Button" href="mailto:arfianarya@gmail.com" hint-size="140px,42px">Email me</x-import>
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Button" variant="secondary" href="https://drive.google.com/drive/folders/1DG2bW8UIH0rnfBa0PBrw7l_vZZI6qqZW?usp=sharing" target="_blank" rel="noopener" hint-size="140px,42px">Download CV</x-import>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 28px; padding-top: 10px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase">
+        <a href="https://www.linkedin.com/in/arfianarya/" target="_blank" rel="noopener" style="display: inline-block; padding: 12px 4px; color: var(--ash)" style-hover="color: var(--gold-bright)">LinkedIn</a>
+        <a href="https://www.behance.net/arfianarya8a40" target="_blank" rel="noopener" style="display: inline-block; padding: 12px 4px; color: var(--ash)" style-hover="color: var(--gold-bright)">Behance</a>
+      </div>
+    </div>
+
+    <div style="position: relative; z-index: 1; display: grid; grid-template-columns: {{ footCols }}; justify-items: {{ footJustify }}; text-align: {{ footAlign }}; align-items: center; gap: {{ footGap }}; padding: 22px min(6vw, 92px) 28px">
+      <a href="index.html" style="display: flex; align-items: center; gap: 10px; color: var(--ash)" style-hover="color: var(--gold-bright)">
+        <img src="assets/wordmark.png" alt="Wayfarer" decoding="async" style="display: block; height: 24px; width: auto">
+      </a>
+      <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ash-dim); white-space: nowrap">Every step reveals something new</span>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: {{ footEnd }}; gap: 8px 20px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ash-dim)">
+        <span>© 2026 Arfian Arya</span>
+      </div>
+    </div>
+  </section>
+
+  <div style="position: fixed; inset: 0; background-image: url(assets/grain.svg); opacity: .05; mix-blend-mode: overlay; pointer-events: none; z-index: 20"></div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;wordmark&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;LOGO&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { menu: false, mobile: typeof window !== "undefined" && (window.innerWidth < 760 || (window.innerWidth < 1200 && window.innerHeight >= window.innerWidth * 0.9)), phone: typeof window !== "undefined" && window.innerWidth < 760, tablet: typeof window !== "undefined" && window.innerWidth >= 760 && window.innerWidth < 1200 && window.innerHeight >= window.innerWidth * 0.9, scrolled: false, railFits: false, page: 0, gutter: 0, dash: 'a', appt: 'a', client: 'a', tasks: 'a', procHover: null };
+
+  fireflies = Array.from({ length: 18 }, (_, i) => {
+    const near = i % 3 === 0;
+    const s = near ? 3 + Math.random() * 2 : 1.2 + Math.random() * 1.5;
+    return {
+      left: (5 + Math.random() * 90).toFixed(1) + '%',
+      top: (12 + Math.random() * 76).toFixed(1) + '%',
+      size: s.toFixed(1) + 'px',
+      blur: (near ? 0.3 : 0.9 + Math.random()).toFixed(1) + 'px',
+      halo: (s * 2.6).toFixed(1) + 'px',
+      haloWide: (s * 6).toFixed(1) + 'px',
+      peak: near ? 1 : (0.4 + Math.random() * 0.35).toFixed(2),
+      dur: (2.8 + Math.random() * 4.5).toFixed(1) + 's',
+      pathDur: (14 + Math.random() * 16).toFixed(1) + 's',
+      delay: (-Math.random() * 9).toFixed(1) + 's',
+    };
+  });
+
+  pageNames = ['Opening', 'Cover', 'Background', 'Challenge', 'Process', 'Platforms', 'Ecosystem', 'Outcome', 'Conclusion', 'Contact'];
+
+  screens = {
+    dash: {
+      srcA: 'assets/vetit/dash-a.png', srcP: 'assets/vetit/dash-p.png',
+      audit: [
+        { num: 'I', title: 'Inconsistent use of colour', body: 'Panels use different colour treatments, creating visual noise and making it harder to identify priorities and status quickly.' },
+        { num: 'II', title: 'Inefficient space & scannability', body: 'Limited horizontal space and inconsistent tag placement make content harder to scan, especially when comparing multiple items or statuses.' },
+        { num: 'III', title: 'Weak error prevention', body: 'Small "X" buttons sit close to other interactive areas, increasing the risk of accidental widget removal without a confirmation step.' },
+        { num: 'IV', title: 'Unclear data context', body: '"Appointments Overview" uses progress bars without a total or scale, so it is hard to tell whether the displayed numbers are high or low.' },
+      ],
+      prop: [
+        { num: 'I', title: 'Standardise the colour system', body: 'Neutral colour for general information, specific colours reserved for important statuses, so meaning becomes consistent across panels.' },
+        { num: 'II', title: 'Refine spatial organisation', body: 'Reorganise the dashboard to use available space better and create a cleaner visual flow between cards and information.' },
+        { num: 'III', title: 'Improve error prevention', body: 'Make small interactive elements such as the "X" buttons easier to hit deliberately, while keeping the interface uncluttered.' },
+        { num: 'IV', title: 'Clarify appointment status', body: 'Present appointment volumes and statuses against a scale, so users can see what is happening and where attention is needed.' },
+      ],
+    },
+    appt: {
+      srcA: 'assets/vetit/appt-a.png', srcP: 'assets/vetit/appt-p.png',
+      audit: [
+        { num: 'I', title: 'Multiple views, overlapping functions', body: 'The experience spans eleven pages, including three calendars, three timelines, and a day book, with several views serving similar purposes.' },
+        { num: 'II', title: 'Information overload', body: 'Appointment cards carry too much information, making it difficult to identify the most important details at a glance.' },
+        { num: 'III', title: 'Hidden filters', body: 'Key filtering options are tucked inside a popup, making them less visible and harder to reach.' },
+        { num: 'IV', title: 'Unclear add action', body: 'Appointments can only be added by selecting a date, with no clearly visible "Add Appointment" action.' },
+        { num: 'V', title: 'Redundant navigation', body: 'Multiple calendar and timeline views create unnecessary complexity and make it harder to understand which view to use.' },
+      ],
+      prop: [
+        { num: 'I', title: 'Simplify view modes', body: 'Consolidate overlapping views into fewer, clearer modes.' },
+        { num: 'II', title: 'Reduce information density', body: 'Show only the most essential information on each appointment card.' },
+        { num: 'III', title: 'Improve filter accessibility', body: 'Keep filters visible and accessible directly on the page.' },
+        { num: 'IV', title: 'Make creation clearer', body: 'Add a dedicated "Add Appointment" button so the action is discoverable without guessing.' },
+        { num: 'V', title: 'Consolidate navigation', body: 'Remove duplicated calendar and timeline routes so each view has one obvious purpose.' },
+      ],
+    },
+    client: {
+      srcA: 'assets/vetit/client-a.png', srcP: 'assets/vetit/client-p.png',
+      audit: [
+        { num: 'I', title: 'Long & complex workflow', body: 'The longest section of the audit at fourteen pages, with multiple steps required to complete a single task.' },
+        { num: 'II', title: 'Too many steps', body: 'Adding a new client requires six separate steps, creating unnecessary effort for staff.' },
+        { num: 'III', title: 'Unclear consent status', body: 'Consent options do not clearly distinguish between "Declined" and "Not Yet Asked".' },
+        { num: 'IV', title: 'Redundant data entry', body: 'Staff must enter the client\u2019s age manually even though the date of birth is already provided.' },
+      ],
+      prop: [
+        { num: 'I', title: 'Simplify the flow', body: 'Merge related steps to reduce the process from six steps to four.' },
+        { num: 'II', title: 'Move duplicate checks earlier', body: 'Run the duplicate check at the end of the first step to prevent unnecessary data entry.' },
+        { num: 'III', title: 'Clarify consent states', body: 'Clearly distinguish between "Declined" and "Not Yet Asked".' },
+        { num: 'IV', title: 'Automate age calculation', body: 'Calculate the client\u2019s age automatically from their date of birth.' },
+      ],
+    },
+    tasks: {
+      srcA: 'assets/vetit/tasks-a.png', srcP: 'assets/vetit/tasks-p.png',
+      audit: [
+        { num: 'I', title: 'Difficult to scan', body: 'The task board uses heavy vertical stacking, making it hard to get a quick overview of the team\u2019s workload.' },
+        { num: 'II', title: 'Competing visual priorities', body: '"High Priority" and "Overdue" use similar red styling, making it harder to distinguish urgency from task status.' },
+        { num: 'III', title: 'Visual clutter', body: 'Repeated "No cards to display" messages add unnecessary noise to empty columns.' },
+        { num: 'IV', title: 'Limited filtering', body: 'Without global search or filters, users have to manually scan the board to find specific or high-priority tasks.' },
+        { num: 'V', title: 'High cognitive load', body: 'Each task contains multiple details and statuses, requiring users to process a lot of information at once.' },
+      ],
+      prop: [
+        { num: 'I', title: 'Improve structure & navigation', body: 'Improve the layout and allow tasks to be added directly from each column to make task management faster and easier.' },
+        { num: 'II', title: 'Simplify urgency & status', body: 'A clearer, more consistent colour system helps users distinguish between low, medium, high, and overdue tasks without relying on colour alone.' },
+        { num: 'III', title: 'Reduce visual noise', body: 'Replace repeated "No cards to display" messages with cleaner empty states to make the board easier to scan.' },
+        { num: 'IV', title: 'Strengthen visual hierarchy', body: 'Make task titles more prominent and simplify priority labels so important tasks read first.' },
+        { num: 'V', title: 'Add global filters', body: 'Filters for priority, assignee, status, and task type remove the need to scan the whole board.' },
+        { num: 'VI', title: 'Improve visual guidance', body: 'Subtle progress and status indicators give clearer cues when scanning through multiple tasks.' },
+      ],
+    },
+  };
+
+  componentDidMount() {
+    this.glOnScroll = () => { if (this.glFrame) return; this.glFrame = requestAnimationFrame(() => { this.glFrame = null; this.glTick(); }); };
+    window.addEventListener('scroll', this.glOnScroll, { passive: true });
+    setTimeout(() => this.glTick(), 400);
+    this.onMq = () => { const w = window.innerWidth, h = window.innerHeight; const phone = w < 760, tablet = !phone && w < 1200 && h >= w * 0.9, m = phone || tablet; if (m !== this.state.mobile || phone !== this.state.phone || tablet !== this.state.tablet) this.setState({ mobile: m, phone, tablet }); };
+    window.addEventListener('resize', this.onMq);
+    this.onMq();
+    this.reveals = Array.from(document.querySelectorAll('[data-reveal]'));
+    const vh = window.innerHeight || 800;
+    this.reveals.forEach((el) => {
+      if (el.getBoundingClientRect().top > vh * 0.9) {
+        el.dataset.hidden = '1';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+      }
+      el.style.transition = 'opacity 700ms cubic-bezier(.16,1,.3,1), transform 700ms cubic-bezier(.16,1,.3,1)';
+    });
+    const show = (el) => { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; };
+    this.io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.intersectionRatio > 0.06) { show(e.target); this.io.unobserve(e.target); }
+      });
+    }, { threshold: [0, 0.06, 0.2] });
+    this.reveals.forEach((el) => this.io.observe(el));
+    this.revealFallback = setInterval(() => {
+      const h = window.innerHeight || 800;
+      this.reveals.forEach((el) => {
+        if (el.dataset.hidden && el.getBoundingClientRect().top < h * 0.92) { delete el.dataset.hidden; show(el); }
+      });
+    }, 400);
+    this.pages = Array.from(document.querySelectorAll('section[data-screen-label]'));
+
+    this.onKey = (e) => {
+      const t = e.target;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+      if (e.key === 'ArrowDown' || e.key === 'PageDown') { e.preventDefault(); this.page(1); }
+      if (e.key === 'ArrowUp' || e.key === 'PageUp') { e.preventDefault(); this.page(-1); }
+    };
+    window.addEventListener('keydown', this.onKey);
+    this.onScroll = () => {
+      if (this.frame) return;
+      this.frame = requestAnimationFrame(() => { this.frame = null; this.tick(); });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onScroll);
+    this.tick();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.glOnScroll);
+    window.removeEventListener('resize', this.onMq);
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onScroll);
+    window.removeEventListener('keydown', this.onKey);
+    if (this.io) this.io.disconnect();
+    clearInterval(this.revealFallback);
+    if (this.frame) cancelAnimationFrame(this.frame);
+  }
+
+  pageTo(i) {
+    const pages = this.pages || [];
+    if (!pages[i]) return;
+    const top = pages[i].getBoundingClientRect().top + (window.scrollY || 0);
+    window.scrollTo({ top: Math.max(0, Math.round(top)), behavior: 'smooth' });
+    this.setState({ page: i });
+  }
+
+  page(dir) {
+    const pages = this.pages || [];
+    if (!pages.length) return;
+    this.pageTo(Math.min(pages.length - 1, Math.max(0, (this.state.page || 0) + dir)));
+  }
+
+  tick() {
+    const scrolled = (window.scrollY || 0) > 60;
+    const vw = window.innerWidth;
+    const gutter = Math.max(0, (vw - 1400) / 2) + Math.min(vw * 0.06, 92);
+    const railFits = vw > 620;
+    if (railFits !== this.state.railFits || Math.abs((this.state.gutter || 0) - gutter) > 1) this.setState({ railFits, gutter });
+    let page = this.state.page || 0;
+    if (this.pages && this.pages.length) {
+      const mid = window.innerHeight * 0.42;
+      let found = 0;
+      this.pages.forEach((el, i) => { if (el.getBoundingClientRect().top <= mid) found = i; });
+      page = found;
+    }
+    if (scrolled !== this.state.scrolled || page !== this.state.page) this.setState({ scrolled, page });
+  }
+
+  screenVals(key, prefix) {
+    const s = this.screens[key];
+    const mode = this.state[key];
+    const isAudit = mode === 'a';
+    const rows = (isAudit ? s.audit : s.prop).map((r, i) => ({ ...r, tone: isAudit ? 'var(--ash-dim)' : 'var(--gold)', rule: i < 2 ? 'none' : '1px solid var(--line)' }));
+    const out = {};
+    out[prefix + 'Src'] = isAudit ? s.srcA : s.srcP;
+    out[prefix + 'Rows'] = rows;
+    out[prefix + 'SetAudit'] = () => this.setState({ [key]: 'a' });
+    out[prefix + 'SetProp'] = () => this.setState({ [key]: 'p' });
+    out[prefix + 'AuditBg'] = isAudit ? 'rgba(192,152,97,.14)' : 'var(--ink-raised)';
+    out[prefix + 'AuditFg'] = isAudit ? 'var(--gold-bright)' : 'var(--ash-dim)';
+    out[prefix + 'PropBg'] = isAudit ? 'var(--ink-raised)' : 'rgba(192,152,97,.14)';
+    out[prefix + 'PropFg'] = isAudit ? 'var(--ash-dim)' : 'var(--gold-bright)';
+    return out;
+  }
+
+  glPlatforms = {
+    res: {
+      label: 'Resident App', kind: 'phone',
+      p1: 'The Resident App is the main touchpoint between residents and the GL ecosystem. It gives residents a single place to access property services, manage their activities, check important information, and interact with the services available to them.',
+      p2: 'The experience is designed around convenience, helping residents complete everyday tasks without relying on different channels or communicating with multiple teams.',
+      features: [
+        { title: 'Home and everyday access', media: ['res-home'], bullets: [
+          'The homepage brings the most relevant resident actions to the first view, with quick access to Registration of Interest and the Referral Program.',
+          'A featured property card gives residents a clear focal point for important property content, while keeping the experience visually engaging.',
+          'The bottom navigation keeps Home, Promos, Loyalty, Notifications, and More consistently accessible.',
+          'Clear sections and visual hierarchy balance property content, resident actions, and promotions within a single homepage.' ] },
+        { title: 'Quick access to everyday services', media: ['res-quick'], bullets: [
+          'The Quick Access Menu gives residents a faster way to reach common services without going through multiple layers of navigation.',
+          'I organised frequently used resident services into a single menu, making them easier to find and access.',
+          'Each option uses a dedicated icon and label so residents can quickly recognise the service they need.' ] },
+        { title: 'Everything about your property, in one place', media: ['res-property'], bullets: [
+          'My Property gives residents a quick overview of their property, including its name, unit information, and available home features.',
+          'Services are organised by the selected property, so residents see features relevant to where they live.',
+          'Residents who own or manage multiple properties can switch between them and view the services for each one.',
+          'Property functions such as Visitor Management, Buggy Service, User Delegation, Maintenance Charges, Progressive Billing, and VP Appointment live together here instead of crowding the main navigation.',
+          'A large property image anchors the view, so residents always know which property they are looking at.' ] },
+        { title: 'Making visitor registration simple and flexible', media: ['res-visitor-1', 'res-visitor-2'], bullets: [
+          'Residents can register different types of visits, whether a regular visit or an event.',
+          'The form collects the essentials: purpose, date, visiting hours, entry type, vehicle details, and guest information.',
+          'Multiple visitors can be registered in one submission, with only the main guest\u2019s details required.',
+          'Favorites make it easy to select returning visitors, and single or multiple entry passes match the type of visit.',
+          'Because registration connects to on-site security, the details residents submit are used by the TAB Guard App when the visitor arrives.' ] },
+        { title: 'Keeping important updates easy to catch', media: ['res-notifications'], bullets: [
+          'The notification centre brings updates from different areas of the platform into one place.',
+          'Notifications are grouped by time and date, with All, Read, and Unread tabs for quick filtering.',
+          'Each notification carries a clear category, title, message, and timestamp, so the update makes sense before it is opened.',
+          'Unread items are highlighted while read items step back, and category icons show where each update comes from.' ] },
+        { title: 'From discovering a reward to collecting it', media: ['res-rewards-1', 'res-rewards-2'], bullets: [
+          'The loyalty page shows the resident\u2019s membership tier and points balance, with available rewards easy to browse.',
+          'Search and category filters narrow rewards by type, such as Discount, Product, and Voucher.',
+          'Each reward card highlights availability, type, title, and expiry date before it is opened.',
+          'For limited rewards, availability and the collect action are made more visible.',
+          'The flow connects browsing and collection into one simple journey: discover, view details, collect.' ] },
+        { title: 'Parking, claimed in a few taps', media: ['res-parking-1', 'res-parking-2'], bullets: [
+          'The parking experience is built around the key actions: claiming a voucher and selecting the vehicle to use.',
+          'The available voucher sits at the top, so the main action is visible without searching.',
+          'Residents choose from their registered plate numbers instead of typing them in.',
+          'Once claimed, the Voucher Session keeps the claimed time, expiry countdown, and actions in view, with the status confirming the booking.',
+          'Terms and conditions sit inside the flow, so the rules are clear before a voucher is claimed.' ] },
+      ],
+    },
+    admin: {
+      label: 'Admin Platform', kind: 'wide',
+      p1: 'The Admin Platform gives property teams a central place to manage residents, oversee requests, maintain property information, and handle day-to-day operations across the GL ecosystem.',
+      p2: 'It makes complex administrative work easier to manage while keeping information organised, and connects with the Resident App and TAB Guard App so actions flow between every user.',
+      features: [
+        { title: 'Managing resident information at scale', media: ['admin-residents'], bullets: [
+          'Resident Management gives admins one place to oversee residents and their activities across properties and units.',
+          'Search, filters, sorting, and pagination help admins find and review information quickly.',
+          'Resident workflows such as access management, visitor requests, buggy service, community chat, notice board, and feedback share the same environment.',
+          'For visitor management, admins can review requests, check resident and visitor details, and track status from a single interface.',
+          'A clear, scannable table helps admins work through large amounts of data efficiently.' ] },
+        { title: 'Keeping voucher activity easy to monitor', media: ['admin-vouchers'], bullets: [
+          'Voucher Usage gives admins a central overview of how parking vouchers are used across the property.',
+          'Key metrics at the top show claimed and available vouchers at a glance.',
+          'Search and filters find records by voucher ID, resident name, plate number, date, and status.',
+          'Statuses such as Confirmed, Redeemed, Expired, and Cancelled make each voucher\u2019s state clear.' ] },
+        { title: 'Managing rewards across the loyalty experience', media: ['admin-rewards'], bullets: [
+          'Reward Management gives admins a central place to create, organise, and manage rewards for residents.',
+          'Rewards are organised by type, merchant, and status, keeping a growing catalogue manageable.',
+          'Search, filters, and status labels make it easy to see whether a reward is active, inactive, or suspended.',
+          'Single and Group views handle different types of rewards, and Create New Reward keeps adding offers straightforward.' ] },
+      ],
+    },
+    guard: {
+      label: 'Tab Guard App', kind: 'wide',
+      p1: 'The Tab Guard App is designed for security guards and on-site staff. It gives them a focused workspace for handling visitor access, verifying information, and responding to activities that need attention on-site.',
+      p2: 'The experience prioritises speed and clarity, and connects with the Resident App and Admin Platform so visitor and access information flows across the ecosystem.',
+      features: [
+        { title: 'Supporting daily operations at a glance', media: ['guard-home'], bullets: [
+          'The homepage brings the guard\u2019s most important activities into one place: visitors, panic reports, and buggy service requests.',
+          'Visitor Management surfaces total, overstayed, and upcoming visitors, so guards understand the situation on-site.',
+          'Quick actions such as Scan QR and Key in Visitor keep the most common tasks immediately accessible.',
+          'Panic reports and buggy requests appear directly on the homepage, so guards can respond without navigating away.' ] },
+        { title: 'Keeping visitor activity clear and easy to manage', media: ['guard-visitors'], bullets: [
+          'Visitor Management gives guards a central view of upcoming, checked-in, and overstayed visitors.',
+          'A structured table shows the guest, resident, number of visitors, visit time, and status.',
+          'Search and filters by unit, plate number, visit date, and status locate a specific visitor quickly.',
+          'Clear status indicators and always-visible quick actions let guards process visitors in the same view.' ] },
+        { title: 'Keeping operational updates visible', media: ['guard-notifications'], bullets: [
+          'The notification centre brings updates from across the Guard App into one place.',
+          'Each notification has a clear category, title, message, and timestamp for enough context at a glance.',
+          'Categories such as Visitor Management, Panic Report, and Buggy Service show where an update comes from.',
+          'It connects to the wider ecosystem: a visitor pass submitted in the Resident App can trigger an update for the guard.' ] },
+      ],
+    },
+  };
+
+  glMedia(kind, name, n, j, title) {
+    const src = 'assets/gamuda/' + name + (/-[12]$/.test(name) ? '.png' : '.jpg');
+    if (name.endsWith('-pair')) return { src, alt: title, h: '64vh', maxW: '100%', r: '0px', dy: '0px', mw: '100%', bd: 'none', sh: 'none', fx: 'drop-shadow(0 30px 50px rgba(0,0,0,.6)) drop-shadow(0 0 40px rgba(192,152,97,.18))' };
+    if (kind === 'phone') return { src, alt: title, h: n > 1 ? '58vh' : '64vh', maxW: n > 1 ? '46%' : '80%', r: '18px', dy: n > 1 && j === 1 ? '5vh' : '0px', mw: n > 1 ? '45%' : '62%', bd: '1px solid var(--line-strong)', sh: '0 50px 100px -40px rgba(0,0,0,.95), 0 30px 80px -40px rgba(192,152,97,.4)', fx: 'none' };
+    return { src, alt: title, h: 'auto', maxW: '100%', r: '6px', dy: '0px', mw: '100%', bd: '1px solid var(--line-strong)', sh: '0 50px 100px -40px rgba(0,0,0,.95), 0 30px 80px -40px rgba(192,152,97,.4)', fx: 'none' };
+  }
+
+  glTick() {
+    const els = document.querySelectorAll('[data-glfeat]');
+    if (!els.length) return;
+    const mid = window.innerHeight * 0.5;
+    let best = 0, bd = Infinity;
+    els.forEach((el, i) => { const r = el.getBoundingClientRect(); const d = Math.abs(r.top + r.height / 2 - mid); if (d < bd) { bd = d; best = i; } });
+    if (best !== (this.state.glFeat || 0)) this.setState({ glFeat: best });
+  }
+
+  glGo(k) {
+    if (k === (this.state.glTab || 'res')) return;
+    this.setState({ glTab: k, glFeat: 0 });
+    const el = document.getElementById('gl-show');
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY - 150;
+    if (window.scrollY > top) window.scrollTo({ top, behavior: 'smooth' });
+  }
+
+  glVals() {
+    const mob = !!this.state.mobile;
+    const tab = this.state.glTab || 'res';
+    const P = this.glPlatforms[tab];
+    const n = P.features.length;
+    const act = Math.min(this.state.glFeat || 0, n - 1);
+    const pad = (x) => String(x).padStart(2, '0');
+    const mk = (f) => f.media.map((m, j) => this.glMedia(P.kind, m, f.media.length, j, f.title));
+    return {
+      meta: [
+        { label: 'Client', value: 'Gamuda Land' },
+        { label: 'Year', value: '2025-2026' },
+        { label: 'Role', value: 'UI/UX Designer' },
+      ],
+      glTrio: [
+        { platform: 'Resident App', who: 'Residents', body: 'Access property services, make payments, manage requests, check information, and use the other services available to them.' },
+        { platform: 'Admin Web Platform', who: 'Admins', body: 'Manage residents, handle requests and activities, maintain property information, and oversee operations from the backend.' },
+        { platform: 'Tab Guard App', who: 'Guards', body: 'Support on-site operations, such as checking and verifying visitors and managing access-related activities.' },
+      ],
+      glKnots: [
+        { title: 'Connecting different platforms', body: 'Each platform served a different purpose, but they had to communicate, so an action taken on one could be reflected and handled correctly on another.' },
+        { title: 'Consistent experiences across roles', body: 'Different users and functionality still had to feel like one ecosystem. I kept patterns, terminology, and visual language consistent while adapting each interface to its users\u2019 needs.' },
+        { title: 'Different workflows and permissions', body: 'Residents, admins, and guards each had their own workflows, information, and permissions. The goal was to keep every experience simple while making the right information and actions available at the right stage.' },
+      ].map((k, i, a) => ({ ...k, rule: i === a.length - 1 ? 'none' : '1px solid var(--line)' })),
+      glSteps: [
+        ['Understand the Requirements', 'I started by reviewing the requirements and existing product context with the BA and PM. This helped me understand the purpose of each feature, the different user roles involved, and how the requirements connected across platforms.'],
+        ['Review the User Flows', 'The BA prepared the user flows based on the project requirements. My role was to review them with the team, identify potential UX issues or unclear steps, and make sure the proposed experience made sense from a user\u2019s perspective.'],
+        ['Explore the Design', 'I explored different design directions directly in Figma, experimenting with layouts, information hierarchy, navigation, and UI patterns to find solutions that were clear and practical for each platform.'],
+        ['Design the Experience', 'Once the direction was agreed on, I developed the high-fidelity UI for the different platforms, working with the existing UI library and reusable components to maintain consistency across the GL ecosystem.'],
+        ['Present & Iterate', 'I presented the designs to both the internal team and the client to walk through the proposed solutions and gather feedback, then refined and iterated until we reached a direction that aligned with the requirements and product goals.'],
+        ['Design Handoff', 'Once the designs were finalised, I organised the Figma files and prepared the necessary screens, components, and specifications for the development team, and worked with developers to clarify details and support the implementation.'],
+      ].map(([title, body], i) => {
+        const on = this.state.glStep === i;
+        return {
+          num: String(i + 1), title, body,
+          bg: on ? 'rgba(192,152,97,.05)' : 'transparent',
+          numColor: on ? 'var(--gold)' : 'var(--gold-dim)',
+          detailMax: on ? '220px' : '0px',
+          detailOp: on ? 1 : 0,
+          onEnter: () => { if (this.state.glStep !== i) this.setState({ glStep: i }); },
+          onLeave: () => { if (this.state.glStep === i) this.setState({ glStep: -1 }); },
+        };
+      }),
+      glTabsTop: mob ? '62px' : '72px',
+      glTabs: ['res', 'admin', 'guard'].map((k) => {
+        const on = k === tab;
+        return { label: this.glPlatforms[k].label, go: () => this.glGo(k), bg: on ? 'var(--gold)' : 'rgba(11,9,6,.6)', fg: on ? '#0B0906' : 'var(--parchment)', bd: on ? 'var(--gold)' : 'var(--line-strong)' };
+      }),
+      glIntros: ['res', 'admin', 'guard'].map((k) => {
+        const on = k === tab;
+        return { p1: this.glPlatforms[k].p1, p2: this.glPlatforms[k].p2, op: on ? 1 : 0, y: on ? '0px' : '10px', vis: on ? 'visible' : 'hidden' };
+      }),
+      glCols: mob ? 'minmax(0, 1fr)' : (P.kind === 'phone' ? 'minmax(0, 0.95fr) minmax(0, 1fr)' : 'minmax(0, 1.35fr) minmax(0, 1fr)'),
+      glStageDisplay: mob ? 'none' : 'block',
+      glStage: P.features.map((f, i) => ({
+        op: i === act ? 1 : 0,
+        tf: i === act ? 'translateY(0) scale(1)' : (i < act ? 'translateY(-44px) scale(.96)' : 'translateY(52px) scale(.96)'),
+        blur: i === act ? '0px' : '6px',
+        media: mk(f),
+      })),
+      glCount: pad(act + 1),
+      glTotal: pad(n),
+      glProg: ((act + 1) / n * 100).toFixed(1) + '%',
+      glFeatures: P.features.map((f, i) => ({
+        idx: i,
+        count: pad(i + 1) + ' / ' + pad(n),
+        title: f.title,
+        bullets: f.bullets.map((t) => ({ t })),
+        media: mk(f),
+        op: mob || i === act ? 1 : 0.26,
+        minH: mob ? 'auto' : '86vh',
+        pad: mob ? '44px 0' : '6vh 0',
+        rule: mob && i < n - 1 ? '1px solid var(--line)' : 'none',
+        inlineDisplay: mob ? 'flex' : 'none',
+      })),
+    };
+  }
+
+  renderVals() {
+    const { scrolled } = this.state;
+    const compact = (this.state.gutter || 0) <= 62;
+    const roomForLabel = (this.state.gutter || 0) > 200;
+    return {
+      ...this.glVals(),
+      wordmark: this.props.wordmark ?? 'LOGO',
+      procFlow: this.state.mobile ? 'row' : 'column',
+      procRows: this.state.mobile ? 'auto' : 'repeat(4, auto)',
+      mob: !!this.state.mobile,
+      toggleMenu: () => this.setState({ menu: !this.state.menu }),
+      closeMenu: () => { if (this.state.menu) this.setState({ menu: false }); },
+      burgerDisplay: this.state.phone ? 'flex' : 'none',
+      burgerTop: this.state.phone ? (this.state.menu ? 'translateY(7px) rotate(45deg)' : 'none') : 'none',
+      burgerBot: this.state.phone ? (this.state.menu ? 'translateY(-7px) rotate(-45deg)' : 'none') : 'none',
+      burgerMidOp: this.state.phone ? (this.state.menu ? 0 : 1) : 1,
+      navLinksDisplay: this.state.phone ? (this.state.menu ? 'flex' : 'none') : 'flex',
+      navDir: this.state.phone ? 'column' : 'row',
+      navAlign: this.state.phone ? 'flex-start' : 'center',
+      navGap: this.state.phone ? '2px' : 'min(36px, 5.6vw)',
+      navItemW: this.state.phone ? '100%' : 'auto',
+      navItemMinH: this.state.phone ? '44px' : 'auto',
+      navItemAlign: this.state.phone ? 'stretch' : 'center',
+      goHome: () => { window.location.href = 'index.html'; },
+      goProjects: () => { window.location.href = 'projects.html'; },
+      goAbout: () => { window.location.href = 'about.html'; },
+      navMenuPos: this.state.phone ? 'absolute' : 'static',
+      navMenuTop: this.state.phone ? '100%' : 'auto',
+      navMenuSide: this.state.phone ? '0' : 'auto',
+      navMenuPad: this.state.phone ? '22px min(6vw, 92px) 26px' : '0',
+      navMenuBg: this.state.phone ? 'rgba(11,9,6,.96)' : 'transparent',
+      navMenuLine: this.state.phone ? '1px solid var(--line)' : 'none',
+      navMenuBlur: this.state.phone ? 'blur(12px)' : 'none',
+      footCols: this.state.mobile ? 'minmax(0, 1fr)' : '1fr auto 1fr',
+      footJustify: this.state.mobile ? 'center' : 'stretch',
+      footAlign: this.state.mobile ? 'center' : 'left',
+      footEnd: this.state.mobile ? 'center' : 'flex-end',
+      footStart: this.state.mobile ? 'center' : 'flex-start',
+      footGap: this.state.mobile ? '12px' : '14px 40px',
+      footWrap: this.state.mobile ? 'normal' : 'nowrap',
+      trueVal: true,
+      fireflies: this.fireflies,
+      navVeil: this.state.mobile ? '.9' : (scrolled ? '.86' : '0'),
+      navLine: this.state.mobile ? '.16' : (scrolled ? '.16' : '0'),
+      railOp: this.state.railFits ? 1 : 0,
+      railDisplay: this.state.railFits ? 'flex' : 'none',
+      railRight: (this.state.gutter || 0) > 62 ? 'min(3vw, 30px)' : '8px',
+      pageNav: this.pageNames.map((label, i) => {
+        const on = i === (this.state.page || 0);
+        return {
+          label,
+          num: String(i + 1).padStart(2, '0'),
+          color: on ? 'var(--gold)' : 'var(--ash-dim)',
+          tick: compact ? (on ? '20px' : '9px') : (on ? '30px' : '12px'),
+          numDisplay: compact ? 'none' : 'inline',
+          numOp: on ? 1 : 0.5,
+          labelOp: on && roomForLabel ? 1 : 0,
+          labelX: on ? '0px' : '8px',
+          go: () => this.pageTo(i),
+        };
+      }),
+      lenses: [
+        { key: 'Lens A', title: 'Layout Pattern Audit', body: 'Structural grids and responsiveness: how the interface holds together, and where the underlying grid stops holding.' },
+        { key: 'Lens B', title: 'Interaction & UI Quality', body: 'Visual hierarchy, system polish, and microcopy clarity: the details that decide whether an interface feels trustworthy.' },
+        { key: 'Lens C', title: 'Heuristics & Laws of UX', body: 'Nielsen\u2019s ten usability heuristics alongside Hick\u2019s Law and Fitts\u2019s Law, used to find cognitive friction and improve decision time and touch ergonomics.' },
+        { key: 'Lens D', title: 'Accessibility Benchmark', body: 'WCAG 2.1 Level AA compliance, resolving contrast and occlusion failures before synthesising everything into recommendations.' },
+      ],
+      process: [
+        { num: '1', title: 'Understanding the Existing Experience', body: 'We started by getting familiar with the VetIT system, reviewing the existing screens and workflows to understand how the product currently worked and what users were expected to do.' },
+        { num: '2', title: 'Mapping the User Experience', body: 'We mapped the key workflows and navigation paths to understand how different parts of the system connected, while identifying areas where users might experience unnecessary steps or confusion.' },
+        { num: '3', title: 'Extraction', body: 'With the structure in place, we examined how information was arranged on each screen. We identified the layout patterns being used and looked for areas where the structure could better support readability and usability.' },
+        { num: '4', title: 'Looking Beyond the Layout', body: 'We looked beyond the visual design to evaluate interaction patterns, branding, consistency, content hierarchy, and overall UI quality, considering how these elements affected usability.' },
+        { num: '5', title: 'Testing Against Usability Principles', body: 'We tested the experience against Nielsen\u2019s 10 Usability Heuristics, using each principle as a lens to identify usability issues and understand their potential impact.' },
+        { num: '6', title: 'Making the Experience More Accessible', body: 'We then evaluated the interface against WCAG 2.1 Level AA, looking at areas such as contrast, labels, touch targets, keyboard interaction, and information clarity.' },
+        { num: '7', title: 'Connecting Problems to UX Principles', body: 'We applied selected Laws of UX to understand why certain design decisions created friction, connecting the observed problems to principles such as Hick\u2019s Law, Fitts\u2019s Law, Jakob\u2019s Law, and Cognitive Load.' },
+        { num: '8', title: 'Turning Findings Into Improvements', body: 'Finally, we brought our findings together and turned them into actionable recommendations, balancing quick wins with longer-term improvements to make the VetIT experience clearer, more efficient, and easier to use.' },
+      ].map((p, i) => ({
+        ...p,
+        rule: (i === 3 || i === 7) ? 'none' : '1px solid var(--line)',
+        detailMax: this.state.procHover === i ? '200px' : '0px',
+        detailOp: this.state.procHover === i ? 1 : 0,
+        enter: () => this.setState({ procHover: i }),
+        leave: () => this.setState((st) => (st.procHover === i ? { procHover: null } : null)),
+      })),
+      ...this.screenVals('dash', 'dash'),
+      ...this.screenVals('appt', 'appt'),
+      ...this.screenVals('client', 'client'),
+      ...this.screenVals('tasks', 'tasks'),
+    };
+  }
+}
+
+</script>
+</body>
+</html>
