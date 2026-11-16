@@ -638,20 +638,30 @@ function NavLink({
 }) {
   const [hover, setHover] = React.useState(false);
   const lit = hover || active;
+  const phone = typeof window !== 'undefined' && window.innerWidth < 760;
   return /*#__PURE__*/React.createElement("a", _extends({
     onMouseEnter: () => setHover(true),
     onMouseLeave: () => setHover(false),
     onFocus: () => setHover(true),
     onBlur: () => setHover(false),
     style: {
-      font: 'var(--fw-regular) 12px/1.4 var(--font-mono)',
-      letterSpacing: 'var(--ls-mono)',
+      font: 'var(--fw-semibold) 14px/1.2 var(--font-body)',
+      letterSpacing: 'var(--ls-tight)',
       textDecoration: 'none',
       whiteSpace: 'nowrap',
-      color: lit ? 'var(--gold-bright)' : 'var(--ash)',
-      paddingBlock: 'var(--space-hairline)',
-      borderBottom: '1px solid ' + (lit ? 'var(--gold-dim)' : 'transparent'),
-      transition: 'color var(--transition-fast), border-color var(--transition-fast)',
+      color: lit ? 'var(--gold-bright)' : 'var(--parchment)',
+      display: 'flex',
+      alignItems: 'center',
+      boxSizing: 'border-box',
+      width: phone ? '100%' : 'auto',
+      padding: phone ? '14px 16px' : '10px 18px',
+      border: 0,
+      background: !lit ? 'transparent' : phone
+        ? 'linear-gradient(90deg, rgba(192,152,97,' + (active ? '.24' : '.16') + ') 0%, rgba(192,152,97,' + (active ? '.10' : '.06') + ') 100%)'
+        : 'radial-gradient(closest-side, rgba(227,192,138,' + (active ? '.20' : '.14') + '), rgba(227,192,138,0))',
+      textShadow: lit ? '0 0 14px rgba(227,192,138,.55)' : 'none',
+      cursor: 'pointer',
+      transition: 'color var(--transition-fast), background var(--transition-fast), text-shadow var(--transition-fast)',
       ...style
     }
   }, rest), numeral && /*#__PURE__*/React.createElement("span", {

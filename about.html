@@ -16,10 +16,14 @@
 <link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/effects.css">
 <link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/tokens/base.css">
 <link rel="stylesheet" href="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/styles.css">
+<link rel="stylesheet" href="theme.css">
+<link rel="icon" type="image/png" sizes="64x64" href="assets/favicon.png">
+<link rel="shortcut icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <script src="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/_ds_bundle.js"></script>
 <style>
   :root { --ash: #D8D0C0; --ash-dim: #A39B8B; }
-  html, body { margin: 0; padding: 0; background: #0B0906; }
+  html, body { margin: 0; padding: 0; background: var(--ink); }
   html { scroll-behavior: smooth; }
   a { color: var(--ash); text-decoration: none; }
   a:hover { color: var(--gold-bright); }
@@ -35,21 +39,21 @@
 </style>
 </helmet>
 
-<div style="position: relative; width: 100%; background: #0B0906; font-family: Geist, system-ui, sans-serif; overflow-x: hidden">
+<div style="position: relative; width: 100%; background: var(--ink); font-family: Geist, system-ui, sans-serif; overflow-x: hidden">
 
   <div style="position: fixed; inset: 0; z-index: 0; pointer-events: none">
     <div style="position: absolute; inset: -8%; background-image: url(assets/forest.jpg); background-size: cover; background-position: 50% 42%; filter: brightness(.56) contrast(1.06); animation: forest-breathe 46s ease-in-out infinite"></div>
-    <div style="position: absolute; inset: 0; background: radial-gradient(68% 52% at 50% 38%, rgba(11,9,6,.46), rgba(11,9,6,.9) 78%), linear-gradient(180deg, rgba(11,9,6,.78), rgba(11,9,6,.5) 30%, rgba(11,9,6,.94))"></div>
+    <div style="position: absolute; inset: 0; background: radial-gradient(68% 52% at 50% 38%, rgba(var(--ink-rgb),.46), rgba(var(--ink-rgb),.9) 78%), linear-gradient(180deg, rgba(var(--ink-rgb),.78), rgba(var(--ink-rgb),.5) 30%, rgba(var(--ink-rgb),.94))"></div>
     <div style="position: absolute; inset: -14%; background: radial-gradient(42% 30% at 62% 24%, rgba(214,178,120,.10), rgba(214,178,120,0) 70%)"></div>
     <sc-for list="{{ fireflies }}" as="f" hint-placeholder-count="12">
       <div style="position: absolute; left: {{ f.left }}; top: {{ f.top }}; animation: firefly-path {{ f.pathDur }} ease-in-out infinite alternate; animation-delay: {{ f.delay }}">
-        <div style="width: {{ f.size }}; height: {{ f.size }}; border-radius: 50%; background: #F2DCAF; filter: blur({{ f.blur }}); box-shadow: 0 0 {{ f.halo }} rgba(227,192,138,.8), 0 0 {{ f.haloWide }} rgba(192,152,97,.4); opacity: {{ f.peak }}; animation: firefly-glow {{ f.dur }} ease-in-out infinite; animation-delay: {{ f.delay }}"></div>
+        <div style="width: {{ f.size }}; height: {{ f.size }}; border-radius: 50%; background: #F2DCAF; filter: blur({{ f.blur }}); box-shadow: 0 0 {{ f.halo }} rgba(227,192,138,.8), 0 0 {{ f.haloWide }} rgba(var(--gold-rgb),.4); opacity: {{ f.peak }}; animation: firefly-glow {{ f.dur }} ease-in-out infinite; animation-delay: {{ f.delay }}"></div>
       </div>
     </sc-for>
     <div style="position: absolute; top: 14%; left: 12%; width: 1px; height: 1px; border-radius: 50%; background: #FFF6D6; opacity: .5; animation: twinkle 6s ease-in-out infinite; box-shadow: 0 0 0 .5px rgba(255,246,214,.6), 24vw 5vh 0 0 #FFF6D6, 44vw -2vh 0 0 rgba(255,246,214,.7), 61vw 9vh 0 0 #FFF6D6, 72vw 3vh 0 0 rgba(255,246,214,.55), 14vw 28vh 0 0 rgba(255,246,214,.7), 36vw 40vh 0 0 #FFF6D6, 50vw 22vh 0 0 rgba(255,246,214,.5), 66vw 46vh 0 0 rgba(255,246,214,.8), 79vw 32vh 0 0 #FFF6D6, 6vw 54vh 0 0 rgba(255,246,214,.6), 30vw 65vh 0 0 rgba(255,246,214,.75), 55vw 60vh 0 0 #FFF6D6, 74vw 70vh 0 0 rgba(255,246,214,.5), 20vw 76vh 0 0 rgba(255,246,214,.65), 46vw 82vh 0 0 #FFF6D6"></div>
   </div>
 
-  <div style="position: fixed; top: 0; left: 0; right: 0; z-index: 12; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px min(6vw, 92px); background: rgba(11,9,6,{{ navVeil }}); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(192,152,97,{{ navLine }}); transition: background 400ms ease, border-color 400ms ease">
+  <div style="position: fixed; top: 0; left: 0; right: 0; z-index: 12; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px min(6vw, 92px); background: rgba(var(--ink-rgb),{{ navVeil }}); backdrop-filter: {{ navBlur }}; border-bottom: 1px solid rgba(var(--gold-rgb),{{ navLine }}); transition: background 400ms ease, border-color 400ms ease">
     <a href="index.html" style="display: flex; align-items: center; gap: 10px; color: var(--parchment)" style-hover="color: var(--gold-bright)">
       <img src="assets/wordmark.png" alt="Wayfarer" decoding="async" style="display: block; height: clamp(22px, 6vw, 30px); width: auto">
     </a>
@@ -67,6 +71,13 @@
       </div>
       <div data-nav-item="true" onClick="{{ goAbout }}" style="display: flex; align-items: {{ navItemAlign }}; cursor: pointer; width: {{ navItemW }}; min-height: {{ navItemMinH }}">
         <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.NavLink" href="about.html" active="{{ trueVal }}" hint-size="80px,18px">About Me</x-import>
+      </div>
+      <div style="display: flex; align-items: {{ navItemAlign }}; width: {{ navItemW }}; min-height: {{ navItemMinH }}">
+        <button type="button" onClick="{{ toggleTheme }}" aria-label="{{ themeLabel }}" title="{{ themeLabel }}" style="display: flex; align-items: center; gap: 12px; width: {{ navItemW }}; padding: {{ themeBtnPad }}; background: none; border: 0; font: 600 14px/1.2 var(--font-body); letter-spacing: .02em; color: var(--parchment); cursor: pointer; transition: color 150ms ease" style-hover="color: var(--gold-bright)">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" style="display: {{ sunDisp }}; flex: none"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="display: {{ moonDisp }}; flex: none"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg>
+          <span style="display: {{ themeTextDisp }}">{{ themeText }}</span>
+        </button>
       </div>
     </div>
   </div>
@@ -140,10 +151,10 @@
       </div>
 
       <div data-reveal="true" style="position: relative; padding-left: 40px">
-        <div style="position: absolute; left: 3px; top: 8px; bottom: 8px; width: 1px; background: linear-gradient(180deg, rgba(192,152,97,0), rgba(192,152,97,.42) 12%, rgba(192,152,97,.42) 88%, rgba(192,152,97,0))"></div>
+        <div style="position: absolute; left: 3px; top: 8px; bottom: 8px; width: 1px; background: linear-gradient(180deg, rgba(var(--gold-rgb),0), rgba(var(--gold-rgb),.42) 12%, rgba(var(--gold-rgb),.42) 88%, rgba(var(--gold-rgb),0))"></div>
         <sc-for list="{{ waypoints }}" as="w" hint-placeholder-count="5">
-          <div style="position: relative; display: flex; flex-wrap: wrap; align-items: baseline; gap: 14px 44px; padding: 30px min(3vw, 34px); border-bottom: {{ w.rule }}; transition: background 250ms cubic-bezier(.4,0,.2,1)" style-hover="background: rgba(192,152,97,.04)">
-            <span style="position: absolute; left: -41px; top: 42px; width: 7px; height: 7px; border: 1px solid var(--gold); background: #0B0906; transform: rotate(45deg)"></span>
+          <div style="position: relative; display: flex; flex-wrap: wrap; align-items: baseline; gap: 14px 44px; padding: 30px min(3vw, 34px); border-bottom: {{ w.rule }}; transition: background 250ms cubic-bezier(.4,0,.2,1)" style-hover="background: rgba(var(--gold-rgb),.04)">
+            <span style="position: absolute; left: -41px; top: 42px; width: 7px; height: 7px; border: 1px solid var(--gold); background: var(--ink); transform: rotate(45deg)"></span>
             <div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 6px">
               <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-dim)">{{ w.period }}</span>
               <span style="font-family: 'Libertinus Serif Display', serif; font-size: clamp(22px, 2.2vw, 34px); line-height: 1.12; color: var(--parchment)">{{ w.role }}</span>
@@ -179,7 +190,7 @@
           </sc-for>
         </div>
 
-        <div style="flex: 1 1 420px; position: relative; display: flex; flex-direction: column; justify-content: center; gap: 22px; min-height: 400px; padding: 48px min(4vw, 52px); background: radial-gradient(80% 70% at 76% 22%, rgba(192,152,97,.09), rgba(11,9,6,0) 72%), linear-gradient(180deg, var(--ink-raised), var(--ink)); overflow: hidden">
+        <div style="flex: 1 1 420px; position: relative; display: flex; flex-direction: column; justify-content: center; gap: 22px; min-height: 400px; padding: 48px min(4vw, 52px); background: radial-gradient(80% 70% at 76% 22%, rgba(var(--gold-rgb),.09), rgba(var(--ink-rgb),0) 72%), linear-gradient(180deg, var(--ink-raised), var(--ink)); overflow: hidden">
           <div style="position: absolute; left: min(4vw, 52px); top: 40px; width: 34px; height: 1px; background: var(--gold-dim)"></div>
           <div style="display: flex; flex-direction: column; gap: 20px; opacity: {{ plateOp }}; transform: translateY({{ plateY }}); transition: opacity 380ms cubic-bezier(.16,1,.3,1), transform 480ms cubic-bezier(.16,1,.3,1)">
             <span style="max-width: 18ch; font-family: 'Libertinus Serif Display', serif; font-size: clamp(30px, 3.4vw, 52px); line-height: 1.04; color: var(--parchment)">{{ activeTitle }}</span>
@@ -249,36 +260,44 @@
     </div>
   </section>
 
-  <section data-screen-label="About footer" style="position: relative; z-index: 2; border-top: 1px solid var(--line); min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; border-top: 1px solid var(--line)">
-    <div style="position: absolute; inset: 0; background: radial-gradient(56% 44% at 50% 42%, rgba(192,152,97,.11), rgba(11,9,6,0) 74%), linear-gradient(180deg, rgba(11,9,6,0) 0%, rgba(11,9,6,.10) 34%, rgba(11,9,6,.46) 100%); pointer-events: none"></div>
+  <section ref="{{ footRef }}" data-screen-label="About footer" style="position: relative; z-index: 3; min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; background: linear-gradient(180deg, rgba(var(--ink-rgb),0) 0%, rgba(var(--ink-rgb),.35) 18%, rgba(var(--ink-rgb),.7) 42%, rgba(var(--ink-rgb),.92) 68%, var(--ink) 100%)">
 
-    <div style="position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px; padding: 22vh min(6vw, 92px) 12vh; max-width: 900px; margin: 0 auto">
-      <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="280px,14px">Open to the next chapter</x-import>
-      <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(24px, 3.1vw, 58px); line-height: 1.06; letter-spacing: -.01em; color: var(--parchment); white-space: {{ footWrap }}">Available for full-time <span style="font-style: italic; color: var(--gold)">Product Design</span> roles.</h2>
-      <p style="margin: 0; max-width: 58ch; font-size: 17px; line-height: 1.68; color: var(--ash); text-wrap: balance">Looking for a team building something that has to hold up, where research, systems and craft are treated as the same job.</p>
-
-      <div style="width: 280px; padding: 6px 0 2px">
-        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Divider" ornament="full" hint-size="280px,16px"></x-import>
+    <div style="position: relative; display: grid; grid-template-columns: {{ contactCols }}; align-items: end; gap: 48px 64px; padding: 18vh min(6vw, 92px) 9vh">
+      <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 22px; max-width: 760px">
+        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Eyebrow" hint-size="280px,14px">Open to the next chapter</x-import>
+        <h2 style="margin: 0; font-family: 'Libertinus Serif Display', serif; font-weight: 400; font-size: clamp(34px, 4.6vw, 84px); line-height: 1.02; letter-spacing: -.015em; color: var(--parchment); text-wrap: balance">Let&#8217;s draw <span style="font-style: italic; color: var(--gold)">the next card</span> together.</h2>
+        <p style="margin: 0; max-width: 52ch; font-size: 17px; line-height: 1.68; color: var(--ash); text-wrap: pretty">Available for full-time Product Design roles, looking for a team where research, systems and craft are treated as the same job.</p>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px; padding-top: 6px">
+          <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Button" href="mailto:arfianarya@gmail.com" hint-size="140px,42px">Email me</x-import>
+          <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Button" variant="secondary" href="https://drive.google.com/drive/folders/1DG2bW8UIH0rnfBa0PBrw7l_vZZI6qqZW?usp=sharing" target="_blank" rel="noopener" hint-size="140px,42px">Download CV</x-import>
+        </div>
       </div>
-
-      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px">
-        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Button" href="mailto:arfianarya@gmail.com" hint-size="140px,42px">Email me</x-import>
-        <x-import component-from-global-scope="ArcanumDesignSystem_2a7afc.Button" variant="secondary" href="https://drive.google.com/drive/folders/1DG2bW8UIH0rnfBa0PBrw7l_vZZI6qqZW?usp=sharing" target="_blank" rel="noopener" hint-size="150px,42px">Download CV</x-import>
-      </div>
-
-      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 28px; padding-top: 10px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase">
-        <a href="https://www.linkedin.com/in/arfianarya/" target="_blank" rel="noopener" style="display: inline-block; padding: 12px 4px; color: var(--ash)" style-hover="color: var(--gold-bright)">LinkedIn</a>
-        <a href="https://www.behance.net/arfianarya8a40" target="_blank" rel="noopener" style="display: inline-block; padding: 12px 4px; color: var(--ash)" style-hover="color: var(--gold-bright)">Behance</a>
-      </div>
+      <nav aria-label="Elsewhere" style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px; justify-self: {{ contactLinksJustify }}">
+        <span style="padding-bottom: 8px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ash-dim)">Elsewhere</span>
+        <a href="https://www.linkedin.com/in/arfianarya/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 10px; padding: 6px 0; font-family: 'Libertinus Serif Display', serif; font-size: clamp(20px, 1.6vw, 26px); line-height: 1.2; color: var(--parchment); transition: color 250ms ease" style-hover="color: var(--gold-bright)">LinkedIn <span aria-hidden="true" style="font-size: .7em; color: var(--gold)">&#8599;</span></a>
+        <a href="https://www.behance.net/arfianarya8a40" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 10px; padding: 6px 0; font-family: 'Libertinus Serif Display', serif; font-size: clamp(20px, 1.6vw, 26px); line-height: 1.2; color: var(--parchment); transition: color 250ms ease" style-hover="color: var(--gold-bright)">Behance <span aria-hidden="true" style="font-size: .7em; color: var(--gold)">&#8599;</span></a>
+      </nav>
     </div>
 
-    <div style="position: relative; z-index: 1; display: grid; grid-template-columns: {{ footCols }}; justify-items: {{ footJustify }}; text-align: {{ footAlign }}; align-items: center; gap: {{ footGap }}; padding: 22px min(6vw, 92px) 28px">
-      <a href="index.html" style="display: flex; align-items: center; gap: 10px; color: var(--ash)" style-hover="color: var(--gold-bright)">
-        <img src="assets/wordmark.png" alt="Wayfarer" decoding="async" style="display: block; height: 24px; width: auto">
-      </a>
-      <span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ash-dim); white-space: nowrap">Every step reveals something new</span>
-      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: {{ footEnd }}; gap: 8px 20px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ash-dim)">
-        <span>© 2026 Arfian Arya</span>
+
+    <div style="position: relative">
+
+      <div aria-hidden="true" style="position: relative; height: calc(100vw / 5.25 * 1.02); overflow: hidden">
+        <div style="position: absolute; left: 0; right: 0; top: 0; display: flex; justify-content: center; padding: 0; font-family: 'Geist', system-ui, sans-serif; font-weight: 700; font-size: calc(100vw / 5.25); line-height: .9; letter-spacing: -.075em; transform: scaleY(1.38); transform-origin: 50% 0; text-transform: uppercase; color: #8C7B5E; white-space: nowrap">
+          <sc-for list="{{ footLetters }}" as="L" hint-placeholder-count="8">
+            <span style="display: inline-block; transform: translateY({{ L.y }}); transition: transform 1100ms cubic-bezier(.16,1,.3,1) {{ L.delay }}">{{ L.ch }}</span>
+          </sc-for>
+        </div>
+        <div style="position: absolute; inset: 0; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); -webkit-mask-image: linear-gradient(180deg, transparent 38%, #000 70%); mask-image: linear-gradient(180deg, transparent 38%, #000 70%); pointer-events: none"></div>
+        <div style="position: absolute; inset: 0; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); -webkit-mask-image: linear-gradient(180deg, transparent 62%, #000 92%); mask-image: linear-gradient(180deg, transparent 62%, #000 92%); pointer-events: none"></div>
+        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(var(--ink-rgb),0) 45%, rgba(var(--ink-rgb),.7) 100%); pointer-events: none"></div>
+      </div>
+
+
+      <div style="position: relative; z-index: 2; display: grid; grid-template-columns: {{ footCols }}; justify-items: {{ footJustify }}; text-align: {{ footAlign }}; align-items: center; gap: {{ footGap }}; padding: 16px min(6vw, 92px); border-top: 1px solid var(--line); font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--ash-dim)">
+        <span style="white-space: nowrap">&#169; 2026 Arfian Arya</span>
+        <span style="white-space: nowrap">Every step reveals something new</span>
+        <span style="justify-self: {{ footEnd }}; white-space: nowrap">Mataram, Indonesia</span>
       </div>
     </div>
   </section>
@@ -292,6 +311,7 @@ class Component extends DCLogic {
   state = { menu: false, mobile: typeof window !== "undefined" && (window.innerWidth < 760 || (window.innerWidth < 1200 && window.innerHeight >= window.innerWidth * 0.9)), phone: typeof window !== "undefined" && window.innerWidth < 760, tablet: typeof window !== "undefined" && window.innerWidth >= 760 && window.innerWidth < 1200 && window.innerHeight >= window.innerWidth * 0.9, scrolled: false, star: -1, tenet: 0, flip: 0, cardFlip: false, pts: [], field: { w: 0, h: 0 } };
 
   edges = [[0,1],[1,2],[0,3],[3,4],[4,5],[1,4],[2,5]];
+  footRef = React.createRef();
   fieldRef = React.createRef();
   tiltRef = React.createRef();
   shineRef = React.createRef();
@@ -331,7 +351,31 @@ class Component extends DCLogic {
     { title: 'AI-assisted Practice', body: 'Using AI for research synthesis, copy iteration, documentation and repetitive production work.', basis: '30%', offset: '42px' },
   ];
 
+  readTheme() {
+    try { return localStorage.getItem('wayfarer-theme') === 'light' ? 'light' : 'dark'; } catch (e) { return 'dark'; }
+  }
+
+  applyTheme(t, animate) {
+    const el = document.documentElement;
+    if (animate) {
+      el.classList.add('theme-anim');
+      clearTimeout(this.themeT);
+      this.themeT = setTimeout(() => el.classList.remove('theme-anim'), 600);
+    }
+    if (t === 'light') el.setAttribute('data-theme', 'light'); else el.removeAttribute('data-theme');
+    try { localStorage.setItem('wayfarer-theme', t); } catch (e) {}
+    if (this.state.theme !== t) this.setState({ theme: t });
+  }
+
   componentDidMount() {
+    this.applyTheme(this.readTheme(), false);
+    const footEl = this.footRef.current;
+    if (footEl && typeof IntersectionObserver !== 'undefined') {
+      this.footIO = new IntersectionObserver((es) => {
+        if (es.some((e) => e.isIntersecting)) { this.setState({ footIn: true }); this.footIO.disconnect(); }
+      }, { threshold: 0.2 });
+      this.footIO.observe(footEl);
+    } else this.setState({ footIn: true });
     this.onMq = () => { const w = window.innerWidth, h = window.innerHeight; const phone = w < 760, tablet = !phone && w < 1200 && h >= w * 0.9, m = phone || tablet; if (m !== this.state.mobile || phone !== this.state.phone || tablet !== this.state.tablet) this.setState({ mobile: m, phone, tablet }); };
     window.addEventListener('resize', this.onMq);
     this.onMq();
@@ -405,6 +449,7 @@ class Component extends DCLogic {
   }
 
   componentWillUnmount() {
+    if (this.footIO) this.footIO.disconnect();
     window.removeEventListener('resize', this.onMq);
     window.removeEventListener('scroll', this.onScroll);
     window.removeEventListener('resize', this.measure);
@@ -453,9 +498,21 @@ class Component extends DCLogic {
       navMenuTop: this.state.phone ? '100%' : 'auto',
       navMenuSide: this.state.phone ? '0' : 'auto',
       navMenuPad: this.state.phone ? '22px min(6vw, 92px) 26px' : '0',
-      navMenuBg: this.state.phone ? 'rgba(11,9,6,.96)' : 'transparent',
+      toggleTheme: () => this.applyTheme(this.state.theme === 'light' ? 'dark' : 'light', true),
+      themeLabel: this.state.theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme',
+      themeText: this.state.theme === 'light' ? 'Dark mode' : 'Light mode',
+      themeTextDisp: this.state.phone ? 'inline' : 'none',
+      themeBtnPad: this.state.phone ? '14px 16px' : '10px',
+      sunDisp: this.state.theme === 'light' ? 'none' : 'block',
+      moonDisp: this.state.theme === 'light' ? 'block' : 'none',
+      contactCols: this.state.mobile ? 'minmax(0, 1fr)' : 'minmax(0, 1fr) auto',
+      contactLinksJustify: this.state.mobile ? 'start' : 'end',
+      footLetters: 'WAYFARER'.split('').map((ch, i) => ({ ch, y: this.state.footIn ? '0%' : '105%', delay: (i * 70) + 'ms' })),
+      footRef: this.footRef,
+      navMenuBg: this.state.phone ? 'var(--ink)' : 'transparent',
       navMenuLine: this.state.phone ? '1px solid var(--line)' : 'none',
-      navMenuBlur: this.state.phone ? 'blur(12px)' : 'none',
+      navMenuBlur: 'none',
+      navBlur: this.state.phone ? 'none' : 'blur(10px)',
       footCols: this.state.mobile ? 'minmax(0, 1fr)' : '1fr auto 1fr',
       footJustify: this.state.mobile ? 'center' : 'stretch',
       footAlign: this.state.mobile ? 'center' : 'left',
@@ -473,12 +530,12 @@ class Component extends DCLogic {
         return {
           num: t.num,
           title: t.title,
-          rowBg: on ? 'linear-gradient(90deg, rgba(192,152,97,.09), rgba(11,9,6,.4))' : 'rgba(11,9,6,.42)',
+          rowBg: on ? 'linear-gradient(90deg, rgba(var(--gold-rgb),.09), rgba(var(--ink-rgb),.4))' : 'rgba(var(--ink-rgb),.42)',
           spine: on ? 'var(--gold)' : 'transparent',
           numColor: on ? 'var(--gold)' : 'var(--ash-dim)',
           titleColor: on ? 'var(--gold-bright)' : 'var(--parchment)',
           dot: on ? 'var(--gold)' : 'transparent',
-          glow: on ? '0 0 14px rgba(192,152,97,.75)' : '0 0 0 rgba(192,152,97,0)',
+          glow: on ? '0 0 14px rgba(var(--gold-rgb),.75)' : '0 0 0 rgba(var(--gold-rgb),0)',
           enter: () => { if (this.state.tenet !== i) this.setState({ tenet: i, flip: 1 }, () => { clearTimeout(this._ft); this._ft = setTimeout(() => this.setState({ flip: 0 }), 30); }); },
         };
       }),
@@ -514,8 +571,8 @@ class Component extends DCLogic {
           x1: s1.x, y1: s1.y, x2: s2.x, y2: s2.y,
           dot1x: s1.x, dot1y: s1.y, dot2x: s2.x, dot2y: s2.y,
           r: hot ? 2.6 : 1.8,
-          stroke: hot ? 'rgba(192,152,97,.62)' : 'rgba(192,152,97,.17)',
-          fill: hot ? 'rgba(227,192,138,.9)' : 'rgba(192,152,97,.3)',
+          stroke: hot ? 'rgba(var(--gold-rgb),.62)' : 'rgba(var(--gold-rgb),.17)',
+          fill: hot ? 'rgba(227,192,138,.9)' : 'rgba(var(--gold-rgb),.3)',
           dash: hot ? 'none' : '3 5',
         };
       }),
@@ -527,9 +584,9 @@ class Component extends DCLogic {
           basis: s.basis,
           offset: s.offset,
           border: on ? 'var(--gold)' : 'var(--line)',
-          bg: on ? 'linear-gradient(180deg, rgba(192,152,97,.07), rgba(11,9,6,.35))' : 'rgba(11,9,6,.28)',
+          bg: on ? 'linear-gradient(180deg, rgba(var(--gold-rgb),.07), rgba(var(--ink-rgb),.35))' : 'rgba(var(--ink-rgb),.28)',
           dot: on ? 'var(--gold)' : 'transparent',
-          glow: on ? '0 0 14px rgba(192,152,97,.75)' : '0 0 0 rgba(192,152,97,0)',
+          glow: on ? '0 0 14px rgba(var(--gold-rgb),.75)' : '0 0 0 rgba(var(--gold-rgb),0)',
           titleColor: on ? 'var(--gold-bright)' : 'var(--parchment)',
           lift: on ? '-4px' : '0px',
           max: on ? '180px' : '0px',

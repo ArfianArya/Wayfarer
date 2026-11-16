@@ -1,0 +1,65 @@
+/* Wayfarer theme switch.
+   Dark is the default. Light is applied by setting data-theme="light" on <html>.
+   Pages refer to the ground colour through --ink / --ink-rgb and to gold alphas through --gold-rgb,
+   so every surface, overlay and hairline follows the theme. */
+
+:root {
+  --ink-rgb: 11,9,6;
+  --gold-rgb: 192,152,97;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  /* grounds: warm parchment paper */
+  --ink:          #F3ECDD;
+  --ink-raised:   #EAE1CE;
+  --ink-raised-2: #E1D5BD;
+  --ink-rgb: 243,236,221;
+
+  /* gold, deepened so it reads on paper */
+  --gold:        #87602C;
+  --gold-bright: #6A4A1E;
+  --gold-dim:    #A8834F;
+  --gold-rgb: 135,96,44;
+
+  /* text: dark sepia ink */
+  --parchment: #1E170E;
+  --ash:       #4A4134;
+  --ash-dim:   #6B6150;
+
+  --line:        rgba(135,96,44,0.22);
+  --line-strong: rgba(135,96,44,0.42);
+
+  --gold-a04: rgba(135,96,44,0.04);
+  --gold-a07: rgba(135,96,44,0.07);
+  --gold-a10: rgba(135,96,44,0.10);
+  --gold-a14: rgba(135,96,44,0.14);
+  --gold-a16: rgba(135,96,44,0.16);
+  --gold-a22: rgba(135,96,44,0.22);
+  --gold-a40: rgba(135,96,44,0.40);
+
+  --scrim-nav: rgba(243,236,221,.88);
+}
+
+/* the dark forest photo becomes a pale, misty wood in light mode */
+:root[data-theme="light"] [style*="forest.jpg"] {
+  filter: invert(.9) sepia(.45) saturate(.8) brightness(1.04) contrast(.9) !important;
+  opacity: .5 !important;
+}
+
+/* soften the fireflies and stars on paper */
+:root[data-theme="light"] [style*="#F2DCAF"] { filter: brightness(.55) saturate(1.4) !important; }
+
+/* light client logos and the gold wordmark need darkening to read on paper */
+:root[data-theme="light"] img[src*="clients/"] {
+  filter: grayscale(1) invert(1) brightness(.45) contrast(1.2) !important;
+  opacity: .5 !important;
+}
+:root[data-theme="light"] img[src*="clients/"]:hover { opacity: .9 !important; }
+:root[data-theme="light"] img[src*="wordmark"] { filter: brightness(.55) contrast(1.3); }
+
+/* smooth the switch */
+html.theme-anim, html.theme-anim * {
+  transition: background-color 450ms ease, color 450ms ease, border-color 450ms ease !important;
+}
