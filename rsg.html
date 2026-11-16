@@ -21,7 +21,9 @@
 <link rel="shortcut icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <script src="_ds/arcanum-design-system-2a7afc6e-2146-4e96-875d-f5aa3d720d5e/_ds_bundle.js"></script>
+<script src="night.js"></script>
 <style>
+  @keyframes night-fog { 0% { transform: translate3d(-5%,0,0) } 100% { transform: translate3d(5%,0,0) } }
   :root { --ash: #D8D0C0; --ash-dim: #A39B8B; }
   html, body { margin: 0; padding: 0; background: var(--ink); }
   html { scroll-snap-type: y proximity; scroll-behavior: smooth; }
@@ -42,6 +44,12 @@
   <div style="position: fixed; inset: 0; z-index: 0; pointer-events: none">
     <div style="position: absolute; inset: -8%; background-image: url(assets/forest.jpg); background-size: cover; background-position: 50% 40%; filter: brightness(.62) contrast(1.06); animation: forest-breathe 46s ease-in-out infinite"></div>
     <div style="position: absolute; inset: 0; background: radial-gradient(70% 54% at 50% 40%, rgba(var(--ink-rgb),.42), rgba(var(--ink-rgb),.88) 78%), linear-gradient(180deg, rgba(var(--ink-rgb),.72), rgba(var(--ink-rgb),.46) 30%, rgba(var(--ink-rgb),.92))"></div>
+    <div data-night-depth="true" style="position: absolute; inset: 0; background: var(--ink); opacity: 0"></div>
+    <div data-night-fog="true" aria-hidden="true" style="position: absolute; inset: 0; opacity: 0; will-change: opacity">
+      <div style="position: absolute; left: -30%; width: 160%; top: 52%; height: 42%; background: radial-gradient(30% 46% at 24% 50%, rgba(150,124,88,.06), rgba(150,124,88,0) 70%), radial-gradient(34% 40% at 66% 58%, rgba(150,124,88,.05), rgba(150,124,88,0) 70%), radial-gradient(24% 44% at 92% 46%, rgba(150,124,88,.055), rgba(150,124,88,0) 70%); animation: night-fog 80s ease-in-out infinite alternate"></div>
+      <div style="position: absolute; left: -30%; width: 160%; top: 8%; height: 36%; background: radial-gradient(28% 44% at 36% 50%, rgba(130,106,74,.045), rgba(130,106,74,0) 70%), radial-gradient(30% 40% at 78% 40%, rgba(130,106,74,.04), rgba(130,106,74,0) 70%); animation: night-fog 110s ease-in-out infinite alternate-reverse"></div>
+      <div style="position: absolute; inset: 0; background: radial-gradient(60% 50% at 50% 50%, rgba(var(--ink-rgb),.35) 30%, rgba(var(--ink-rgb),.8) 100%)"></div>
+    </div>
     <div style="position: absolute; inset: -14%; background: radial-gradient(44% 32% at 42% 26%, rgba(214,178,120,.10), rgba(214,178,120,0) 70%)"></div>
     <sc-for list="{{ fireflies }}" as="f" hint-placeholder-count="12">
       <div style="position: absolute; left: {{ f.left }}; top: {{ f.top }}; animation: firefly-path {{ f.pathDur }} ease-in-out infinite alternate; animation-delay: {{ f.delay }}">
