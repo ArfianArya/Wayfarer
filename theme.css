@@ -63,3 +63,18 @@
 html.theme-anim, html.theme-anim * {
   transition: background-color 450ms ease, color 450ms ease, border-color 450ms ease !important;
 }
+
+/* Behance cards sit on cover photos, so they keep the dark palette in light mode
+   to keep their labels legible over the image. */
+:root[data-theme="light"] [data-cover-card] {
+  --ink:          #0B0906;
+  --ink-raised:   #17120B;
+  --ink-raised-2: #1E1811;
+  --ink-rgb: 11,9,6;
+  --gold:        #C09861;
+  --gold-bright: #E3C08A;
+  --gold-dim:    #8A6B45;
+  --gold-rgb: 192,152,97;
+  --parchment: #FFF6D6;
+  --ash:       #B9AE9C;
+}
